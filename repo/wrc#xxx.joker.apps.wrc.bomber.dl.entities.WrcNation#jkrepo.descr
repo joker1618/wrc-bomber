@@ -1,0 +1,6 @@
+entityID:java.lang.Long
+name:java.lang.String
+code:java.lang.String
+flagIconPath:java.nio.file.Path
+flagImagePath:java.nio.file.Path
+creationTm:xxx.joker.libs.core.datetime.JkDateTime
