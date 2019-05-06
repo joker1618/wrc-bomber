@@ -14,6 +14,7 @@
 .bgOrange   { -fx-background-color: ORANGE }
 .bgBlue     { -fx-background-color: BLUE }
 .bgBlack    { -fx-background-color: BLACK }
+.bgBrown    { -fx-background-color: BROWN }
 
 .pad5   { -fx-padding: 5 }
 .pad10  { -fx-padding: 10 }
@@ -29,4 +30,9 @@
 
 .vgap5  { -fx-vgap: 5 }
 .vgap10 { -fx-vgap: 10 }
+
+.bordered {
+    -fx-border-width: 5;
+    -fx-border-color: GREEN;
+}
 

@@ -3,12 +3,13 @@ package xxx.joker.apps.wrc.bomber.gui;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import org.scenicview.ScenicView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
+import xxx.joker.apps.wrc.bomber.gui.pane.RootPane;
 import xxx.joker.libs.repository.design.RepoEntity;
 import xxx.joker.libs.repository.util.RepoUtil;
 
@@ -21,22 +22,28 @@ public class WrcGUI extends Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(WrcGUI.class);
     private static boolean scenicView;
+    private Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        SeasonPane rootPane = new SeasonPane(new WrcSeason());
+        this.primaryStage = primaryStage;
+
+//        SeasonPane rootPane = new SeasonPane(new WrcSeason());
+        RootPane rootPane = new RootPane();
 
         // Create scene
         Group root = new Group();
-        Scene scene = new Scene(root);
-//        Scene scene = new Scene(root, 600, 500);
-        scene.setRoot(rootPane);
-        root.getStyleClass().add("bgBlue");
+//        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 1000, 800);
+//        scene.setRoot(rootPane);
+        ScrollPane scrollPane = new ScrollPane(rootPane);
+        scene.setRoot(scrollPane);
+//        rootPane.getStyleClass().add("bgBlue");
 
         // Show stage
         primaryStage.setScene(scene);
-//        primaryStage.sizeToScene();
-        primaryStage.setMaximized(true);
+        primaryStage.sizeToScene();
+//        primaryStage.setMaximized(true);
 
 //        primaryStage.setResizable(false);
         primaryStage.show();
@@ -49,6 +56,7 @@ public class WrcGUI extends Application {
 //        rootPane.heightProperty().addListener(o -> LOG.debug("height {}", o));
 
         scene.getStylesheets().add(getClass().getResource("/css/common.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/css/guiStyle.css").toExternalForm());
     }
 
 
@@ -61,6 +69,7 @@ public class WrcGUI extends Application {
             display(RepoUtil.formatEntities(ds));
         }
 
+        display("stage dim: {}x{}", primaryStage.getWidth(), primaryStage.getHeight());
     }
 
     public static void main(String[] args) {

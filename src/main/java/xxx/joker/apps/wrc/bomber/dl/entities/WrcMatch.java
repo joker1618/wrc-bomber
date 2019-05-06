@@ -5,6 +5,7 @@ import xxx.joker.libs.repository.design.RepoEntity;
 import xxx.joker.libs.repository.design.RepoField;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class WrcMatch extends RepoEntity {
 
@@ -20,6 +21,21 @@ public class WrcMatch extends RepoEntity {
     private LocalDate day;
     @RepoField
     private WrcWinner winner;
+
+    public WrcMatch() {
+
+    }
+    public WrcMatch(WrcNation nation, WrcWinner winner) {
+        this.nation = nation;
+        this.winner = winner;
+        this.day = LocalDate.now();
+    }
+    public WrcMatch(WrcNation nation, WrcWinner winner, Long rallyID) {
+        this.nation = nation;
+        this.winner = winner;
+        this.rallyID = rallyID;
+        this.day = LocalDate.now();
+    }
 
     @Override
     public String getPrimaryKey() {
