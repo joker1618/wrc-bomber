@@ -7,6 +7,7 @@ import javafx.collections.SetChangeListener;
 import xxx.joker.apps.wrc.bomber.common.Configs;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcNation;
+import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
 import xxx.joker.libs.core.lambdas.JkStreams;
 import xxx.joker.libs.repository.JkRepoFile;
@@ -46,6 +47,16 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
     @Override
     public Map<String, WrcNation> getNationMap() {
         return getDataMap(WrcNation.class, WrcNation::getName);
+    }
+
+    @Override
+    public List<WrcSeason> getSeasons() {
+        return getDataList(WrcSeason.class);
+    }
+
+    @Override
+    public List<WrcRally> getRallies() {
+        return getDataList(WrcRally.class);
     }
 
     @Override

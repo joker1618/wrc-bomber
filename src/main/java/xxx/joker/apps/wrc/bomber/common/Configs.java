@@ -7,10 +7,13 @@ import java.nio.file.Paths;
 
 public class Configs {
 
-//    public static final Path DB_FOLDER = JkEnvironment.getAppsFolder().resolve("wrc-bomber/db");
-    public static final Path DB_FOLDER = Paths.get("repo");
+    public static final Path BASE_FOLDER = JkEnvironment.getAppsFolder().resolve("wrc-bomber");
+
+    public static final Path DB_FOLDER = BASE_FOLDER.resolve("repo");
+//    public static final Path DB_FOLDER = Paths.get("repo").toAbsolutePath();
     public static final String DB_NAME = "wrc";
 
     public static final Path FLAG_FOLDER = DB_FOLDER.resolve("flags");
+    public static final Path IMG_FOLDER = BASE_FOLDER.resolve("images");
 
 }

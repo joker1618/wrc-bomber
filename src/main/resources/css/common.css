@@ -36,3 +36,5 @@
     -fx-border-color: GREEN;
 }
 
+.bold { -fx-font-weight: BOLD }
+

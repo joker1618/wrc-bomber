@@ -3,10 +3,7 @@ package xxx.joker.apps.wrc.bomber.dl.entities;
 import xxx.joker.libs.repository.design.RepoEntity;
 import xxx.joker.libs.repository.design.RepoField;
 
-import java.io.InputStream;
 import java.nio.file.Path;
-
-import static xxx.joker.libs.core.utils.JkStrings.strf;
 
 public class WrcNation extends RepoEntity {
 
@@ -15,9 +12,7 @@ public class WrcNation extends RepoEntity {
     @RepoField
     private String code;
     @RepoField
-    private Path flagIconPath;
-    @RepoField
-    private Path flagImagePath;
+    private Path flagPath;
 
     @Override
     public String getPrimaryKey() {
@@ -40,19 +35,11 @@ public class WrcNation extends RepoEntity {
         this.code = code;
     }
 
-    public Path getFlagIconPath() {
-        return flagIconPath;
+    public Path getFlagPath() {
+        return flagPath;
     }
 
-    public void setFlagIconPath(Path flagIconPath) {
-        this.flagIconPath = flagIconPath;
-    }
-
-    public Path getFlagImagePath() {
-        return flagImagePath;
-    }
-
-    public void setFlagImagePath(Path flagImagePath) {
-        this.flagImagePath = flagImagePath;
+    public void setFlagPath(Path flagPath) {
+        this.flagPath = flagPath;
     }
 }

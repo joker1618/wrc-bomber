@@ -8,8 +8,8 @@ import javafx.stage.Stage;
 import org.scenicview.ScenicView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
-import xxx.joker.apps.wrc.bomber.gui.pane.RootPane;
 import xxx.joker.libs.repository.design.RepoEntity;
 import xxx.joker.libs.repository.util.RepoUtil;
 
@@ -28,7 +28,7 @@ public class WrcGUI extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
 
-//        SeasonPane rootPane = new SeasonPane(new WrcSeason());
+//        SeasonPaneOLD rootPane = new SeasonPaneOLD(new WrcSeason());
         RootPane rootPane = new RootPane();
 
         // Create scene
@@ -64,10 +64,14 @@ public class WrcGUI extends Application {
     public void stop() throws Exception {
         LOG.debug("STOP APP");
 
-        Map<Class<RepoEntity>, Set<RepoEntity>> dataSets = WrcRepoImpl.getInstance().getDataSets();
+        WrcRepo repo = WrcRepoImpl.getInstance();
+
+        Map<Class<RepoEntity>, Set<RepoEntity>> dataSets = repo.getDataSets();
         for (Set<RepoEntity> ds : dataSets.values()) {
             display(RepoUtil.formatEntities(ds));
         }
+
+        repo.commit();
 
         display("stage dim: {}x{}", primaryStage.getWidth(), primaryStage.getHeight());
     }

@@ -1,7 +1,8 @@
 package xxx.joker.apps.wrc.bomber.dl.enums;
 
-public enum WrcWinner {
+public enum WrcDriver {
 
+    NONE,
     FEDE,
     BOMBER
 

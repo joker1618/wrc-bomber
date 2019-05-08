@@ -1,40 +1,32 @@
 package xxx.joker.apps.wrc.bomber.dl.entities;
 
-import xxx.joker.apps.wrc.bomber.dl.enums.WrcWinner;
+import xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver;
 import xxx.joker.libs.repository.design.RepoEntity;
 import xxx.joker.libs.repository.design.RepoField;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class WrcMatch extends RepoEntity {
 
     @RepoField
     private WrcNation nation;
-    /**
-     * If the match is part of a rally, will be equals to the entityID of the first match
-     * If is a single match, null
-     */
     @RepoField
     private Long rallyID;
     @RepoField
-    private LocalDate day;
-    @RepoField
-    private WrcWinner winner;
+    private WrcDriver winner;
 
     public WrcMatch() {
 
     }
-    public WrcMatch(WrcNation nation, WrcWinner winner) {
+    public WrcMatch(WrcNation nation, Long rallyID, WrcDriver winner) {
         this.nation = nation;
-        this.winner = winner;
-        this.day = LocalDate.now();
-    }
-    public WrcMatch(WrcNation nation, WrcWinner winner, Long rallyID) {
-        this.nation = nation;
-        this.winner = winner;
         this.rallyID = rallyID;
-        this.day = LocalDate.now();
+        this.winner = winner;
+    }
+
+    public WrcMatch(WrcNation nation, WrcDriver winner) {
+        this.nation = nation;
+        this.winner = winner;
     }
 
     @Override
@@ -44,14 +36,6 @@ public class WrcMatch extends RepoEntity {
 
     public WrcNation getNation() {
         return nation;
-    }
-
-    public LocalDate getDay() {
-        return day;
-    }
-
-    public void setDay(LocalDate day) {
-        this.day = day;
     }
 
     public void setNation(WrcNation nation) {
@@ -66,11 +50,11 @@ public class WrcMatch extends RepoEntity {
         this.rallyID = rallyID;
     }
 
-    public WrcWinner getWinner() {
+    public WrcDriver getWinner() {
         return winner;
     }
 
-    public void setWinner(WrcWinner winner) {
+    public void setWinner(WrcDriver winner) {
         this.winner = winner;
     }
 }
