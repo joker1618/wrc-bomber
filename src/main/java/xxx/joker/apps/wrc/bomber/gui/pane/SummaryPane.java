@@ -28,19 +28,15 @@ public class SummaryPane extends BorderPane {
     private final WrcRepo repo = WrcRepoImpl.getInstance();
 
     public SummaryPane() {
-        getStyleClass().addAll("bgYellow");
+        getStyleClass().addAll("bgYellow", "bold");
 
         HBox topBox = new HBox(new Label("SUMMARY"));
         topBox.getStyleClass().add("captionBox");
         setTop(topBox);
 
         HBox centerBox = new HBox();
-        setCenter(centerBox);
-        ImageView iv1 = JfxUtil.createImageView(Configs.IMG_FOLDER.resolve("bomber1.png"), 100, null);
-        ImageView iv2 = JfxUtil.createImageView(Configs.IMG_FOLDER.resolve("bomber2.png"), 100, null);
-
         GridPane gp = new GridPane();
-        centerBox.getChildren().addAll(iv1, gp, iv2);
+        setCenter(gp);
 
         gp.add(new Label(FEDE.name()), 1, 0);
         gp.add(new Label(BOMBER.name()), 2, 0);
@@ -48,7 +44,7 @@ public class SummaryPane extends BorderPane {
         int statNum = 1;
         addStatRow(gp, statNum++, "Stage", () -> JkStreams.toMap(repo.getMatches(), WrcMatch::getWinner));
         addStatRow(gp, statNum++, "Rally", () -> JkStreams.toMap(repo.getRallies(), WrcRally::getWinner));
-        addStatRow(gp, statNum++, "Season", () -> JkStreams.toMap(repo.getSeasons(), WrcSeason::getWinner));
+        addStatRow(gp, statNum++, "Season", () -> JkStreams.toMap(repo.getClosedSeasons(), WrcSeason::getWinner));
     }
 
     private <V> void addStatRow(GridPane gp, int rowNum, String title, Supplier<Map<WrcDriver, List<V>>> supplier) {

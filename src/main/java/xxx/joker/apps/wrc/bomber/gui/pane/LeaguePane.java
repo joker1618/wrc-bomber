@@ -6,13 +6,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcNation;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
+import xxx.joker.apps.wrc.bomber.gui.snippet.LeagueResults;
 import xxx.joker.libs.core.javafx.JfxUtil;
 import xxx.joker.libs.core.lambdas.JkStreams;
 
@@ -57,59 +61,8 @@ public class LeaguePane extends BorderPane {
     }
 
     private void createResultsPane(BorderPane bp, WrcSeason season) {
-        GridPane gp = new GridPane();
-
-        gp.add(new Label(""), 0, 0);
-        gp.add(new Label(FEDE.name()), 0, 1);
-        gp.add(new Label(BOMBER.name()), 0, 2);
-
-        Map<String, WrcNation> allNations = repo.getNationMap();
-
-        int colNum = 1;
-        for (WrcRally rally : season.getRallyList()) {
-            ImageView ivFlag = JfxUtil.createImageView(rally.getNation().getFlagPath(), 60, 60);
-
-            gp.add(ivFlag, colNum, 0);
-            gp.add(new Label(rally.getStageWins(FEDE)+""), colNum, 1);
-            gp.add(new Label(rally.getStageWins(BOMBER)+""), colNum, 2);
-
-            colNum++;
-
-            allNations.remove(rally.getNation().getName());
-        }
-
-        for (WrcNation nation : allNations.values()) {
-            ImageView ivFlag = JfxUtil.createImageView(nation.getFlagPath(), 60, 60);
-            gp.add(ivFlag, colNum, 0);
-            colNum++;
-        }
-
-        gp.add(new Label("N.R."), colNum, 0);
-        gp.add(new Label(season.getRallyWins(FEDE)+""), colNum, 1);
-        gp.add(new Label(season.getRallyWins(BOMBER)+""), colNum, 2);
-        colNum++;
-
-        gp.add(new Label("N.S."), colNum, 0);
-        gp.add(new Label(season.getStageWins(FEDE)+""), colNum, 1);
-        gp.add(new Label(season.getStageWins(BOMBER)+""), colNum, 2);
-        colNum++;
-
-        ColumnConstraints ccFirst = new ColumnConstraints();
-        ccFirst.setHalignment(HPos.LEFT);
-        gp.getColumnConstraints().add(ccFirst);
-
-        ColumnConstraints ccMatch = new ColumnConstraints();
-        ccMatch.setHalignment(HPos.CENTER);
-        for(int i = 1; i < colNum; i++) {
-            gp.getColumnConstraints().add(ccMatch);
-        }
-
-        gp.getStyleClass().add("bgRed");
-        gp.setHgap(10);
-        gp.setVgap(10);
-        gp.setGridLinesVisible(true);
-
-        bp.setCenter(gp);
+        LeagueResults leagueResults = new LeagueResults(season);
+        bp.setCenter(leagueResults);
     }
 
     private void createAddPane(BorderPane bpParent, WrcSeason season) {

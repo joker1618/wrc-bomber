@@ -1,5 +1,6 @@
 package xxx.joker.apps.wrc.bomber.dl;
 
+import javafx.scene.image.Image;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcNation;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
@@ -21,8 +22,11 @@ public interface WrcRepo extends JkRepo {
     List<WrcMatch> getMatches();
 
     WrcSeason getActualSeason();
+    List<WrcSeason> getClosedSeasons();
+
 
     void registerActionChangeStats(Consumer<WrcRepo> action);
     void refreshStats();
 
+    Image getFlag(WrcNation nation);
 }

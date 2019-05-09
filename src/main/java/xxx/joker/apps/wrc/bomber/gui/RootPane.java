@@ -7,9 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
-import xxx.joker.apps.wrc.bomber.gui.pane.AddMatchPane;
-import xxx.joker.apps.wrc.bomber.gui.pane.LeaguePane;
-import xxx.joker.apps.wrc.bomber.gui.pane.SummaryPane;
+import xxx.joker.apps.wrc.bomber.gui.pane.*;
 
 
 public class RootPane extends BorderPane {
@@ -26,16 +24,20 @@ public class RootPane extends BorderPane {
         mainVBox.getStyleClass().add("rootPane");
         setCenter(mainVBox);
 
-        Pane summaryPane = new SummaryPane();
-        mainVBox.getChildren().add(summaryPane);
-
-        Pane seasonPane = new LeaguePane();
+        Pane seasonPane = new XXLeaguePane();
         mainVBox.getChildren().add(seasonPane);
 
-        Pane addResultPane = new AddMatchPane();
-        mainVBox.getChildren().add(addResultPane);
-
-//        setRight(rbox);
+//        Pane summaryPane = new SummaryPane();
+//        mainVBox.getChildren().add(summaryPane);
+//
+//        Pane seasonPane = new LeaguePane();
+//        mainVBox.getChildren().add(seasonPane);
+//
+//        Pane addResultPane = new AddMatchPane();
+//        mainVBox.getChildren().add(addResultPane);
+//
+//        Pane histPane = new HistorySeasonPane();
+//        mainVBox.getChildren().add(histPane);
     }
 
 
