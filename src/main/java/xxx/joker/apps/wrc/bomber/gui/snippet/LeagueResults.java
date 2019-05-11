@@ -72,7 +72,7 @@ public class LeagueResults extends GridPane {
             getColumnConstraints().add(ccMatch);
         }
 
-        getStyleClass().add("bgRed");
+        getStyleClass().add("gp");
         setHgap(10);
         setVgap(10);
         setGridLinesVisible(true);

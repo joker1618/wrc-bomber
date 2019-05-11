@@ -24,20 +24,20 @@ public class RootPane extends BorderPane {
         mainVBox.getStyleClass().add("rootPane");
         setCenter(mainVBox);
 
-        Pane seasonPane = new XXLeaguePane();
-        mainVBox.getChildren().add(seasonPane);
-
-//        Pane summaryPane = new SummaryPane();
-//        mainVBox.getChildren().add(summaryPane);
-//
-//        Pane seasonPane = new LeaguePane();
+//        Pane seasonPane = new XXLeaguePane();
 //        mainVBox.getChildren().add(seasonPane);
 //
-//        Pane addResultPane = new AddMatchPane();
-//        mainVBox.getChildren().add(addResultPane);
-//
-//        Pane histPane = new HistorySeasonPane();
-//        mainVBox.getChildren().add(histPane);
+        Pane summaryPane = new SummaryPane();
+        mainVBox.getChildren().add(summaryPane);
+
+        Pane seasonPane = new LeaguePane();
+        mainVBox.getChildren().add(seasonPane);
+
+        Pane addResultPane = new AddMatchPane();
+        mainVBox.getChildren().add(addResultPane);
+
+        Pane histPane = new HistorySeasonPane();
+        mainVBox.getChildren().add(histPane);
     }
 
 

@@ -35,7 +35,7 @@ public class LeaguePane extends BorderPane {
     private Button btnStartSeason;
 
     public LeaguePane() {
-        getStyleClass().add("bgYellow");
+        getStyleClass().addAll("bgYellow", "leaguePane");
 
         HBox topBox = new HBox(new Label("ACTUAL SEASON"));
         topBox.getStyleClass().add("captionBox");

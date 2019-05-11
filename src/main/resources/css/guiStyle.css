@@ -43,3 +43,7 @@
 .customGrid .row0.col0 {
     -fx-border-width: 1;
 }
+
+.leaguePane .gp {
+    -fx-background-color: #e6e6ff;
+}
