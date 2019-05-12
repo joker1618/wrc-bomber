@@ -8,6 +8,17 @@ import javafx.stage.Stage;
 import org.scenicview.ScenicView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
+import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
+import xxx.joker.libs.core.files.JkFiles;
+import xxx.joker.libs.repository.design.RepoEntity;
+import xxx.joker.libs.repository.util.RepoUtil;
+
+import java.nio.file.Paths;
+import java.util.Map;
+import java.util.Set;
+
+import static xxx.joker.libs.core.utils.JkConsole.display;
 
 public class WrcGUI extends Application {
 
@@ -44,6 +55,15 @@ public class WrcGUI extends Application {
     @Override
     public void stop() throws Exception {
         LOG.debug("STOP APP");
+
+        WrcRepo repo = WrcRepoImpl.getInstance();
+        Map<Class<RepoEntity>, Set<RepoEntity>> dataSets = repo.getDataSets();
+        for (Set<RepoEntity> ds : dataSets.values()) {
+            display(RepoUtil.formatEntities(ds));
+        }
+
+        display("working dir: {}", Paths.get("").toAbsolutePath());
+        display("launcher path: {}", JkFiles.getLauncherPath(WrcGUI.class));
     }
 
     public static void main(String[] args) {

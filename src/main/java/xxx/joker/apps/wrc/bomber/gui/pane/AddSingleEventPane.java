@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import xxx.joker.apps.wrc.bomber.common.EventWriter;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
@@ -65,6 +66,8 @@ public class AddSingleEventPane extends HBox {
             repo.add(match);
             repo.refreshStats();
             winnerBox.getSelectionModel().selectFirst();
+            EventWriter.register(match);
+            repo.commit();
         });
 
         nationsBox.getSelectionModel().selectedItemProperty().addListener((obs,o,n) -> {
@@ -159,10 +162,15 @@ public class AddSingleEventPane extends HBox {
             WrcNation nation = repo.getNation(nationsBox.getSelectionModel().getSelectedItem());
             WrcRally rally = new WrcRally(nation);
             repo.add(rally);
-            mlist.forEach(m -> m.setRallyID(rally.getEntityID()));
+            mlist.forEach(m -> {
+                m.setSeasonID(rally.getSeasonID());
+                m.setRallyID(rally.getEntityID());
+            });
             rally.getMatches().addAll(mlist);
             repo.refreshStats();
             nationsBox.getSelectionModel().selectFirst();
+            EventWriter.register(rally);
+            repo.commit();
         });
 
         nationsBox.getSelectionModel().selectFirst();

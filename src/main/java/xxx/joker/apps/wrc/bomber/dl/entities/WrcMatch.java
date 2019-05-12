@@ -11,17 +11,13 @@ public class WrcMatch extends RepoEntity {
     @RepoField
     private Long rallyID;
     @RepoField
+    private Long seasonID;
+    @RepoField
     private WrcDriver winner;
 
     public WrcMatch() {
 
     }
-    public WrcMatch(WrcNation nation, Long rallyID, WrcDriver winner) {
-        this.nation = nation;
-        this.rallyID = rallyID;
-        this.winner = winner;
-    }
-
     public WrcMatch(WrcNation nation, WrcDriver winner) {
         this.nation = nation;
         this.winner = winner;
@@ -54,5 +50,13 @@ public class WrcMatch extends RepoEntity {
 
     public void setWinner(WrcDriver winner) {
         this.winner = winner;
+    }
+
+    public Long getSeasonID() {
+        return seasonID;
+    }
+
+    public void setSeasonID(Long seasonID) {
+        this.seasonID = seasonID;
     }
 }

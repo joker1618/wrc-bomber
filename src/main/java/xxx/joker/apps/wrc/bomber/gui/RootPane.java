@@ -5,6 +5,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import xxx.joker.apps.wrc.bomber.common.GitProxy;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.gui.pane.AddSingleEventPane;
@@ -45,9 +46,11 @@ public class RootPane extends BorderPane {
 
     private Pane createGitButtonsPane() {
         Button btnUpdate = new Button("UPDATE FROM GITHUB");
+        btnUpdate.setOnAction(e -> GitProxy.pullData());
         Pane middle = new Pane();
         middle.setStyle("-fx-min-width:200; -fx-max-width:200; -fx-background-color:RED");
         Button btnPush = new Button("PUSH CHANGES TO GITHUB");
+        btnPush.setOnAction(e -> GitProxy.pushData());
         HBox hbox = new HBox(btnUpdate, middle, btnPush);
         hbox.getStyleClass().addAll("childPane", "pad20", "bgRed");
         return hbox;

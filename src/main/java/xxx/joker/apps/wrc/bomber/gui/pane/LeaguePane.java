@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import xxx.joker.apps.wrc.bomber.common.EventWriter;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
@@ -141,13 +142,18 @@ public class LeaguePane extends BorderPane {
             WrcNation nation = repo.getNation(nationsBox.getSelectionModel().getSelectedItem());
             WrcRally rally = new WrcRally(nation, season.getEntityID());
             season.getRallyList().add(rally);
-            mlist.forEach(m -> m.setRallyID(rally.getEntityID()));
+            mlist.forEach(m -> {
+                m.setSeasonID(rally.getSeasonID());
+                m.setRallyID(rally.getEntityID());
+            });
             rally.getMatches().addAll(mlist);
             repo.refreshStats();
             nationsBox.getSelectionModel().selectFirst();
             nationsBox.getItems().remove(nation.getName());
             createResultsPane(bpParent, season);
             btnCloseSeason.setDisable(false);
+            EventWriter.register(rally);
+            repo.commit();
         });
 
         nationsBox.getSelectionModel().selectFirst();
