@@ -1,49 +1,26 @@
 .rootPane {
     -fx-font-family: "Calibri";
     -fx-font-size: 20;
+    -fx-spacing: 20;
+    -fx-background-color: BLACK;
 }
 
-.rootPane > * {
+.rootPane .childPane {
     -fx-border-width: 5;
     -fx-border-color: BLUE;
+    -fx-background-color: WHITE;
+    -fx-padding: 10;
 }
 
 .captionBox {
     -fx-font-family: "Times New Roman";
     -fx-font-size: 40;
     -fx-font-weight: BOLD;
+    -fx-padding: 10;
 }
+
 .captionBox .label {
-    -fx-text-fill: RED;
+    -fx-text-fill: BLUE;
+    -fx-font-style: italic;
 }
 
-.customGrid {
-    -fx-background-color: PINK;
-}
-
-.customGrid .evenCol.oddRow {
-    -fx-background-color: YELLOW;
-}
-
-.customGrid .cellBox {
-    -fx-pref-width: 100;
-    -fx-pref-height: 60;
-    -fx-alignment: CENTER;
-    -fx-border-width: 0 1 1 0;
-    -fx-border-color: GREEN;
-}
-
-.customGrid .col0 {
-    -fx-alignment: CENTER-LEFT;
-    -fx-border-width: 0 1 1 1;
-}
-.customGrid .row0 {
-    -fx-border-width: 1 1 1 0;
-}
-.customGrid .row0.col0 {
-    -fx-border-width: 1;
-}
-
-.leaguePane .gp {
-    -fx-background-color: #e6e6ff;
-}

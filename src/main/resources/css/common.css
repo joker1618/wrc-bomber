@@ -32,8 +32,8 @@
 .vgap10 { -fx-vgap: 10 }
 
 .bordered {
-    -fx-border-width: 5;
-    -fx-border-color: GREEN;
+    -fx-border-width: 1;
+    -fx-border-color: BLACK;
 }
 
 .bold { -fx-font-weight: BOLD }

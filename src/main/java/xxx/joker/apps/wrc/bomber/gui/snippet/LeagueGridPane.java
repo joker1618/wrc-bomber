@@ -1,18 +1,12 @@
-package xxx.joker.apps.wrc.bomber.gui.pane;
+package xxx.joker.apps.wrc.bomber.gui.snippet;
 
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcNation;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
-import xxx.joker.apps.wrc.bomber.gui.snippet.GridPaneBuilder;
 import xxx.joker.libs.core.javafx.JfxUtil;
 
 import java.util.Map;
@@ -20,32 +14,15 @@ import java.util.Map;
 import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.BOMBER;
 import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.FEDE;
 
-public class XXLeaguePane extends BorderPane {
+public class LeagueGridPane extends GridPane {
 
     private final WrcRepo repo = WrcRepoImpl.getInstance();
 
-    private HBox contentBox;
-    private Button btnStartSeason;
-
-    public XXLeaguePane() {
-        getStyleClass().addAll("bgYellow", "pad20");
-
-        HBox topBox = new HBox(new Label("ACTUAL SEASON"));
-        topBox.getStyleClass().add("captionBox");
-        setTop(topBox);
-
-        contentBox = new HBox();
-        setCenter(contentBox);
-
-        btnStartSeason = new Button("Start new season");
-        btnStartSeason.setOnAction(e -> contentBox.getChildren().setAll(createLeaguePane(new WrcSeason())));
-
-        WrcSeason actualSeason = repo.getActualSeason();
-        Node centerNode = actualSeason == null ? btnStartSeason : createLeaguePane(actualSeason);
-        contentBox.getChildren().setAll(centerNode);
+    public LeagueGridPane(WrcSeason season) {
+        initPane(season);
     }
 
-    private GridPane createLeaguePane(WrcSeason season) {
+    private void initPane(WrcSeason season) {
         GridPaneBuilder cgrid = new GridPaneBuilder();
         cgrid.add(1, 0, FEDE.name());
         cgrid.add(2, 0, BOMBER.name());
@@ -81,7 +58,8 @@ public class XXLeaguePane extends BorderPane {
         cgrid.add(2, colNum, season.getStageWins(BOMBER));
         colNum++;
 
-        return cgrid.createGridPane();
-    }
+        cgrid.createGridPane(this);
 
+        getStylesheets().add(getClass().getResource("/css/leaguePane.css").toExternalForm());
+    }
 }

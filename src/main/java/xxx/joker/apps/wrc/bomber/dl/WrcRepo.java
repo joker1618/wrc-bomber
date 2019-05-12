@@ -29,4 +29,5 @@ public interface WrcRepo extends JkRepo {
     void refreshStats();
 
     Image getFlag(WrcNation nation);
+
 }

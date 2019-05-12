@@ -4,8 +4,6 @@ import xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver;
 import xxx.joker.libs.repository.design.RepoEntity;
 import xxx.joker.libs.repository.design.RepoField;
 
-import java.time.LocalDate;
-
 public class WrcMatch extends RepoEntity {
 
     @RepoField

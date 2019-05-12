@@ -20,18 +20,19 @@ import java.util.List;
 import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.BOMBER;
 import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.FEDE;
 
-public class AddMatchPane extends HBox {
+public class AddSingleEventPane extends HBox {
 
     private final WrcRepo repo = WrcRepoImpl.getInstance();
 
-    public AddMatchPane() {
-        getStyleClass().addAll("bgYellow", "spacing20");
+    public AddSingleEventPane() {
+        getStyleClass().addAll("childPane", "bgRed", "spacing20");
         getChildren().add(createSingleMatchPane());
         getChildren().add(createRallyMatchPane());
     }
 
     private BorderPane createSingleMatchPane() {
         BorderPane bp = new BorderPane();
+        bp.getStyleClass().add("bgYellow");
 
         HBox topBox = new HBox(new Label("ADD MATCH"));
         topBox.getStyleClass().add("captionBox");
@@ -39,7 +40,6 @@ public class AddMatchPane extends HBox {
 
         GridPane gp = new GridPane();
         bp.setCenter(gp);
-        gp.getStyleClass().add("bgOrange");
         gp.setHgap(5);
         gp.setVgap(5);
         gp.setGridLinesVisible(true);
@@ -91,6 +91,7 @@ public class AddMatchPane extends HBox {
 
     private BorderPane createRallyMatchPane() {
         BorderPane bp = new BorderPane();
+        bp.getStyleClass().add("bgYellow");
 
         HBox topBox = new HBox(new Label("ADD RALLY"));
         topBox.getStyleClass().add("captionBox");
@@ -100,13 +101,11 @@ public class AddMatchPane extends HBox {
         bp.setCenter(bp2);
 
         GridPane gp = new GridPane();
-        gp.getStyleClass().addAll("bgGrey", "bold");
         gp.setHgap(5);
         gp.setVgap(5);
-        gp.setGridLinesVisible(true);
 
         HBox centerBox = new HBox(gp);
-        centerBox.getStyleClass().addAll("centered", "bgOrange");
+        centerBox.getStyleClass().addAll("centered");
         bp2.setCenter(centerBox);
 
         Button btnFede = new Button(FEDE.name());
@@ -116,7 +115,7 @@ public class AddMatchPane extends HBox {
 
         Button btnSave = new Button("SAVE");
         HBox bottomBox = new HBox(btnSave);
-        bottomBox.getStyleClass().addAll("centered", "bgBlack");
+        bottomBox.getStyleClass().addAll("centered");
         bp2.setBottom(bottomBox);
 
         List<WrcMatch> mlist = new ArrayList<>();
@@ -136,7 +135,7 @@ public class AddMatchPane extends HBox {
         });
 
         HBox hwrap = new HBox(nationsBox);
-        hwrap.getStyleClass().addAll("centered", "bgBlack");
+        hwrap.getStyleClass().addAll("centered");
         bp2.setTop(hwrap);
 
         btnFede.setOnAction(e -> {

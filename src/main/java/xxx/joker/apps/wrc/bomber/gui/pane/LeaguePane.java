@@ -1,13 +1,10 @@
 package xxx.joker.apps.wrc.bomber.gui.pane;
 
-import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
@@ -16,13 +13,11 @@ import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcNation;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
-import xxx.joker.apps.wrc.bomber.gui.snippet.LeagueResults;
-import xxx.joker.libs.core.javafx.JfxUtil;
+import xxx.joker.apps.wrc.bomber.gui.snippet.LeagueGridPane;
 import xxx.joker.libs.core.lambdas.JkStreams;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.BOMBER;
 import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.FEDE;
@@ -32,10 +27,10 @@ public class LeaguePane extends BorderPane {
     private final WrcRepo repo = WrcRepoImpl.getInstance();
 
     private HBox contentBox;
-    private Button btnStartSeason;
+    private HBox btnStartBox;
 
     public LeaguePane() {
-        getStyleClass().addAll("bgYellow", "leaguePane");
+        getStyleClass().addAll("childPane");
 
         HBox topBox = new HBox(new Label("ACTUAL SEASON"));
         topBox.getStyleClass().add("captionBox");
@@ -44,11 +39,13 @@ public class LeaguePane extends BorderPane {
         contentBox = new HBox();
         setCenter(contentBox);
 
-        btnStartSeason = new Button("Start new season");
+        Button btnStartSeason = new Button("Start new season");
         btnStartSeason.setOnAction(e -> contentBox.getChildren().setAll(createLeaguePane(new WrcSeason())));
+        btnStartBox = new HBox(btnStartSeason);
+        btnStartBox.getStyleClass().addAll("pad20");
 
         WrcSeason actualSeason = repo.getActualSeason();
-        Node centerNode = actualSeason == null ? btnStartSeason : createLeaguePane(actualSeason);
+        Node centerNode = actualSeason == null ? btnStartBox : createLeaguePane(actualSeason);
         contentBox.getChildren().setAll(centerNode);
     }
 
@@ -61,21 +58,22 @@ public class LeaguePane extends BorderPane {
     }
 
     private void createResultsPane(BorderPane bp, WrcSeason season) {
-        LeagueResults leagueResults = new LeagueResults(season);
-        bp.setCenter(leagueResults);
+//        LeagueResults leagueResults = new LeagueResults(season);
+//        bp.setCenter(leagueResults);
+        bp.setCenter(new LeagueGridPane(season));
     }
 
     private void createAddPane(BorderPane bpParent, WrcSeason season) {
         BorderPane bp = new BorderPane();
+        bp.getStyleClass().addAll("bgYellow", "pad20");
 
         GridPane gp = new GridPane();
-        gp.getStyleClass().addAll("bgGrey", "bold");
         gp.setHgap(5);
         gp.setVgap(5);
         gp.setGridLinesVisible(true);
 
         HBox centerBox = new HBox(gp);
-        centerBox.getStyleClass().addAll("centered", "bgOrange");
+        centerBox.getStyleClass().addAll("centered");
         bp.setCenter(centerBox);
 
         Button btnFede = new Button(FEDE.name());
@@ -85,7 +83,7 @@ public class LeaguePane extends BorderPane {
 
         Button btnSave = new Button("SAVE");
         HBox bottomBox = new HBox(btnSave);
-        bottomBox.getStyleClass().addAll("centered", "bgBlack");
+        bottomBox.getStyleClass().addAll("centered");
         bp.setBottom(bottomBox);
 
         List<WrcMatch> mlist = new ArrayList<>();
@@ -105,7 +103,7 @@ public class LeaguePane extends BorderPane {
             mlist.clear();
         });
         HBox topBox = new HBox(nationsBox);
-        topBox.getStyleClass().addAll("centered", "bgBlack");
+        topBox.getStyleClass().addAll("centered");
         bp.setTop(topBox);
 
         btnFede.setOnAction(e -> {
@@ -130,10 +128,13 @@ public class LeaguePane extends BorderPane {
         btnCloseSeason.setOnAction(e -> {
             season.setFinished(true);
             repo.refreshStats();
-            contentBox.getChildren().setAll(btnStartSeason);
+            contentBox.getChildren().setAll(btnStartBox);
         });
 
-        HBox bhbox = new HBox(bp, btnCloseSeason);
+        HBox boxCloseBtn = new HBox(btnCloseSeason);
+        boxCloseBtn.getStyleClass().addAll("pad20");
+
+        HBox bhbox = new HBox(bp, boxCloseBtn);
         bpParent.setBottom(bhbox);
 
         btnSave.setOnAction(e -> {

@@ -1,12 +1,13 @@
 package xxx.joker.apps.wrc.bomber.dl.entities;
 
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver;
-import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.*;
 import xxx.joker.libs.core.lambdas.JkStreams;
 import xxx.joker.libs.repository.design.RepoEntity;
 import xxx.joker.libs.repository.design.RepoField;
 
 import java.util.List;
+
+import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.*;
 
 public class WrcRally extends RepoEntity {
 

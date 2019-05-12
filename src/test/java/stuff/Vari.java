@@ -1,24 +1,115 @@
 package stuff;
 
 import org.junit.Test;
+import xxx.joker.libs.core.files.JkFiles;
+import xxx.joker.libs.core.utils.JkStrings;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static xxx.joker.libs.core.utils.JkConsole.display;
 
 public class Vari {
 
     @Test
-    public void aa() {
-        display("{}", maxx(Arrays.asList(10d, 3.6, 34.4)));
-        display("{}", maxx(Arrays.asList(10L, 3.6, 34L)));
+    public void aa() throws Exception {
+        Path folder = Paths.get("gitTests");
+//        JkFiles.delete(folder);
+//        Files.createDirectories(folder);
+        int res;
+//        res = runCmd(folder, "git clone https://github.com/joker1618/java-8-base-parent.git j8");
+//        display("git clone: {}", res);
+//        res = runCmd(folder.resolve("j8"), "git config --global user.email \"java@mail.xyz\"");
+//        display("git config mail: {}", res);
+//        res = runCmd(folder.resolve("j8"), "git config --global user.name \"fake\"");
+//        display("git config name: {}", res);
+//
+//        res = runCmd(folder.resolve("j8"), "git pull");
+//        display("git pull: {}", res);
+//
+//        res = runCmd(folder.resolve("j8"), "git add --all");
+//        display("git add: {}", res);
+//        res = runCmd(folder.resolve("j8"), "git commit -m xx");
+//        display("git commit: {}", res);
+//        res = runCmd(folder.resolve("j8"), "git push");
+//        display("git push: {}", res);
+//
+//        res = runCmd(folder.resolve("j8"), "git reset");
+//        display("git reset: {}", res);
+        res = runCmd(folder.resolve("j8"), "git status");
+        res = runCmd(folder.resolve("j8"), "git remote -v update");
+        display("git status: {}", res);
 
     }
 
+    private int runCmd(Path folder, String cmd) throws Exception {
+        ProcessBuilder pb = new ProcessBuilder()
+                .command(JkStrings.splitList(cmd, " "))
+                .directory(folder.toFile());
 
-    private static <T extends Number> T maxx(Collection<T> coll) {
-        return (T) coll.stream().map(Number::doubleValue).min(Comparator.reverseOrder()).get();
+        Process p = pb.start();
+        StreamGobbler errorGobbler = new StreamGobbler(p.getErrorStream(), "ERROR");
+
+        StreamGobbler outputGobbler = new StreamGobbler(p.getInputStream(), "OUTPUT");
+
+        outputGobbler.start();
+
+        errorGobbler.start();
+
+        int exit = p.waitFor();
+
+        errorGobbler.join();
+
+        outputGobbler.join();
+        return exit;
+    }
+
+    private static class StreamGobbler extends Thread {
+
+
+
+        private final InputStream is;
+
+        private final String type;
+
+
+
+        private StreamGobbler(InputStream is, String type) {
+
+            this.is = is;
+
+            this.type = type;
+
+        }
+
+
+
+        @Override
+
+        public void run() {
+
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(is));) {
+
+                String line;
+
+                while ((line = br.readLine()) != null) {
+
+                    System.out.println(type + "> " + line);
+
+                }
+
+            } catch (IOException ioe) {
+
+                ioe.printStackTrace();
+
+            }
+
+        }
+
     }
 }

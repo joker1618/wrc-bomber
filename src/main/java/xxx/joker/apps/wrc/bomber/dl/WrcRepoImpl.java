@@ -1,9 +1,5 @@
 package xxx.joker.apps.wrc.bomber.dl;
 
-import com.sun.javafx.collections.ObservableSetWrapper;
-import javafx.beans.property.SimpleListProperty;
-import javafx.collections.ObservableSet;
-import javafx.collections.SetChangeListener;
 import javafx.scene.image.Image;
 import xxx.joker.apps.wrc.bomber.common.Configs;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
@@ -11,13 +7,17 @@ import xxx.joker.apps.wrc.bomber.dl.entities.WrcNation;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
 import xxx.joker.libs.core.cache.JkCache;
-import xxx.joker.libs.core.files.JkFiles;
 import xxx.joker.libs.core.lambdas.JkStreams;
 import xxx.joker.libs.repository.JkRepoFile;
-import xxx.joker.libs.repository.design.RepoEntity;
 
-import java.util.*;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
+
+import static xxx.joker.libs.core.utils.JkStrings.strf;
 
 public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
 
@@ -87,7 +87,9 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
 
     @Override
     public Image getFlag(WrcNation nation) {
-        return cacheFlag.get(nation, () -> new Image(JkFiles.toURL(nation.getFlagPath())));
+        String str = strf("flags/{}.{}.flag.image.png", nation.getName(), nation.getCode());
+        InputStream is = getClass().getClassLoader().getResourceAsStream(str);
+        return cacheFlag.get(nation, () -> new Image(is));
     }
 
 

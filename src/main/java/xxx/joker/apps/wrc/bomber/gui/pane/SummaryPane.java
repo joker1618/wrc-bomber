@@ -1,58 +1,57 @@
 package xxx.joker.apps.wrc.bomber.gui.pane;
 
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import xxx.joker.apps.wrc.bomber.common.Configs;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver;
-import xxx.joker.libs.core.javafx.JfxUtil;
+import xxx.joker.apps.wrc.bomber.gui.snippet.GridPaneBuilder;
 import xxx.joker.libs.core.lambdas.JkStreams;
-import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.*;
 
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.BOMBER;
+import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.FEDE;
+
 public class SummaryPane extends BorderPane {
 
     private final WrcRepo repo = WrcRepoImpl.getInstance();
 
     public SummaryPane() {
-        getStyleClass().addAll("bgYellow", "bold");
+        getStyleClass().addAll("childPane", "summaryPane");
 
         HBox topBox = new HBox(new Label("SUMMARY"));
         topBox.getStyleClass().add("captionBox");
         setTop(topBox);
 
-        HBox centerBox = new HBox();
-        GridPane gp = new GridPane();
-        setCenter(gp);
-
-        gp.add(new Label(FEDE.name()), 1, 0);
-        gp.add(new Label(BOMBER.name()), 2, 0);
+        GridPaneBuilder builder = new GridPaneBuilder();
+        builder.add(0, 1, FEDE);
+        builder.add(0, 2, BOMBER);
 
         int statNum = 1;
-        addStatRow(gp, statNum++, "Stage", () -> JkStreams.toMap(repo.getMatches(), WrcMatch::getWinner));
-        addStatRow(gp, statNum++, "Rally", () -> JkStreams.toMap(repo.getRallies(), WrcRally::getWinner));
-        addStatRow(gp, statNum++, "Season", () -> JkStreams.toMap(repo.getClosedSeasons(), WrcSeason::getWinner));
+        addStatRow(builder, statNum++, "Stage", () -> JkStreams.toMap(repo.getMatches(), WrcMatch::getWinner));
+        addStatRow(builder, statNum++, "Rally", () -> JkStreams.toMap(repo.getRallies(), WrcRally::getWinner));
+        addStatRow(builder, statNum++, "Season", () -> JkStreams.toMap(repo.getClosedSeasons(), WrcSeason::getWinner));
+
+        setCenter(builder.createGridPane());
+
+        getStylesheets().add(getClass().getResource("/css/summaryPane.css").toExternalForm());
     }
 
-    private <V> void addStatRow(GridPane gp, int rowNum, String title, Supplier<Map<WrcDriver, List<V>>> supplier) {
+    private <V> void addStatRow(GridPaneBuilder builder, int rowNum, String title, Supplier<Map<WrcDriver, List<V>>> supplier) {
         Label lblFede = new Label("");
         Label lblBomber = new Label("");
-        gp.add(new Label(title), 0, rowNum);
-        gp.add(lblFede, 1, rowNum);
-        gp.add(lblBomber, 2, rowNum);
+        builder.add(rowNum, 0, title);
+        builder.add(rowNum, 1, lblFede);
+        builder.add(rowNum, 2, lblBomber);
 
         Consumer<WrcRepo> action = r -> {
             Map<WrcDriver, List<V>> map = supplier.get();
@@ -62,6 +61,5 @@ public class SummaryPane extends BorderPane {
         action.accept(repo);
         repo.registerActionChangeStats(action);
     }
-
 
 }

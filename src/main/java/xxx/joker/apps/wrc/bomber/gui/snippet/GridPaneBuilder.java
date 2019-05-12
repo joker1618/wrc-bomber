@@ -4,9 +4,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import xxx.joker.libs.core.lambdas.JkStreams;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import static xxx.joker.libs.core.utils.JkStrings.strf;
 
@@ -14,10 +14,6 @@ public class GridPaneBuilder {
 
     // row, cols
     private Map<Integer, Map<Integer, HBox>> boxMap = new HashMap<>();
-    private int rowHeight = -1;
-    private Map<Integer, Integer> rowHeightMap = new HashMap<>();
-    private int colWidth = -1;
-    private Map<Integer, Integer> colWidthMap = new HashMap<>();
 
     public GridPaneBuilder add(int row, int col, String lbl, Object... params) {
         return add(row, col, new Label(strf(lbl, params)));
@@ -34,6 +30,11 @@ public class GridPaneBuilder {
 
     public GridPane createGridPane() {
         GridPane gp = new GridPane();
+        createGridPane(gp);
+        return gp;
+    }
+
+    public void createGridPane(GridPane gp) {
         gp.getStyleClass().addAll("customGrid");
 
 
@@ -51,13 +52,11 @@ public class GridPaneBuilder {
             for(int c = 0; c < maxCol; c++) {
                 HBox hbox = boxMap.getOrDefault(r, new HashMap<>()).getOrDefault(c, new HBox(new Label("")));
                 hbox.getStyleClass().addAll("row"+r, "col"+c, "cellBox");
-                hbox.getStyleClass().add(r % 2 == 0 ? "oddRow" : "evenCol");
+                hbox.getStyleClass().add(r % 2 == 0 ? "oddRow" : "evenRow");
                 hbox.getStyleClass().add(c % 2 == 0 ? "oddCol" : "evenCol");
                 gp.add(hbox, c, r);
             }
         }
-
-        return gp;
     }
 
 
