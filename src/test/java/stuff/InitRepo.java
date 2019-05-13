@@ -1,7 +1,6 @@
 package stuff;
 
 import org.junit.Test;
-import xxx.joker.apps.wrc.bomber.util.EventWriter;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
@@ -30,19 +29,6 @@ public class InitRepo {
         }
 
         repo.commit();
-    }
-
-    @Test
-    public void eventsInit() {
-//        JkFiles.delete(Configs.EVENT_FILEPATH);
-        WrcRepo repo = WrcRepoImpl.getInstance();
-
-        List<WrcMatch> sorted = JkStreams.sorted(repo.getMatches(), Comparator.comparing(WrcMatch::getEntityID));
-
-        for (WrcMatch match : sorted) {
-            EventWriter.register(match);
-        }
-
     }
 
     @Test
