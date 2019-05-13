@@ -13,6 +13,7 @@ import xxx.joker.libs.core.files.JkFiles;
 import static xxx.joker.apps.wrc.bomber.common.Configs.*;
 
 import java.nio.file.Files;
+import java.util.List;
 
 public class GitProxy {
 
@@ -26,9 +27,11 @@ public class GitProxy {
 
     public static void updateData() {
         if(!Files.exists(GIT_FOLDER)) {
-            git.clone();
+            JkProcess res = git.clone();
+            LOG.debug(res.toStringFull());
         }
-        git.pull();
+        JkProcess res = git.pull();
+        LOG.debug(res.toStringFull());
         JkFiles.deleteContent(DB_FOLDER);
         JkFiles.findFiles(GIT_FOLDER.resolve("repo"), false).forEach(f -> {
             JkFiles.copyFile(f, DB_FOLDER.resolve(f.getFileName()));
@@ -44,7 +47,8 @@ public class GitProxy {
         JkFiles.findFiles(DB_FOLDER, false).forEach(f -> {
             JkFiles.copyFile(f, GIT_FOLDER.resolve("repo").resolve(f.getFileName()));
         });
-        git.commitAndPush("fix");
+        List<JkProcess> resList = git.commitAndPush("fix");
+        resList.forEach(res -> LOG.debug(res.toStringFull()));
         LOG.info("Commit and push done");
     }
 }
