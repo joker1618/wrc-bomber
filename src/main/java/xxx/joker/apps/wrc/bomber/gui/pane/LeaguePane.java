@@ -51,7 +51,9 @@ public class LeaguePane extends BorderPane {
     }
 
     private BorderPane createLeaguePane(WrcSeason season) {
+        boolean doCommit = season.getEntityID() == null;
         repo.add(season);
+        if(doCommit)    repo.commit();
         BorderPane bp = new BorderPane();
         createResultsPane(bp, season);
         createAddPane(bp, season);
@@ -59,8 +61,6 @@ public class LeaguePane extends BorderPane {
     }
 
     private void createResultsPane(BorderPane bp, WrcSeason season) {
-//        LeagueResults leagueResults = new LeagueResults(season);
-//        bp.setCenter(leagueResults);
         bp.setCenter(new LeagueGridPane(season));
     }
 
@@ -129,6 +129,7 @@ public class LeaguePane extends BorderPane {
         btnCloseSeason.setOnAction(e -> {
             season.setFinished(true);
             repo.refreshStats();
+            repo.commit();
             contentBox.getChildren().setAll(btnStartBox);
         });
 

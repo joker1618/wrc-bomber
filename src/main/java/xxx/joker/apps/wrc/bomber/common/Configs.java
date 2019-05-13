@@ -11,6 +11,7 @@ public class Configs {
 
     public static final Path EVENT_FILEPATH = BASE_FOLDER.resolve("events/eventsHistory.csv");
 
+    public static final Path GIT_FOLDER = BASE_FOLDER.resolve("git-data");
     public static final Path DB_FOLDER = BASE_FOLDER.resolve("repo");
     public static final String DB_NAME = "wrc";
 
