@@ -1,27 +1,18 @@
 package stuff;
 
 import org.junit.Test;
-import xxx.joker.apps.wrc.bomber.common.Configs;
-import xxx.joker.apps.wrc.bomber.common.EventWriter;
+import xxx.joker.apps.wrc.bomber.util.EventWriter;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcNation;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
-import xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver;
 import xxx.joker.libs.core.datetime.JkDateTime;
-import xxx.joker.libs.core.datetime.JkDuration;
 import xxx.joker.libs.core.files.JkFiles;
 import xxx.joker.libs.core.lambdas.JkStreams;
-import xxx.joker.libs.core.runtimes.JkReflection;
 import xxx.joker.libs.core.utils.JkStrings;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class InitRepo {

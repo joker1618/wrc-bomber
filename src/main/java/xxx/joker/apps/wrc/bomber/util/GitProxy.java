@@ -1,4 +1,4 @@
-package xxx.joker.apps.wrc.bomber.common;
+package xxx.joker.apps.wrc.bomber.util;
 
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.libs.core.adapter.JkGIT;
