@@ -45,6 +45,11 @@ public class GitProxy {
     }
 
     public static void pushData() {
+        if(!Files.exists(GIT_FOLDER)) {
+            JkProcess res = git.clone();
+            LOG.debug(res.toStringFull());
+        }
+        git.pull();
         JkFiles.deleteContent(GIT_FOLDER.resolve("repo"));
         JkFiles.findFiles(DB_FOLDER, false).forEach(f -> {
             Path outPath = GIT_FOLDER.resolve("repo").resolve(f.getFileName());

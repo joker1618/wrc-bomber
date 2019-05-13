@@ -61,9 +61,6 @@ public class WrcGUI extends Application {
         for (Set<RepoEntity> ds : dataSets.values()) {
             display(RepoUtil.formatEntities(ds));
         }
-
-        display("working dir: {}", Paths.get("").toAbsolutePath());
-        display("launcher path: {}", JkFiles.getLauncherPath(WrcGUI.class));
     }
 
     public static void main(String[] args) {
