@@ -6,7 +6,7 @@ import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.gui.RootPane;
 import xxx.joker.apps.wrc.bomber.gui.WrcGUI;
-import xxx.joker.libs.core.adapter.JkGIT;
+import xxx.joker.libs.core.adapter.JkGit;
 import xxx.joker.libs.core.adapter.JkProcess;
 import xxx.joker.libs.core.files.JkFiles;
 
@@ -19,7 +19,7 @@ public class GitProxy {
 
     private static final Logger LOG = LoggerFactory.getLogger(GitProxy.class);
 
-    private static JkGIT git = new JkGIT(GIT_FOLDER, GIT_URL_DATA);
+    private static JkGit git = new JkGit(GIT_FOLDER, GIT_URL_DATA);
 
     private GitProxy() {
 
