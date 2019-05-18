@@ -4,8 +4,8 @@ import org.junit.Test;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.*;
-import xxx.joker.libs.core.format.JkOutput;
-import xxx.joker.libs.core.utils.JkConsole;
+import xxx.joker.apps.wrc.bomber.dl.enums.WrcTime;
+import xxx.joker.apps.wrc.bomber.dl.enums.WrcWeather;
 import xxx.joker.libs.repository.util.RepoUtil;
 
 import java.util.List;

@@ -16,7 +16,7 @@ public class WrcRally extends RepoEntity {
     @RepoField
     private Long seasonID;
     @RepoField
-    private int rallyProgrInSeason;
+    private Integer rallyProgrInSeason;
     @RepoField
     private List<WrcMatch> matches;
 
@@ -72,11 +72,11 @@ public class WrcRally extends RepoEntity {
         this.matches = matches;
     }
 
-    public int getRallyProgrInSeason() {
+    public Integer getRallyProgrInSeason() {
         return rallyProgrInSeason;
     }
 
-    public void setRallyProgrInSeason(int rallyProgrInSeason) {
+    public void setRallyProgrInSeason(Integer rallyProgrInSeason) {
         this.rallyProgrInSeason = rallyProgrInSeason;
     }
 }

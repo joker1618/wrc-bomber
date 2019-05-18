@@ -6,7 +6,9 @@ import xxx.joker.libs.core.types.JkFormattable;
 import xxx.joker.libs.core.utils.JkStrings;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static xxx.joker.libs.core.utils.JkStrings.strf;
 
@@ -18,15 +20,15 @@ public class WrcSurface implements JkFormattable<WrcSurface> {
         SNOW
     }
 
-    private List<Pair<GroundType, Double>> surfaces;
+    private Map<GroundType, Double> surfaces;
 
     public WrcSurface() {
-        this.surfaces = new ArrayList<>();
+        this.surfaces = new HashMap<>();
     }
 
     @Override
     public String format() {
-        return JkStreams.join(surfaces, "--", p -> strf("{}:{}", p.getKey().name(), p.getValue()));
+        return JkStreams.join(surfaces.entrySet(), "--", p -> strf("{}:{}", p.getKey().name(), p.getValue()));
     }
 
     @Override
@@ -35,7 +37,7 @@ public class WrcSurface implements JkFormattable<WrcSurface> {
         surfaces.clear();
         for (String surf : surfList) {
             String[] split = JkStrings.splitArr(surf, ":");
-            surfaces.add(Pair.of(GroundType.valueOf(split[0]), Double.valueOf(split[1])));
+            surfaces.put(GroundType.valueOf(split[0]), Double.valueOf(split[1]));
         }
         return this;
     }

@@ -1,4 +1,4 @@
-package xxx.joker.apps.wrc.bomber.dl.entities;
+package xxx.joker.apps.wrc.bomber.dl.enums;
 
 public enum WrcWeather {
 

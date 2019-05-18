@@ -1,6 +1,8 @@
 package xxx.joker.apps.wrc.bomber.dl.entities;
 
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver;
+import xxx.joker.apps.wrc.bomber.dl.enums.WrcTime;
+import xxx.joker.apps.wrc.bomber.dl.enums.WrcWeather;
 import xxx.joker.libs.repository.design.RepoEntity;
 import xxx.joker.libs.repository.design.RepoField;
 
@@ -15,7 +17,7 @@ public class WrcMatch extends RepoEntity {
     @RepoField
     private Long rallyID;
     @RepoField
-    private int stageProgrInRally;
+    private Integer stageProgrInRally;
     @RepoField
     private WrcStage stage;
     @RepoField
@@ -82,11 +84,11 @@ public class WrcMatch extends RepoEntity {
         this.carFede = carFede;
     }
 
-    public int getStageProgrInRally() {
+    public Integer getStageProgrInRally() {
         return stageProgrInRally;
     }
 
-    public void setStageProgrInRally(int stageProgrInRally) {
+    public void setStageProgrInRally(Integer stageProgrInRally) {
         this.stageProgrInRally = stageProgrInRally;
     }
 

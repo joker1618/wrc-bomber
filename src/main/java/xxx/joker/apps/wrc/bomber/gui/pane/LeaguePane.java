@@ -14,6 +14,8 @@ import javafx.scene.layout.VBox;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.*;
+import xxx.joker.apps.wrc.bomber.dl.enums.WrcTime;
+import xxx.joker.apps.wrc.bomber.dl.enums.WrcWeather;
 import xxx.joker.apps.wrc.bomber.gui.snippet.LeagueGridPane;
 import xxx.joker.libs.core.lambdas.JkStreams;
 
