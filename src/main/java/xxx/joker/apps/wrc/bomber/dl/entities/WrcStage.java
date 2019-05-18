@@ -23,7 +23,7 @@ public class WrcStage extends RepoEntity {
 
     @Override
     public String getPrimaryKey() {
-        return strf("stage-{}-{}", nation, num);
+        return strf("stage-{}-{}", nation.getName(), num);
     }
 
     public WrcNation getNation() {

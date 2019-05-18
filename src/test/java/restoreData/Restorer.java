@@ -24,11 +24,11 @@ public class Restorer {
     @Test
     public void restoreAll() {
 //        repo.clearDataSets();
-        loadNations();
-        loadCars();
+//        loadNations();
+//        loadCars();
         loadStages();
         repo.getDataSets().values().forEach(ds -> display(RepoUtil.formatEntities(ds)));
-        repo.commit();
+//        repo.commit();
     }
 
     private void loadCars() {
@@ -43,8 +43,12 @@ public class Restorer {
             String[] split = JkStrings.splitArr(line, "|");
             WrcStage n = new WrcStage();
             n.setNation(repo.getNation(split[0]));
-            n.setName(split[1]);
             n.setNum(Integer.parseInt(split[2]));
+            WrcStage found = repo.get(n);
+            if(found != null) {
+                n = found;
+            }
+            n.setName(split[1]);
             n.setLength(Integer.parseInt(split[3]));
             n.setSurface(new WrcSurface().parse(split[4]));
             n.setSpecialStage(Boolean.valueOf(split[5]));
