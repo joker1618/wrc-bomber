@@ -4,16 +4,30 @@ import xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver;
 import xxx.joker.libs.repository.design.RepoEntity;
 import xxx.joker.libs.repository.design.RepoField;
 
+import static xxx.joker.libs.core.utils.JkStrings.strf;
+
 public class WrcMatch extends RepoEntity {
 
     @RepoField
     private WrcNation nation;
     @RepoField
-    private Long rallyID;
-    @RepoField
     private Long seasonID;
     @RepoField
+    private Long rallyID;
+    @RepoField
+    private int stageProgrInRally;
+    @RepoField
+    private WrcStage stage;
+    @RepoField
     private WrcDriver winner;
+    @RepoField
+    private WrcCar carFede;
+    @RepoField
+    private WrcCar carBomber;
+    @RepoField
+    private WrcWeather weather;
+    @RepoField
+    private WrcTime time;
 
     public WrcMatch() {
 
@@ -25,7 +39,7 @@ public class WrcMatch extends RepoEntity {
 
     @Override
     public String getPrimaryKey() {
-        return String.valueOf(getEntityID());
+        return strf("match-%04d", getEntityID());
     }
 
     public WrcNation getNation() {
@@ -58,5 +72,53 @@ public class WrcMatch extends RepoEntity {
 
     public void setSeasonID(Long seasonID) {
         this.seasonID = seasonID;
+    }
+
+    public WrcCar getCarFede() {
+        return carFede;
+    }
+
+    public void setCarFede(WrcCar carFede) {
+        this.carFede = carFede;
+    }
+
+    public int getStageProgrInRally() {
+        return stageProgrInRally;
+    }
+
+    public void setStageProgrInRally(int stageProgrInRally) {
+        this.stageProgrInRally = stageProgrInRally;
+    }
+
+    public WrcCar getCarBomber() {
+        return carBomber;
+    }
+
+    public void setCarBomber(WrcCar carBomber) {
+        this.carBomber = carBomber;
+    }
+
+    public WrcWeather getWeather() {
+        return weather;
+    }
+
+    public void setWeather(WrcWeather weather) {
+        this.weather = weather;
+    }
+
+    public WrcTime getTime() {
+        return time;
+    }
+
+    public void setTime(WrcTime time) {
+        this.time = time;
+    }
+
+    public WrcStage getStage() {
+        return stage;
+    }
+
+    public void setStage(WrcStage stage) {
+        this.stage = stage;
     }
 }

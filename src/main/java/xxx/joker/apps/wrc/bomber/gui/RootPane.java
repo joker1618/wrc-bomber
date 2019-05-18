@@ -45,8 +45,8 @@ public class RootPane extends ScrollPane {
         Pane seasonPane = new LeaguePane();
         mainVBox.getChildren().add(seasonPane);
 
-        Pane addResultPane = new AddSingleEventPane();
-        mainVBox.getChildren().add(addResultPane);
+//        Pane addResultPane = new AddSingleEventPane();
+//        mainVBox.getChildren().add(addResultPane);
 
         Pane histPane = new HistorySeasonPane();
         mainVBox.getChildren().add(histPane);

@@ -1,0 +1,81 @@
+Monaco|Entrevaux|0|4320|TARMAC:1.0|false
+Monaco|Corps|1|6050|TARMAC:0.7--SNOW:0.3|false
+Monaco|La Baite-Neuve|2|5590|SNOW:0.7--TARMAC:0.3|false
+Monaco|Peira Cava|3|8150|TARMAC:1.0|false
+Monaco|Col de l'Orme|4|6170|TARMAC:1.0|false
+
+Sweden|Torsby|0|6000|SNOW:1.0|false
+Sweden|Kirkenaer|1|3380|SNOW:1.0|false
+Sweden|Fredriksberg|2|5500|SNOW:1.0|false
+Sweden|Vargasen|3|11610|SNOW:0.7--GRAVEL:0.3|false
+Sweden|Karlstad|4|3800|SNOW:1.0|true
+
+Mexico|Los Mexicanos|0|4020|GRAVEL:1.0|false
+Mexico|Las Minas|1|5030|GRAVEL:1.0|false
+Mexico|Ibarilla|2|8250|GRAVEL:1.0|false
+Mexico|El Brinco|3|3350|GRAVEL:1.0|false
+Mexico|Autodromo de Leon|4|2300|TARMAC:0.8--GRAVEL:0.2|true
+
+Argentina|Soconcho|0|7910|GRAVEL:1.0|false
+Argentina|El Resposo|1|1101|GRAVEL:1.0|false
+Argentina|Ischilin|2|7060|GRAVEL:1.0|false
+Argentina|El Condor|3|3890|GRAVEL:1.0|false
+Argentina|Fernet Branca|4|6040|GRAVEL:1.0|true
+
+Portugal|Ponte de Lima|0|6430|GRAVEL:0.8--TARMAC:0.2|false
+Portugal|Viano do Castelo|1|6280|GRAVEL:1.0|false
+Portugal|Fridao|2|9670|GRAVEL:0.9--TARMAC:0.1|false
+Portugal|Fafe|3|3850|GRAVEL:0.9--TARMAC:0.1|false
+Portugal|Lousada|4|3340|GRAVEL:0.4--TARMAC:0.6|true
+
+Italy|Olmedo Monte Baranta|0|6600|GRAVEL:1.0|false
+Italy|Sagama|1|4800|GRAVEL:1.0|false
+Italy|Monte Lerno|2|4600|GRAVEL:1.0|false
+Italy|Grighine Nord|3|4850|GRAVEL:1.0|false
+Italy|Ittiri Arena|4|1440|GRAVEL:1.0|true
+
+Poland|Gorklo|0|8270|GRAVEL:0.8--TARMAC:0.2|false
+Poland|Swietajno|1|7180|GRAVEL:0.8--TARMAC:0.2|false
+Poland|Wieliczki|2|5200|GRAVEL:1.0|false
+Poland|Baranowo|3|6730|GRAVEL:0.9--TARMAC:0.1|false
+Poland|Mikolajki Arena|4|2500|TARMAC:1.0|true
+
+Finland|Ounipohja|0|10630|GRAVEL:1.0|false
+Finland|Horrka|1|0|GRAVEL:1.0|false
+Finland||2|0|GRAVEL:1.0|false
+Finland||3|0|GRAVEL:1.0|false
+Finland||4|0|GRAVEL:1.0|true
+
+Germany||0|0|TARMAC:1.0|false
+Germany||1|0|TARMAC:1.0|false
+Germany||2|0|TARMAC:1.0|false
+Germany||3|0|TARMAC:1.0|false
+Germany||4|0|TARMAC:1.0|true
+
+China||0|0|TARMAC:1.0|false
+China||1|0|TARMAC:1.0|false
+China||2|0|TARMAC:1.0|false
+
+France||0|0|TARMAC:1.0|false
+France||1|0|TARMAC:1.0|false
+France||2|0|TARMAC:1.0|false
+France||3|0|TARMAC:1.0|false
+
+Spain||0|0|TARMAC:1.0|false
+Spain||1|0|TARMAC:1.0|false
+Spain||2|0|TARMAC:1.0|false
+Spain||3|0|TARMAC:1.0|false
+Spain||4|0|TARMAC:1.0|true
+
+United Kingdom||0|0|TARMAC:1.0|false
+United Kingdom||1|0|TARMAC:1.0|false
+United Kingdom||2|0|TARMAC:1.0|false
+United Kingdom||3|0|TARMAC:1.0|false
+United Kingdom||4|0|TARMAC:1.0|true
+
+Australia||0|0|TARMAC:1.0|false
+Australia||1|0|TARMAC:1.0|false
+Australia||2|0|TARMAC:1.0|false
+Australia||3|0|TARMAC:1.0|false
+Australia||4|0|TARMAC:1.0|true
+

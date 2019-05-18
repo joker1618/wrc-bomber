@@ -9,6 +9,8 @@ public class WrcNation extends RepoEntity {
     private String name;
     @RepoField
     private String code;
+    @RepoField
+    private int num;
 
     @Override
     public String getPrimaryKey() {
@@ -21,6 +23,14 @@ public class WrcNation extends RepoEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 
     public String getCode() {

@@ -2,10 +2,7 @@ package xxx.joker.apps.wrc.bomber.dl;
 
 import javafx.scene.image.Image;
 import xxx.joker.apps.wrc.bomber.common.Configs;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcNation;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
+import xxx.joker.apps.wrc.bomber.dl.entities.*;
 import xxx.joker.libs.core.cache.JkCache;
 import xxx.joker.libs.core.datetime.JkDateTime;
 import xxx.joker.libs.core.files.JkFiles;
@@ -16,10 +13,7 @@ import xxx.joker.libs.repository.JkRepoFile;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 
 import static xxx.joker.libs.core.utils.JkStrings.strf;
@@ -53,6 +47,27 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
     @Override
     public Map<String, WrcNation> getNationMap() {
         return getDataMap(WrcNation.class, WrcNation::getName);
+    }
+
+    @Override
+    public WrcCar getCar(String carModel) {
+        return get(WrcCar.class, car -> car.getCarModel().equals(carModel));
+    }
+
+    @Override
+    public List<WrcCar> getCars() {
+        return getDataList(WrcCar.class);
+    }
+
+    @Override
+    public List<WrcStage> getStages(String nation) {
+        return getStages(getNation(nation));
+    }
+
+    @Override
+    public List<WrcStage> getStages(WrcNation nation) {
+        Set<WrcStage> ds = getDataSet(WrcStage.class);
+        return JkStreams.filterSort(ds, stage -> stage.getNation().equals(nation));
     }
 
     @Override

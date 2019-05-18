@@ -1,10 +1,7 @@
 package xxx.joker.apps.wrc.bomber.dl;
 
 import javafx.scene.image.Image;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcNation;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
+import xxx.joker.apps.wrc.bomber.dl.entities.*;
 import xxx.joker.libs.repository.JkRepo;
 
 import java.util.List;
@@ -16,6 +13,11 @@ public interface WrcRepo extends JkRepo {
     WrcNation getNation(String nationName);
     List<WrcNation> getNations();
     Map<String, WrcNation> getNationMap();
+
+    WrcCar getCar(String carModel);
+    List<WrcCar> getCars();
+    List<WrcStage> getStages(String nation);
+    List<WrcStage> getStages(WrcNation nation);
 
     List<WrcSeason> getSeasons();
     List<WrcRally> getRallies();
