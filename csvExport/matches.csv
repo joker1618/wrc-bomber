@@ -45,3 +45,17 @@ WrcNation[8,Finland]|15|68|0|WrcStage[113,stage-Finland-0]|FEDE|NULL|NULL|CLEAR_
 WrcNation[8,Finland]|15|68|1|WrcStage[114,stage-Finland-1]|FEDE|NULL|NULL|CLEAR_SKY|DAWN|70|2019-05-18T01:26:26.642
 WrcNation[8,Finland]|15|68|2|WrcStage[115,stage-Finland-2]|BOMBER|NULL|NULL|CLEAR_SKY|DAWN|71|2019-05-18T01:26:26.643
 WrcNation[8,Finland]|15|68|3|WrcStage[116,stage-Finland-3]|FEDE|NULL|NULL|CLEAR_SKY|DAWN|72|2019-05-18T01:26:26.643
+WrcNation[4,Argentina]|15|146|0|WrcStage[93,stage-Argentina-0]|BOMBER|WrcCar[76,Volkswagen Polo R]|WrcCar[76,Volkswagen Polo R]|CLEAR_SKY|DAWN|147|2019-05-25T01:32:20.455
+WrcNation[4,Argentina]|15|146|1|WrcStage[94,stage-Argentina-1]|FEDE|WrcCar[76,Volkswagen Polo R]|WrcCar[76,Volkswagen Polo R]|CLEAR_SKY|DAWN|148|2019-05-25T01:32:20.457
+WrcNation[4,Argentina]|15|146|2|WrcStage[95,stage-Argentina-2]|FEDE|WrcCar[76,Volkswagen Polo R]|WrcCar[76,Volkswagen Polo R]|CLEAR_SKY|DAWN|149|2019-05-25T01:32:20.458
+WrcNation[4,Argentina]|15|146|3|WrcStage[96,stage-Argentina-3]|FEDE|WrcCar[76,Volkswagen Polo R]|WrcCar[76,Volkswagen Polo R]|CLEAR_SKY|DAWN|150|2019-05-25T01:32:20.461
+WrcNation[1,Monaco]|151|152|0|WrcStage[78,stage-Monaco-0]|BOMBER|WrcCar[74,Hyundai i20]|WrcCar[74,Hyundai i20]|CLEAR_SKY|DAWN|153|2019-05-25T02:11:45.784
+WrcNation[1,Monaco]|151|152|1|WrcStage[79,stage-Monaco-1]|FEDE|WrcCar[74,Hyundai i20]|WrcCar[74,Hyundai i20]|CLEAR_SKY|DAWN|154|2019-05-25T02:11:45.785
+WrcNation[1,Monaco]|151|152|2|WrcStage[80,stage-Monaco-2]|BOMBER|WrcCar[74,Hyundai i20]|WrcCar[74,Hyundai i20]|CLEAR_SKY|DAWN|155|2019-05-25T02:11:45.785
+WrcNation[1,Monaco]|151|152|3|WrcStage[81,stage-Monaco-3]|FEDE|WrcCar[74,Hyundai i20]|WrcCar[74,Hyundai i20]|CLEAR_SKY|DAWN|156|2019-05-25T02:11:45.786
+WrcNation[1,Monaco]|151|152|4|WrcStage[82,stage-Monaco-4]|BOMBER|WrcCar[74,Hyundai i20]|WrcCar[74,Hyundai i20]|CLEAR_SKY|DAWN|157|2019-05-25T02:11:45.787
+WrcNation[9,Germany]|151|158|0|WrcStage[118,stage-Germany-0]|FEDE|WrcCar[76,Volkswagen Polo R]|WrcCar[76,Volkswagen Polo R]|CLEAR_SKY|DAWN|159|2019-05-25T02:54:25.256
+WrcNation[9,Germany]|151|158|1|WrcStage[119,stage-Germany-1]|BOMBER|WrcCar[76,Volkswagen Polo R]|WrcCar[76,Volkswagen Polo R]|CLEAR_SKY|DAWN|160|2019-05-25T02:54:25.258
+WrcNation[9,Germany]|151|158|2|WrcStage[120,stage-Germany-2]|BOMBER|WrcCar[76,Volkswagen Polo R]|WrcCar[76,Volkswagen Polo R]|CLEAR_SKY|DAWN|161|2019-05-25T02:54:25.258
+WrcNation[9,Germany]|151|158|3|WrcStage[121,stage-Germany-3]|FEDE|WrcCar[76,Volkswagen Polo R]|WrcCar[76,Volkswagen Polo R]|CLEAR_SKY|DAWN|162|2019-05-25T02:54:25.258
+WrcNation[9,Germany]|151|158|4|WrcStage[122,stage-Germany-4]|BOMBER|WrcCar[76,Volkswagen Polo R]|WrcCar[76,Volkswagen Polo R]|CLEAR_SKY|DAWN|163|2019-05-25T02:54:25.258

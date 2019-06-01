@@ -7,14 +7,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import xxx.joker.apps.wrc.bomber.gui.pane.*;
 import xxx.joker.apps.wrc.bomber.util.GitProxy;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
-import xxx.joker.apps.wrc.bomber.gui.pane.AddSingleEventPane;
-import xxx.joker.apps.wrc.bomber.gui.pane.HistorySeasonPane;
-import xxx.joker.apps.wrc.bomber.gui.pane.LeaguePane;
-import xxx.joker.apps.wrc.bomber.gui.pane.SummaryPane;
-
 
 
 public class RootPane extends ScrollPane {
@@ -50,6 +46,9 @@ public class RootPane extends ScrollPane {
 
         Pane histPane = new HistorySeasonPane();
         mainVBox.getChildren().add(histPane);
+
+        Pane fifaPane = new FifaPane();
+        mainVBox.getChildren().add(fifaPane);
     }
 
     private Pane createGitButtonsPane() {
