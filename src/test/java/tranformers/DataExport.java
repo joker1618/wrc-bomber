@@ -3,6 +3,7 @@ package tranformers;
 import org.junit.Test;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
+import xxx.joker.apps.wrc.bomber.dl.entities.FifaMatch;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
 import xxx.joker.libs.core.files.JkFiles;
@@ -22,14 +23,14 @@ public class DataExport {
 
     @Test
     public void exportInCsv() {
-        List<String> lines = JkOutput.formatCollection(repo.getMatches());
-        JkFiles.writeFile(Paths.get("csvExport/matches.csv"), lines);
+        String outText = JkOutput.formatColl(repo.getMatches());
+        JkFiles.writeFile(Paths.get("csvExport/matches.csv"), outText);
 
-        lines = JkOutput.formatCollection(repo.getRallies());
-        JkFiles.writeFile(Paths.get("csvExport/rallies.csv"), lines);
+        outText = JkOutput.formatColl(repo.getRallies());
+        JkFiles.writeFile(Paths.get("csvExport/rallies.csv"), outText);
 
-        lines = JkOutput.formatCollection(repo.getSeasons());
-        JkFiles.writeFile(Paths.get("csvExport/seasons.csv"), lines);
+        outText = JkOutput.formatColl(repo.getSeasons());
+        JkFiles.writeFile(Paths.get("csvExport/seasons.csv"), outText);
 
     }
 
@@ -57,5 +58,11 @@ public class DataExport {
             lines.add(JkStreams.join(row, "|"));
         }
         JkFiles.writeFile(Paths.get("csvExport/csvMigration.csv"), lines);
+    }
+
+    @Test
+    public void fifaResultsMigration() {
+        String outStr = JkOutput.formatColl(repo.getDataList(FifaMatch.class));
+        JkFiles.writeFile(Paths.get("csvExport/FIFA_csvMigration.csv"), outStr);
     }
 }
