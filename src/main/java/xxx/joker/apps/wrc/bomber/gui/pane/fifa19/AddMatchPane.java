@@ -1,4 +1,4 @@
-package xxx.joker.apps.wrc.bomber.gui.pane;
+package xxx.joker.apps.wrc.bomber.gui.pane.fifa19;
 
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
@@ -10,40 +10,37 @@ import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.FifaMatch;
 import xxx.joker.apps.wrc.bomber.gui.snippet.GridPaneBuilder;
+import xxx.joker.libs.core.lambdas.JkStreams;
 import xxx.joker.libs.core.tests.JkTests;
+import xxx.joker.libs.core.utils.JkStruct;
 
 import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.*;
 
-public class FifaPane extends BorderPane {
+public class AddMatchPane extends BorderPane {
 
     private final WrcRepo repo = WrcRepoImpl.getInstance();
 
-    public FifaPane() {
+    public AddMatchPane() {
         getStyleClass().addAll("childPane");
 
-        HBox topBox = new HBox(new Label("FIFA 19"));
+        HBox topBox = new HBox(new Label("FIFA 19  -  ADD MATCH"));
         topBox.getStyleClass().add("captionBox");
         setTop(topBox);
 
-        setCenter(createFifaMatchesBox());
+        setCenter(createAddMatchBox());
 
     }
 
-    private Pane createFifaMatchesBox() {
+    private Pane createAddMatchBox() {
         HBox rootBox = new HBox();
         rootBox.getStyleClass().addAll("bgBlue", "pad20", "spacing20");
 
         VBox leftBox = new VBox();
         leftBox.getStyleClass().addAll("bgOrange", "pad20", "spacing20");
-
-        VBox rightBox = new VBox();
-        rightBox.getStyleClass().addAll("bgOrange", "pad20", "spacing20");
-        rootBox.getChildren().addAll(leftBox, rightBox);
-
-        fillLastFiveBox(rightBox);
+        rootBox.getChildren().add(leftBox);
 
         TextField teamFede = new TextField();
         TextField golFede = new TextField();
@@ -56,17 +53,18 @@ public class FifaPane extends BorderPane {
         ));
         btnSave.setOnAction(e -> {
             FifaMatch fifaMatch = new FifaMatch();
+            fifaMatch.setMatchCounter(repo.getFifaMatches().size());
             fifaMatch.setTeamFede(teamFede.getText().trim());
             fifaMatch.setGolFede(Integer.parseInt(golFede.getText().trim()));
             fifaMatch.setGolBomber(Integer.parseInt(golBomber.getText().trim()));
             fifaMatch.setTeamBomber(teamBomber.getText().trim());
             repo.add(fifaMatch);
             repo.commit();
+            repo.refreshStats();
             teamFede.setText("");
             golFede.setText("");
             teamBomber.setText("");
             golBomber.setText("");
-            fillLastFiveBox(rightBox);
         });
         HBox boxSave = new HBox(btnSave);
         boxSave.getStyleClass().addAll("centered");
@@ -88,24 +86,6 @@ public class FifaPane extends BorderPane {
         leftBox.getChildren().addAll(gp, boxSave);
 
         return rootBox;
-    }
-
-    private void fillLastFiveBox(Pane container) {
-        GridPaneBuilder gpBuilder = new GridPaneBuilder();
-        gpBuilder.add(0, 0, FEDE);
-        gpBuilder.add(0, 4, BOMBER);
-
-        AtomicInteger rowNum = new AtomicInteger(1);
-        repo.getDataList(FifaMatch.class).stream().sorted(Comparator.comparing(FifaMatch::getCreationTm, Comparator.reverseOrder())).limit(5).forEach(match -> {
-            gpBuilder.add(rowNum.get(), 0, match.getTeamFede());
-            gpBuilder.add(rowNum.get(), 1, match.getGolFede());
-            gpBuilder.add(rowNum.get(), 2, "-");
-            gpBuilder.add(rowNum.get(), 3, match.getGolBomber());
-            gpBuilder.add(rowNum.get(), 4, match.getTeamBomber());
-            rowNum.getAndIncrement();
-        });
-
-        container.getChildren().setAll(gpBuilder.createGridPane());
     }
 
 }

@@ -1,4 +1,4 @@
-package xxx.joker.apps.wrc.bomber.gui.pane;
+package xxx.joker.apps.wrc.bomber.gui.pane.wrc6;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Button;
@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
-import xxx.joker.apps.wrc.bomber.gui.snippet.LeagueGridPane;
 
 import java.util.List;
 

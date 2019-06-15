@@ -1,8 +1,8 @@
 .rootPane {
     -fx-font-family: "Calibri";
-    -fx-font-size: 20;
+    -fx-font-size: 18;
     -fx-spacing: 20;
-    -fx-background-color: BLACK;
+    -fx-background-color: #00cc00;
 }
 
 .rootPane .childPane {

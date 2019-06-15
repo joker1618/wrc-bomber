@@ -1,4 +1,4 @@
-package xxx.joker.apps.wrc.bomber.gui.pane;
+package xxx.joker.apps.wrc.bomber.gui.pane.wrc6;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -28,7 +28,7 @@ public class SummaryPane extends BorderPane {
     public SummaryPane() {
         getStyleClass().addAll("childPane", "summaryPane");
 
-        HBox topBox = new HBox(new Label("SUMMARY"));
+        HBox topBox = new HBox(new Label("WRC 6  -  SUMMARY"));
         topBox.getStyleClass().add("captionBox");
         setTop(topBox);
 
@@ -43,7 +43,7 @@ public class SummaryPane extends BorderPane {
 
         setCenter(builder.createGridPane());
 
-        getStylesheets().add(getClass().getResource("/css/summaryPane.css").toExternalForm());
+        getStylesheets().add(getClass().getResource("/css/wrc6/summaryPane.css").toExternalForm());
     }
 
     private <V> void addStatRow(GridPaneBuilder builder, int rowNum, String title, Supplier<Map<WrcDriver, List<V>>> supplier) {

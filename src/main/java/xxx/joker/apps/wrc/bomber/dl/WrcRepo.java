@@ -26,10 +26,12 @@ public interface WrcRepo extends JkRepo {
     WrcSeason getActualSeason();
     List<WrcSeason> getClosedSeasons();
 
-
     void registerActionChangeStats(Consumer<WrcRepo> action);
     void refreshStats();
 
     Image getFlag(WrcNation nation);
+
+    List<FifaMatch> getFifaMatches();
+
 
 }

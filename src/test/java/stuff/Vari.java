@@ -3,6 +3,7 @@ package stuff;
 import org.junit.Test;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
+import xxx.joker.apps.wrc.bomber.dl.entities.FifaMatch;
 import xxx.joker.libs.core.adapter.JkProcess;
 import xxx.joker.libs.core.utils.JkStrings;
 import xxx.joker.libs.repository.design.RepoEntity;
@@ -14,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,6 +30,17 @@ public class Vari {
         for (Set<RepoEntity> ds : dataSets.values()) {
             display(RepoUtil.formatEntities(ds));
         }
+    }
+
+    @Test
+    public void setFifaMatchCounter() {
+        WrcRepo repo = WrcRepoImpl.getInstance();
+        List<FifaMatch> matches = repo.getFifaMatches();
+        for(int i = 0; i < matches.size(); i++) {
+            matches.get(i).setMatchCounter(i);
+        }
+        repo.commit();
+        display(RepoUtil.formatEntities(repo.getFifaMatches()));
     }
 
     @Test

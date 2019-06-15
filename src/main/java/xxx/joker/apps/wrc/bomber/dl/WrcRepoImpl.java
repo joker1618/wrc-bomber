@@ -112,5 +112,10 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
         return cacheFlag.get(nation, () -> new Image(is));
     }
 
+    @Override
+    public List<FifaMatch> getFifaMatches() {
+        return getDataList(FifaMatch.class);
+    }
+
 
 }

@@ -1,4 +1,4 @@
-package xxx.joker.apps.wrc.bomber.gui.snippet;
+package xxx.joker.apps.wrc.bomber.gui.pane.wrc6;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -7,6 +7,7 @@ import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcNation;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
+import xxx.joker.apps.wrc.bomber.gui.snippet.GridPaneBuilder;
 import xxx.joker.libs.core.javafx.JfxUtil;
 
 import java.util.Map;
@@ -60,6 +61,6 @@ public class LeagueGridPane extends GridPane {
 
         cgrid.createGridPane(this);
 
-        getStylesheets().add(getClass().getResource("/css/leaguePane.css").toExternalForm());
+        getStylesheets().add(getClass().getResource("/css/wrc6/leaguePane.css").toExternalForm());
     }
 }

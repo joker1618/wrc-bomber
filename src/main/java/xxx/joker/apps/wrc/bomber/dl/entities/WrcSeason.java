@@ -16,17 +16,30 @@ public class WrcSeason extends RepoEntity {
     @RepoField
     private List<WrcRally> rallyList;
 
+    /**
+     * The winner is the driver that:
+     * - Win more rallies
+     * - If equals rally win, the driver with more stages win
+     * - If equals rally and stage win, the driver that win the last rally before
+     */
     public WrcDriver getWinner() {
         if(isFinished()) {
-            int wf = getRallyWins(FEDE);
-            int wb = getRallyWins(BOMBER);
-            if(wf > wb) return FEDE;
-            if(wf < wb) return BOMBER;
+            int res = getRallyWins(FEDE) - getRallyWins(BOMBER);
+            if(res == 0) {
+                res = getStageWins(FEDE) - getStageWins(BOMBER);
+            }
+            if(res != 0) {
+                return res > 0 ? FEDE : BOMBER;
+            }
 
-            wf = getStageWins(FEDE);
-            wb = getStageWins(BOMBER);
-            if(wf > wb) return FEDE;
-            if(wf < wb) return BOMBER;
+            int idx = getRallyList().size() - 1;
+            WrcDriver lastWinner = NONE;
+            for(int i = getRallyList().size() - 1; lastWinner == NONE && i >= 0; i--) {
+                lastWinner = getRallyList().get(i).getWinner();
+            }
+            if(lastWinner != NONE) {
+                return lastWinner == BOMBER ? FEDE : BOMBER;
+            }
         }
         return NONE;
     }

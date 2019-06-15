@@ -1,4 +1,4 @@
-package xxx.joker.apps.wrc.bomber.gui.pane;
+package xxx.joker.apps.wrc.bomber.gui.pane.wrc6;
 
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -16,7 +16,6 @@ import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.*;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcTime;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcWeather;
-import xxx.joker.apps.wrc.bomber.gui.snippet.LeagueGridPane;
 import xxx.joker.libs.core.lambdas.JkStreams;
 
 import java.util.ArrayList;
