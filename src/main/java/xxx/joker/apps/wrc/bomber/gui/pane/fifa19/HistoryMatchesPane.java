@@ -44,6 +44,7 @@ public class HistoryMatchesPane extends BorderPane {
 
         JfxTable<FifaMatch> table = createFifaTableMatches();
         setCenter(table);
+        table.setFixedWidths(60, 120, 100, 100, 120, 120, 200);
 
 
 //        List<FifaMatch> matches = repo.getFifaMatches();

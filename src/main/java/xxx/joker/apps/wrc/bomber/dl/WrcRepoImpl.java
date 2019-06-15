@@ -36,7 +36,7 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
 
     @Override
     public WrcNation getNation(String nationName) {
-        return get(WrcNation.class, n -> nationName.equals(n.getName()));
+        return getFirst(WrcNation.class, n -> nationName.equals(n.getName()));
     }
 
     @Override
@@ -51,7 +51,7 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
 
     @Override
     public WrcCar getCar(String carModel) {
-        return get(WrcCar.class, car -> car.getCarModel().equals(carModel));
+        return getFirst(WrcCar.class, car -> car.getCarModel().equals(carModel));
     }
 
     @Override
@@ -87,7 +87,7 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
 
     @Override
     public WrcSeason getActualSeason() {
-        return get(WrcSeason.class, s -> !s.isFinished());
+        return getFirst(WrcSeason.class, s -> !s.isFinished());
     }
 
     @Override

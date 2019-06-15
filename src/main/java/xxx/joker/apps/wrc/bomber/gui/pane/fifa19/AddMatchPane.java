@@ -57,7 +57,7 @@ public class AddMatchPane extends BorderPane {
         ));
         btnSave.setOnAction(e -> {
             FifaMatch fifaMatch = new FifaMatch();
-            fifaMatch.setMatchCounter(repo.getFifaMatches().size());
+            fifaMatch.setMatchCounter(repo.getFifaMatches().size() );
             fifaMatch.setTeamFede(teamFede.getText().trim());
             fifaMatch.setGolFede(Integer.parseInt(golFede.getText().trim()));
             fifaMatch.setGolBomber(Integer.parseInt(golBomber.getText().trim()));
@@ -107,7 +107,8 @@ public class AddMatchPane extends BorderPane {
             int num = wmap.getOrDefault(winner, el).size();
             gpBuilder.add(rnum, 0, winner);
             gpBuilder.add(rnum, 1, num);
-            gpBuilder.add(rnum, 2, "{} %", (num * 100 / matches.size()));
+            int perc = matches.isEmpty() ? 0 : num * 100 / matches.size();
+            gpBuilder.add(rnum, 2, "{} %", perc);
             rnum++;
         }
 
