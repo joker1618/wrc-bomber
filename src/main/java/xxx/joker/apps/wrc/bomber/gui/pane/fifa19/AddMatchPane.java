@@ -12,10 +12,8 @@ import xxx.joker.apps.wrc.bomber.dl.entities.FifaMatch;
 import xxx.joker.apps.wrc.bomber.gui.snippet.GridPaneBuilder;
 import xxx.joker.libs.core.lambdas.JkStreams;
 import xxx.joker.libs.core.tests.JkTests;
-import xxx.joker.libs.core.utils.JkStruct;
 
-import java.util.Comparator;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.*;
 
 import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.*;
 
@@ -42,6 +40,12 @@ public class AddMatchPane extends BorderPane {
         leftBox.getStyleClass().addAll("bgOrange", "pad20", "spacing20");
         rootBox.getChildren().add(leftBox);
 
+        VBox rightBox = new VBox();
+        rightBox.getStyleClass().addAll("bgYellow", "pad20", "spacing20");
+        rootBox.getChildren().add(rightBox);
+
+        createRightPane(rightBox);
+
         TextField teamFede = new TextField();
         TextField golFede = new TextField();
         TextField teamBomber = new TextField();
@@ -65,6 +69,7 @@ public class AddMatchPane extends BorderPane {
             golFede.setText("");
             teamBomber.setText("");
             golBomber.setText("");
+            createRightPane(rightBox);
         });
         HBox boxSave = new HBox(btnSave);
         boxSave.getStyleClass().addAll("centered");
@@ -86,6 +91,30 @@ public class AddMatchPane extends BorderPane {
         leftBox.getChildren().addAll(gp, boxSave);
 
         return rootBox;
+    }
+
+    private void createRightPane(Pane container) {
+        GridPaneBuilder gpBuilder = new GridPaneBuilder();
+
+        gpBuilder.add(0, 1, "TOTAL");
+        gpBuilder.add(0, 2, "% PERC");
+
+        List<FifaMatch> matches = repo.getFifaMatches();
+        Map<String, List<FifaMatch>> wmap = JkStreams.toMap(matches, FifaMatch::strWinner);
+        List<FifaMatch> el = Collections.emptyList();
+        int rnum = 1;
+        for (String winner : Arrays.asList("FEDE", "DRAW", "BOMBER")) {
+            int num = wmap.getOrDefault(winner, el).size();
+            gpBuilder.add(rnum, 0, winner);
+            gpBuilder.add(rnum, 1, num);
+            gpBuilder.add(rnum, 2, "{} %", (num * 100 / matches.size()));
+            rnum++;
+        }
+
+        GridPane gp = gpBuilder.createGridPane();
+        gp.getStylesheets().add(getClass().getResource("/css/fifa/addFifaMatchPane.css").toExternalForm());
+
+        container.getChildren().setAll(gp);
     }
 
 }
