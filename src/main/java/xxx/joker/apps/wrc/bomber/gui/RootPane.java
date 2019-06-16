@@ -118,6 +118,7 @@ public class RootPane extends ScrollPane {
             alert.setHeaderText("Updating from GIT");
             alert.show();
             GitProxy.updateData();
+            repo.refreshStats();
             alert.close();
         });
 

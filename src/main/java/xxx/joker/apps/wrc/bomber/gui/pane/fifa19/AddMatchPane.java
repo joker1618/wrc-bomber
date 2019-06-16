@@ -107,7 +107,7 @@ public class AddMatchPane extends BorderPane {
             int num = wmap.getOrDefault(winner, el).size();
             gpBuilder.add(rnum, 0, winner);
             gpBuilder.add(rnum, 1, num);
-            gpBuilder.add(rnum, 2, "{} %", (num * 100 / matches.size()));
+            gpBuilder.add(rnum, 2, "{} %", num > 0 ? (num * 100 / matches.size()) : 0);
             rnum++;
         }
 

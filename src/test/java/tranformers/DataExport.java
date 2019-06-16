@@ -69,7 +69,7 @@ public class DataExport {
 
     @Test
     public void fifaResultsMigration() {
-        String outStr = JkOutput.formatColl(repo.getDataList(FifaMatch.class));
+        String outStr = JkOutput.formatColl(repo.getList(FifaMatch.class));
         JkFiles.writeFile(Paths.get("csvExport/FIFA_csvMigration.csv"), outStr);
     }
 }

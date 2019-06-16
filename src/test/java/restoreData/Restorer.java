@@ -44,7 +44,7 @@ public class Restorer {
             WrcStage n = new WrcStage();
             n.setNation(repo.getNation(split[0]));
             n.setNum(Integer.parseInt(split[2]));
-            WrcStage found = repo.get(n);
+            WrcStage found = repo.getByPk(n);
             if(found != null) {
                 n = found;
             }

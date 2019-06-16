@@ -41,12 +41,12 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
 
     @Override
     public List<WrcNation> getNations() {
-        return getDataList(WrcNation.class);
+        return getList(WrcNation.class);
     }
 
     @Override
     public Map<String, WrcNation> getNationMap() {
-        return getDataMap(WrcNation.class, WrcNation::getName);
+        return getMap(WrcNation.class, WrcNation::getName);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
 
     @Override
     public List<WrcCar> getCars() {
-        return getDataList(WrcCar.class);
+        return getList(WrcCar.class);
     }
 
     @Override
@@ -72,17 +72,17 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
 
     @Override
     public List<WrcSeason> getSeasons() {
-        return getDataList(WrcSeason.class);
+        return getList(WrcSeason.class);
     }
 
     @Override
     public List<WrcRally> getRallies() {
-        return getDataList(WrcRally.class);
+        return getList(WrcRally.class);
     }
 
     @Override
     public List<WrcMatch> getMatches() {
-        return getDataList(WrcMatch.class);
+        return getList(WrcMatch.class);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
 
     @Override
     public List<FifaMatch> getFifaMatches() {
-        return getDataList(FifaMatch.class);
+        return getList(FifaMatch.class);
     }
 
 
