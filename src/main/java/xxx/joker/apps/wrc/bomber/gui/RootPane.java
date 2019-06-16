@@ -63,9 +63,6 @@ public class RootPane extends ScrollPane {
 
         choiceGame.getSelectionModel().selectedItemProperty().addListener((obs,o,n) -> {
             LOG.debug("Switch view to: {}", n);
-//            if(n == FIFA_19 && !cachePane.contains(n))  {
-//                cachePane.add(FIFA_19, Arrays.asList(new AddMatchPane(), new HistoryMatchesPane()));
-//            }
             mainVBox.getChildren().remove(1, mainVBox.getChildren().size());
             mainVBox.getChildren().addAll(cachePane.get(n));
             if(o == null)   repo.refreshStats();
