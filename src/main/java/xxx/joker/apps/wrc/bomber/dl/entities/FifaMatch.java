@@ -15,8 +15,6 @@ public class FifaMatch  extends RepoEntity {
     private String teamBomber;
     @RepoField
     private int golBomber;
-    @RepoField
-    private int matchCounter;
 
     public FifaMatch() {
     }
@@ -63,12 +61,5 @@ public class FifaMatch  extends RepoEntity {
         this.golBomber = golBomber;
     }
 
-    public int getMatchCounter() {
-        return matchCounter;
-    }
-
-    public void setMatchCounter(int matchCounter) {
-        this.matchCounter = matchCounter;
-    }
 }
 

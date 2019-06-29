@@ -69,19 +69,7 @@ public class RootPane extends ScrollPane {
         });
 
         choiceGame.getSelectionModel().selectFirst();
-//        choiceGame.getSelectionModel().select(FIFA_19);
 
-//        Pane summaryPane = new SummaryPane();
-//        mainVBox.getChildren().add(summaryPane);
-//
-//        Pane seasonPane = new LeaguePane();
-//        mainVBox.getChildren().add(seasonPane);
-//
-//        Pane histPane = new HistorySeasonPane();
-//        mainVBox.getChildren().add(histPane);
-//
-//        Pane fifaPane = new FifaPane();
-//        mainVBox.getChildren().add(fifaPane);
     }
 
     private Pane createGitButtonsPane() {
@@ -143,6 +131,9 @@ public class RootPane extends ScrollPane {
         return hbox;
     }
 
+    public void selectGame(GameType gt) {
+        choiceGame.getSelectionModel().select(gt);
+    }
 
 
 }

@@ -33,7 +33,6 @@ public class JfxTable<T> extends TableView<T> {
     public void update(Collection<T> items) {
         getItems().setAll(items);
         resizeWidth(true);
-        resizeHeight();
     }
 
     public void resizeWidth(boolean reserveScrollSpace) {
@@ -83,10 +82,4 @@ public class JfxTable<T> extends TableView<T> {
         return columns;
     }
 
-    public void resizeHeight() {
-        double h = 2d; // top and bottom border
-        h += JfxCss.retrieveInt(this, "-headerHeight");
-        h += JfxCss.retrieveInt(this, "-rowHeight") * getItems().size();
-        setMaxHeight(h);
-    }
 }

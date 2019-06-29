@@ -30,10 +30,10 @@ public class GitProxy {
     public static void updateData() {
         if(!Files.exists(GIT_FOLDER)) {
             JkProcess res = git.clone();
-            LOG.debug(res.toStringFull());
+            LOG.debug(res.toStringResult(0));
         }
         JkProcess res = git.pull();
-        LOG.debug(res.toStringFull());
+        LOG.debug(res.toStringResult(0));
         JkFiles.deleteContent(DB_FOLDER);
         JkFiles.findFiles(GIT_FOLDER.resolve("repo"), false).forEach(f -> {
             JkFiles.copy(f, DB_FOLDER.resolve(f.getFileName()));
@@ -47,7 +47,7 @@ public class GitProxy {
     public static void pushData() {
         if(!Files.exists(GIT_FOLDER)) {
             JkProcess res = git.clone();
-            LOG.debug(res.toStringFull());
+            LOG.debug(res.toStringResult(0));
         }
         git.pull();
         JkFiles.deleteContent(GIT_FOLDER.resolve("repo"));
@@ -57,7 +57,7 @@ public class GitProxy {
             JkFiles.setLastModifiedTime(outPath, LocalDateTime.now());
         });
         List<JkProcess> resList = git.commitAndPush("fix");
-        resList.forEach(res -> LOG.debug(res.toStringFull()));
+        resList.forEach(res -> LOG.debug(res.toStringResult(0)));
         LOG.info("Commit and push done");
     }
 }

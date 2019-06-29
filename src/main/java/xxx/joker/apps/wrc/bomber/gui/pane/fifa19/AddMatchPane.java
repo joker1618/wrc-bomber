@@ -57,7 +57,6 @@ public class AddMatchPane extends BorderPane {
         ));
         btnSave.setOnAction(e -> {
             FifaMatch fifaMatch = new FifaMatch();
-            fifaMatch.setMatchCounter(repo.getFifaMatches().size() );
             fifaMatch.setTeamFede(teamFede.getText().trim());
             fifaMatch.setGolFede(Integer.parseInt(golFede.getText().trim()));
             fifaMatch.setGolBomber(Integer.parseInt(golBomber.getText().trim()));

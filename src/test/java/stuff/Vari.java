@@ -5,6 +5,7 @@ import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.FifaMatch;
 import xxx.joker.libs.core.adapter.JkProcess;
+import xxx.joker.libs.core.runtimes.JkEnvironment;
 import xxx.joker.libs.core.utils.JkStrings;
 import xxx.joker.libs.repository.design.RepoEntity;
 import xxx.joker.libs.repository.util.RepoUtil;
@@ -30,17 +31,6 @@ public class Vari {
         for (Set<RepoEntity> ds : dataSets.values()) {
             display(RepoUtil.formatEntities(ds));
         }
-    }
-
-    @Test
-    public void setFifaMatchCounter() {
-        WrcRepo repo = WrcRepoImpl.getInstance();
-        List<FifaMatch> matches = repo.getFifaMatches();
-        for(int i = 0; i < matches.size(); i++) {
-            matches.get(i).setMatchCounter(i);
-        }
-        repo.commit();
-        display(RepoUtil.formatEntities(repo.getFifaMatches()));
     }
 
     @Test

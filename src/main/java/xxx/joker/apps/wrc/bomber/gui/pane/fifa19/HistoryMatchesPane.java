@@ -45,40 +45,17 @@ public class HistoryMatchesPane extends BorderPane {
         JfxTable<FifaMatch> table = createFifaTableMatches();
         setCenter(table);
 
-
-//        List<FifaMatch> matches = repo.getFifaMatches();
-//        Map<Long, Integer> posMap = new HashMap<>();
-//        for(int i = 0; i < matches.size(); i++) {
-//            posMap.put(matches.get(i).getEntityID(), i);
-//        }
-////        matches = JkStreams.reverseOrder(matches, Comparator.comparing(FifaMatch::getCreationTm));
-//        AtomicInteger num = new AtomicInteger(matches.size());
-//
-//        JfxTable<FifaMatch> tableView = new JfxTable<>();
-////        JfxTableCol<FifaMatch, Integer> colNum = JfxTableCol.createCol("NUM", m -> posMap.get(m.getEntityID()));
-//        JfxTableCol<FifaMatch, Integer> colNum = JfxTableCol.createCol("NUM", m -> repo.getFifaMatches().indexOf(m));
-//        JfxTableCol<FifaMatch, Integer> golFede = JfxTableCol.createCol("GOL FEDE", "golFede");
-//        JfxTableCol<FifaMatch, Integer> golBomber = JfxTableCol.createCol("GOL BOMBER", "golBomber");
-//        JfxTableCol<FifaMatch, String> colTeamFede = JfxTableCol.createCol("TEAM FEDE", "teamFede");
-//        JfxTableCol<FifaMatch, String> colTeamBomber = JfxTableCol.createCol("TEAM BOMBER", "teamBomber");
-//        JfxTableCol<FifaMatch, String> colWinner = JfxTableCol.createCol("WINNER", FifaMatch::strWinner);
-//        JfxTableCol<FifaMatch, JkDateTime> colTime = JfxTableCol.createCol("DATE", "creationTm", m -> m.format("yyyy-MM-dd HH:mm:ss"));
-//        tableView.getColumns().addAll(colNum, colTeamFede, golFede, golBomber, colTeamBomber, colWinner, colTime);
-//
-//        setCenter(tableView);
-
         repo.registerActionChangeStats(r -> {
             LOG.debug("Updating fifa matches table content");
             table.update(repo.getFifaMatches());
         });
-//        tableView.update(matches);
 
 //        getStylesheets().add(getClass().getResource("/css/fifa19/historyMatches.css").toExternalForm());
     }
 
     private JfxTable<FifaMatch> createFifaTableMatches() {
         JfxTable<FifaMatch> tableView = new JfxTable<>();
-        JfxTableCol<FifaMatch, Integer> colNum = JfxTableCol.createCol("NUM", "matchCounter");
+        JfxTableCol<FifaMatch, Integer> colNum = JfxTableCol.createCol("NUM", m -> repo.getFifaMatches().indexOf(m) + 1);
         JfxTableCol<FifaMatch, Integer> golFede = JfxTableCol.createCol("GOL FEDE", "golFede");
         JfxTableCol<FifaMatch, Integer> golBomber = JfxTableCol.createCol("GOL BOMBER", "golBomber");
         JfxTableCol<FifaMatch, String> colTeamFede = JfxTableCol.createCol("TEAM FEDE", "teamFede");
