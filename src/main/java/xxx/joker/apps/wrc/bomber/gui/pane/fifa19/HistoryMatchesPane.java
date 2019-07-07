@@ -1,8 +1,6 @@
 package xxx.joker.apps.wrc.bomber.gui.pane.fifa19;
 
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import org.slf4j.Logger;
@@ -10,24 +8,9 @@ import org.slf4j.LoggerFactory;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.FifaMatch;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcMatch;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
-import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
-import xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver;
-import xxx.joker.apps.wrc.bomber.gui.snippet.GridPaneBuilder;
 import xxx.joker.apps.wrc.bomber.gui.snippet.JfxTable;
 import xxx.joker.apps.wrc.bomber.gui.snippet.JfxTableCol;
 import xxx.joker.libs.core.datetime.JkDateTime;
-import xxx.joker.libs.core.lambdas.JkStreams;
-
-import java.time.LocalDateTime;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
-import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.BOMBER;
-import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.FEDE;
 
 public class HistoryMatchesPane extends BorderPane {
 

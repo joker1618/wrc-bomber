@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.gui.RootPane;
-import xxx.joker.apps.wrc.bomber.gui.WrcGUI;
 import xxx.joker.libs.core.adapter.JkGit;
 import xxx.joker.libs.core.adapter.JkProcess;
 import xxx.joker.libs.core.files.JkFiles;
@@ -34,10 +33,8 @@ public class GitProxy {
         }
         JkProcess res = git.pull();
         LOG.debug(res.toStringResult(0));
-        JkFiles.deleteContent(DB_FOLDER);
-        JkFiles.findFiles(GIT_FOLDER.resolve("repo"), false).forEach(f -> {
-            JkFiles.copy(f, DB_FOLDER.resolve(f.getFileName()));
-        });
+        JkFiles.delete(REPO_FOLDER);
+        JkFiles.copy(GIT_FOLDER.resolve("repo"), REPO_FOLDER);
         WrcRepo repo = WrcRepoImpl.getInstance();
         repo.rollback();
         repo.refreshStats();
@@ -50,12 +47,8 @@ public class GitProxy {
             LOG.debug(res.toStringResult(0));
         }
         git.pull();
-        JkFiles.deleteContent(GIT_FOLDER.resolve("repo"));
-        JkFiles.findFiles(DB_FOLDER, false).forEach(f -> {
-            Path outPath = GIT_FOLDER.resolve("repo").resolve(f.getFileName());
-            JkFiles.copy(f, outPath);
-            JkFiles.setLastModifiedTime(outPath, LocalDateTime.now());
-        });
+        JkFiles.delete(GIT_FOLDER.resolve("repo"));
+        JkFiles.copy(REPO_FOLDER, GIT_FOLDER.resolve("repo"));
         List<JkProcess> resList = git.commitAndPush("fix");
         resList.forEach(res -> LOG.debug(res.toStringResult(0)));
         LOG.info("Commit and push done");

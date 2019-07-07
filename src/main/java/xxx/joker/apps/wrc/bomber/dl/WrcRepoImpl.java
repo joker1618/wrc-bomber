@@ -4,15 +4,10 @@ import javafx.scene.image.Image;
 import xxx.joker.apps.wrc.bomber.common.Configs;
 import xxx.joker.apps.wrc.bomber.dl.entities.*;
 import xxx.joker.libs.core.cache.JkCache;
-import xxx.joker.libs.core.datetime.JkDateTime;
-import xxx.joker.libs.core.files.JkFiles;
 import xxx.joker.libs.core.lambdas.JkStreams;
-import xxx.joker.libs.core.utils.JkStrings;
 import xxx.joker.libs.repository.JkRepoFile;
 
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -27,7 +22,7 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
 
 
     private WrcRepoImpl() {
-        super(Configs.DB_FOLDER, Configs.DB_NAME, "xxx.joker.apps.wrc.bomber.dl.entities");
+        super(Configs.REPO_FOLDER, Configs.DB_NAME, "xxx.joker.apps.wrc.bomber.dl.entities");
     }
 
     public synchronized static WrcRepo getInstance() {

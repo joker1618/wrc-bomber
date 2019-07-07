@@ -1,5 +1,6 @@
 package tranformers;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
@@ -10,6 +11,7 @@ import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
 import xxx.joker.libs.core.files.JkFiles;
 import xxx.joker.libs.core.format.JkOutput;
 import xxx.joker.libs.core.lambdas.JkStreams;
+import xxx.joker.libs.core.runtimes.JkEnvironment;
 import xxx.joker.libs.core.utils.JkStruct;
 
 import java.nio.file.Paths;
@@ -19,10 +21,14 @@ import java.util.Map;
 
 public class DataExport {
 
-    private final WrcRepo repo = WrcRepoImpl.getInstance();
+    @BeforeClass
+    public static void bc() {
+        JkEnvironment.setAppsFolder(Paths.get(""));
+    }
 
     @Test
     public void exportInCsvWrc6() {
+        WrcRepo repo = WrcRepoImpl.getInstance();
         //NATION|SEASON ID|RALLY ID|STAGE PROGR IN RALLY|WINNER|CAR FEDE|CAR BOMBER|WEATHER|TIME|CREATION TM
         List<String> lines = new ArrayList<>();
         Map<Long, WrcSeason> seasonMap = JkStreams.toMapSingle(repo.getSeasons(), WrcSeason::getEntityID);
@@ -54,6 +60,7 @@ public class DataExport {
 
     @Test
     public void fifa19ExportCsv() {
+        WrcRepo repo = WrcRepoImpl.getInstance();
         String outStr = JkOutput.formatColl(repo.getList(FifaMatch.class));
         JkFiles.writeFile(Paths.get("csvExport/fifa19_matches.csv"), outStr);
     }

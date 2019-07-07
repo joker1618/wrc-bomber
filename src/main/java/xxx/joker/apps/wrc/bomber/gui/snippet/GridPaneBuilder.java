@@ -4,11 +4,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import xxx.joker.libs.core.lambdas.JkStreams;
-import xxx.joker.libs.core.objects.JkPoints;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static xxx.joker.libs.core.utils.JkStrings.strf;

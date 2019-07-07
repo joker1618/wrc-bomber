@@ -1,9 +1,9 @@
 package stuff;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
-import xxx.joker.apps.wrc.bomber.dl.entities.FifaMatch;
 import xxx.joker.libs.core.adapter.JkProcess;
 import xxx.joker.libs.core.runtimes.JkEnvironment;
 import xxx.joker.libs.core.utils.JkStrings;
@@ -16,13 +16,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import static xxx.joker.libs.core.utils.JkConsole.display;
 
 public class Vari {
+
+    @BeforeClass
+    public static void bc() {
+        JkEnvironment.setAppsFolder(Paths.get(""));
+    }
 
     @Test
     public void printDS() {
