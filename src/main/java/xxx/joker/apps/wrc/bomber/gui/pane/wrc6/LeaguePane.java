@@ -16,6 +16,7 @@ import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.*;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcTime;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcWeather;
+import xxx.joker.libs.core.datetime.JkDateTime;
 import xxx.joker.libs.core.lambdas.JkStreams;
 
 import java.util.ArrayList;
@@ -166,7 +167,9 @@ public class LeaguePane extends BorderPane {
             int rowNum = mlist.size() + 1;
             gp.add(new Label(String.valueOf(rowNum)), 0, rowNum);
             gp.add(new Label(BOMBER.name()), 2, rowNum);
-            mlist.add(new WrcMatch(nation, BOMBER));
+            WrcMatch wrcMatch = new WrcMatch(nation, BOMBER);
+            wrcMatch.setCreationTm();
+            mlist.add(wrcMatch);
 //            btnSave.setDisable(false);
         });
 
@@ -189,6 +192,7 @@ public class LeaguePane extends BorderPane {
             WrcNation nation = repo.getNation(nationsBox.getSelectionModel().getSelectedItem());
             WrcCar car = repo.getCar(carsBox.getSelectionModel().getSelectedItem());
             WrcRally rally = new WrcRally(nation, season.getEntityID());
+            rally.setCreationTm(mlist.get(0).getCreationTm());
             rally.setRallyProgrInSeason(season.getRallyList().size());
             season.getRallyList().add(rally);
             AtomicInteger progr = new AtomicInteger(0);

@@ -29,6 +29,7 @@ public class GitProxy {
     public static void updateData() {
         if(!Files.exists(GIT_FOLDER)) {
             JkProcess res = git.clone();
+            git.setCommitter("joker1618", "federicobarbano@gmail.com");
             LOG.debug(res.toStringResult(0));
         }
         JkProcess res = git.pull();
