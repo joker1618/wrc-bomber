@@ -6,7 +6,7 @@ import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.apps.wrc.bomber.dl.entities.*;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcTime;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcWeather;
-import xxx.joker.libs.repository.util.RepoUtil;
+import xxx.joker.libs.datalayer.util.RepoUtil;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -33,7 +33,7 @@ public class DataFiller {
             }
         }
 
-        display(RepoUtil.formatEntities(repo.getMatches()));
+//        display(RepoUtil.formatEntities(repo.getMatches()));
 
         repo.commit();
     }

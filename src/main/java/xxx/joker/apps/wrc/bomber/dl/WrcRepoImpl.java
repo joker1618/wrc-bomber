@@ -5,7 +5,7 @@ import xxx.joker.apps.wrc.bomber.common.Configs;
 import xxx.joker.apps.wrc.bomber.dl.entities.*;
 import xxx.joker.libs.core.cache.JkCache;
 import xxx.joker.libs.core.lambdas.JkStreams;
-import xxx.joker.libs.repository.JkRepoFile;
+import xxx.joker.libs.datalayer.JkRepoFile;
 
 import java.io.InputStream;
 import java.util.*;
@@ -41,7 +41,7 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
 
     @Override
     public Map<String, WrcNation> getNationMap() {
-        return getMap(WrcNation.class, WrcNation::getName);
+        return getMapSingle(WrcNation.class, WrcNation::getName);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class DataExport {
         WrcRepo repo = WrcRepoImpl.getInstance();
         //NATION|SEASON ID|RALLY ID|STAGE PROGR IN RALLY|WINNER|CAR FEDE|CAR BOMBER|WEATHER|TIME|CREATION TM
         List<String> lines = new ArrayList<>();
-        Map<Long, WrcSeason> seasonMap = JkStreams.toMapSingle(repo.getSeasons(), WrcSeason::getEntityID);
+        Map<Long, WrcSeason> seasonMap = JkStreams.toMapSingle(repo.getSeasons(), WrcSeason::getEntityId);
 //        lines.add("NATION|SEASON ID|RALLY ID|STAGE PROGR IN RALLY|WINNER|CAR FEDE|CAR BOMBER|WEATHER|TIME|CREATION TM|ENTITY ID|SEASON FINISHED");
         lines.add("NATION|SEASON ID|RALLY ID|STAGE PROGR IN RALLY|WINNER|CAR FEDE|CAR BOMBER|WEATHER|TIME|CREATION TM|ENTITY ID|SEASON FINISHED|SEASON START|SEASON END|RALLY WINNER|SEASON WINNER");
         for (WrcMatch match : repo.getMatches()) {
@@ -47,7 +47,7 @@ public class DataExport {
             row.add(match.getWeather().name());
             row.add(match.getTime().name());
             row.add(match.getCreationTm().format());
-            row.add(match.getEntityID()+"");
+            row.add(match.getEntityId()+"");
             row.add(s.isFinished()+"");
             row.add(s.getCreationTm().format());
             row.add(s.isFinished() ? JkStruct.getLastElem(JkStruct.getLastElem(s.getRallyList()).getMatches()).getCreationTm().format() : "");

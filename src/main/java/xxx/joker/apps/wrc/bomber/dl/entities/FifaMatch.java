@@ -1,11 +1,11 @@
 package xxx.joker.apps.wrc.bomber.dl.entities;
 
-import xxx.joker.libs.repository.design.RepoEntity;
-import xxx.joker.libs.repository.design.RepoField;
+import xxx.joker.libs.datalayer.design.RepoEntity;
+import xxx.joker.libs.datalayer.design.RepoField;
 
 import static xxx.joker.libs.core.utils.JkStrings.strf;
 
-public class FifaMatch  extends RepoEntity {
+public class FifaMatch extends RepoEntity {
 
     @RepoField
     private String teamFede;
@@ -26,7 +26,7 @@ public class FifaMatch  extends RepoEntity {
 
     @Override
     public String getPrimaryKey() {
-        return strf("fifa-match-%06d", getEntityID());
+        return strf("fifa-match-%06d", getEntityId());
     }
 
     public String getTeamFede() {

@@ -10,13 +10,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
-import xxx.joker.libs.repository.design.RepoEntity;
-import xxx.joker.libs.repository.util.RepoUtil;
+import xxx.joker.libs.core.format.JkFormatter;
+import xxx.joker.libs.core.format.JkOutput;
+import xxx.joker.libs.datalayer.design.RepoEntity;
+import xxx.joker.libs.datalayer.util.RepoUtil;
 
 import java.util.Map;
 import java.util.Set;
 
 import static xxx.joker.libs.core.utils.JkConsole.display;
+import static xxx.joker.libs.core.utils.JkConsole.displayColl;
 
 public class WrcGUI extends Application {
 
@@ -57,8 +60,10 @@ public class WrcGUI extends Application {
 
         WrcRepo repo = WrcRepoImpl.getInstance();
         Map<Class<RepoEntity>, Set<RepoEntity>> dataSets = repo.getDataSets();
-        for (Set<RepoEntity> ds : dataSets.values()) {
-            display(RepoUtil.formatEntities(ds, true));
+        for (Class<?> c : dataSets.keySet()) {
+            Set<RepoEntity> ds = dataSets.get(c);
+            display(c.getName());
+            display(JkOutput.columnsView(JkFormatter.get().formatCsv(ds)));
         }
 
     }

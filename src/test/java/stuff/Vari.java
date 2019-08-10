@@ -7,8 +7,8 @@ import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.libs.core.adapter.JkProcess;
 import xxx.joker.libs.core.runtimes.JkEnvironment;
 import xxx.joker.libs.core.utils.JkStrings;
-import xxx.joker.libs.repository.design.RepoEntity;
-import xxx.joker.libs.repository.util.RepoUtil;
+import xxx.joker.libs.datalayer.design.RepoEntity;
+import xxx.joker.libs.datalayer.util.RepoUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class Vari {
         WrcRepo repo = WrcRepoImpl.getInstance();
         Map<Class<RepoEntity>, Set<RepoEntity>> dataSets = repo.getDataSets();
         for (Set<RepoEntity> ds : dataSets.values()) {
-            display(RepoUtil.formatEntities(ds));
+//            display(RepoUtil.formatEntities(ds));
         }
     }
 

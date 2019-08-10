@@ -2,8 +2,8 @@ package xxx.joker.apps.wrc.bomber.dl.entities;
 
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver;
 import xxx.joker.libs.core.lambdas.JkStreams;
-import xxx.joker.libs.repository.design.RepoEntity;
-import xxx.joker.libs.repository.design.RepoField;
+import xxx.joker.libs.datalayer.design.RepoEntity;
+import xxx.joker.libs.datalayer.design.RepoField;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class WrcRally extends RepoEntity {
 
     @Override
     public String getPrimaryKey() {
-        return String.valueOf(getEntityID());
+        return String.valueOf(getEntityId());
     }
 
     public WrcNation getNation() {

@@ -20,7 +20,7 @@ public class InitRepo {
     public void setSeasonIDToMatch() {
         WrcRepo repo = WrcRepoImpl.getInstance();
 
-        Map<Long, WrcRally> rallyMap = JkStreams.toMapSingle(repo.getRallies(), WrcRally::getEntityID);
+        Map<Long, WrcRally> rallyMap = JkStreams.toMapSingle(repo.getRallies(), WrcRally::getEntityId);
 
         for (WrcMatch match : repo.getMatches()) {
             if(match.getRallyID() != null) {

@@ -54,7 +54,7 @@ public class LeaguePane extends BorderPane {
     }
 
     private BorderPane createLeaguePane(WrcSeason season) {
-        boolean doCommit = season.getEntityID() == null;
+        boolean doCommit = season.getEntityId() == null;
         repo.add(season);
         if(doCommit)    repo.commit();
         BorderPane bp = new BorderPane();
@@ -191,7 +191,7 @@ public class LeaguePane extends BorderPane {
         btnSave.setOnAction(e -> {
             WrcNation nation = repo.getNation(nationsBox.getSelectionModel().getSelectedItem());
             WrcCar car = repo.getCar(carsBox.getSelectionModel().getSelectedItem());
-            WrcRally rally = new WrcRally(nation, season.getEntityID());
+            WrcRally rally = new WrcRally(nation, season.getEntityId());
             rally.setCreationTm(mlist.get(0).getCreationTm());
             rally.setRallyProgrInSeason(season.getRallyList().size());
             season.getRallyList().add(rally);
@@ -202,7 +202,7 @@ public class LeaguePane extends BorderPane {
             WrcTime time = timeBox.getSelectionModel().getSelectedItem();
             mlist.forEach(m -> {
                 m.setSeasonID(rally.getSeasonID());
-                m.setRallyID(rally.getEntityID());
+                m.setRallyID(rally.getEntityId());
                 m.setCarFede(car);
                 m.setCarBomber(car);
                 m.setWeather(weather);

@@ -3,8 +3,8 @@ package xxx.joker.apps.wrc.bomber.dl.entities;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcTime;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcWeather;
-import xxx.joker.libs.repository.design.RepoEntity;
-import xxx.joker.libs.repository.design.RepoField;
+import xxx.joker.libs.datalayer.design.RepoEntity;
+import xxx.joker.libs.datalayer.design.RepoField;
 
 import static xxx.joker.libs.core.utils.JkStrings.strf;
 
@@ -41,7 +41,7 @@ public class WrcMatch extends RepoEntity {
 
     @Override
     public String getPrimaryKey() {
-        return strf("match-%04d", getEntityID());
+        return strf("match-%04d", getEntityId());
     }
 
     public WrcNation getNation() {

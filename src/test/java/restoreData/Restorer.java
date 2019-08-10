@@ -10,7 +10,7 @@ import xxx.joker.apps.wrc.bomber.dl.entities.WrcSurface;
 import xxx.joker.libs.core.files.JkFiles;
 import xxx.joker.libs.core.lambdas.JkStreams;
 import xxx.joker.libs.core.utils.JkStrings;
-import xxx.joker.libs.repository.util.RepoUtil;
+import xxx.joker.libs.datalayer.util.RepoUtil;
 
 import java.nio.file.Paths;
 import java.util.List;
@@ -27,7 +27,7 @@ public class Restorer {
 //        loadNations();
 //        loadCars();
         loadStages();
-        repo.getDataSets().values().forEach(ds -> display(RepoUtil.formatEntities(ds)));
+//        repo.getDataSets().values().forEach(ds -> display(RepoUtil.formatEntities(ds)));
 //        repo.commit();
     }
 

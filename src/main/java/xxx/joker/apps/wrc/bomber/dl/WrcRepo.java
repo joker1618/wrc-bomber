@@ -2,7 +2,7 @@ package xxx.joker.apps.wrc.bomber.dl;
 
 import javafx.scene.image.Image;
 import xxx.joker.apps.wrc.bomber.dl.entities.*;
-import xxx.joker.libs.repository.JkRepo;
+import xxx.joker.libs.datalayer.JkRepo;
 
 import java.util.List;
 import java.util.Map;

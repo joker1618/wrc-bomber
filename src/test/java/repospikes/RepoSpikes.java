@@ -5,9 +5,9 @@ import org.junit.Test;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepo;
 import xxx.joker.apps.wrc.bomber.dl.WrcRepoImpl;
 import xxx.joker.libs.core.runtimes.JkEnvironment;
-import xxx.joker.libs.repository.design.RepoEntity;
-import xxx.joker.libs.repository.entities.RepoResource;
-import xxx.joker.libs.repository.util.RepoUtil;
+import xxx.joker.libs.datalayer.design.RepoEntity;
+import xxx.joker.libs.datalayer.entities.RepoResource;
+import xxx.joker.libs.datalayer.util.RepoUtil;
 
 import java.nio.file.Paths;
 import java.util.Map;

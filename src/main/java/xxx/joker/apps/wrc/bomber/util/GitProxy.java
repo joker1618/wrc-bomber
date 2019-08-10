@@ -35,7 +35,7 @@ public class GitProxy {
         JkProcess res = git.pull();
         LOG.debug(res.toStringResult(0));
         JkFiles.delete(REPO_FOLDER);
-        JkFiles.copy(GIT_FOLDER.resolve("repo"), REPO_FOLDER);
+        JkFiles.copy(GIT_FOLDER.resolve(REPO_FOLDER.getFileName()), REPO_FOLDER);
         WrcRepo repo = WrcRepoImpl.getInstance();
         repo.rollback();
         repo.refreshStats();
@@ -48,8 +48,9 @@ public class GitProxy {
             LOG.debug(res.toStringResult(0));
         }
         git.pull();
-        JkFiles.delete(GIT_FOLDER.resolve("repo"));
-        JkFiles.copy(REPO_FOLDER, GIT_FOLDER.resolve("repo"));
+        Path gitRepoFolder = GIT_FOLDER.resolve(REPO_FOLDER.getFileName());
+        JkFiles.delete(gitRepoFolder);
+        JkFiles.copy(REPO_FOLDER, gitRepoFolder);
         List<JkProcess> resList = git.commitAndPush("fix");
         resList.forEach(res -> LOG.debug(res.toStringResult(0)));
         LOG.info("Commit and push done");
