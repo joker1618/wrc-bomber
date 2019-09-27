@@ -8,12 +8,14 @@ import xxx.joker.apps.wrc.bomber.dl.entities.WrcNation;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcRally;
 import xxx.joker.apps.wrc.bomber.dl.entities.WrcSeason;
 import xxx.joker.apps.wrc.bomber.gui.snippet.GridPaneBuilder;
+import xxx.joker.libs.core.javafx.JfxControls;
 import xxx.joker.libs.core.javafx.JfxUtil;
 
 import java.util.Map;
 
 import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.BOMBER;
 import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.FEDE;
+import static xxx.joker.libs.core.javafx.JfxControls.createImageView;
 
 public class LeagueGridPane extends GridPane {
 
@@ -32,7 +34,7 @@ public class LeagueGridPane extends GridPane {
 
         int colNum = 1;
         for (WrcRally rally : season.getRallyList()) {
-            ImageView ivFlag = JfxUtil.createImageView(repo.getFlag(rally.getNation()), 50, 50);
+            ImageView ivFlag = createImageView(repo.getFlag(rally.getNation()), 50, 50);
 
             cgrid.add(0, colNum, ivFlag);
             cgrid.add(1, colNum, rally.getStageWins(FEDE));
@@ -44,7 +46,7 @@ public class LeagueGridPane extends GridPane {
         }
 
         for (WrcNation nation : allNations.values()) {
-            ImageView ivFlag = JfxUtil.createImageView(repo.getFlag(nation), 50, 50);
+            ImageView ivFlag = createImageView(repo.getFlag(nation), 50, 50);
             cgrid.add(0, colNum, ivFlag);
             colNum++;
         }
