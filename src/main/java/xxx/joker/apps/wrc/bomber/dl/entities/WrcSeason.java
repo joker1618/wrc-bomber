@@ -2,8 +2,9 @@ package xxx.joker.apps.wrc.bomber.dl.entities;
 
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver;
 import xxx.joker.libs.core.lambdas.JkStreams;
+import xxx.joker.libs.datalayer.design.EntityField;
+import xxx.joker.libs.datalayer.design.EntityPK;
 import xxx.joker.libs.datalayer.design.RepoEntity;
-import xxx.joker.libs.datalayer.design.RepoField;
 
 import java.util.List;
 
@@ -11,10 +12,19 @@ import static xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver.*;
 
 public class WrcSeason extends RepoEntity {
 
-    @RepoField
+    @EntityPK
+    private int seasonCounter;
+    @EntityField
     private boolean finished;
-    @RepoField
+    @EntityField
     private List<WrcRally> rallyList;
+
+    public WrcSeason() {
+    }
+
+    public WrcSeason(int seasonCounter) {
+        this.seasonCounter = seasonCounter;
+    }
 
     /**
      * The winner is the driver that:
@@ -52,9 +62,12 @@ public class WrcSeason extends RepoEntity {
         return (int) rallyList.stream().flatMap(r -> r.getMatches().stream()).filter(m -> m.getWinner() == driver).count();
     }
 
-    @Override
-    public String getPrimaryKey() {
-        return String.valueOf(getEntityId());
+    public int getSeasonCounter() {
+        return seasonCounter;
+    }
+
+    public void setSeasonCounter(int seasonCounter) {
+        this.seasonCounter = seasonCounter;
     }
 
     public List<WrcRally> getRallyList() {

@@ -1,22 +1,29 @@
 package xxx.joker.apps.wrc.bomber.dl.entities;
 
+import xxx.joker.libs.datalayer.design.EntityField;
+import xxx.joker.libs.datalayer.design.EntityPK;
 import xxx.joker.libs.datalayer.design.RepoEntity;
-import xxx.joker.libs.datalayer.design.RepoField;
 
 import static xxx.joker.libs.core.utils.JkStrings.strf;
 
 public class FifaMatch extends RepoEntity {
 
-    @RepoField
+    @EntityPK
+    private int matchCounter;
+    @EntityField
     private String teamFede;
-    @RepoField
+    @EntityField
     private int golFede;
-    @RepoField
+    @EntityField
     private String teamBomber;
-    @RepoField
+    @EntityField
     private int golBomber;
 
     public FifaMatch() {
+    }
+
+    public FifaMatch(int matchCounter) {
+        this.matchCounter = matchCounter;
     }
 
     public String strWinner() {
@@ -24,9 +31,12 @@ public class FifaMatch extends RepoEntity {
         return res == 0 ? "DRAW" : res < 0 ? "BOMBER" : "FEDE";
     }
 
-    @Override
-    public String getPrimaryKey() {
-        return strf("fifa-match-%06d", getEntityId());
+    public int getMatchCounter() {
+        return matchCounter;
+    }
+
+    public void setMatchCounter(int matchCounter) {
+        this.matchCounter = matchCounter;
     }
 
     public String getTeamFede() {

@@ -44,7 +44,7 @@ public class LeaguePane extends BorderPane {
         setCenter(contentBox);
 
         Button btnStartSeason = new Button("Start new season");
-        btnStartSeason.setOnAction(e -> contentBox.getChildren().setAll(createLeaguePane(new WrcSeason())));
+        btnStartSeason.setOnAction(e -> contentBox.getChildren().setAll(createLeaguePane(new WrcSeason(1 + repo.getSeasons().size()))));
         btnStartBox = new HBox(btnStartSeason);
         btnStartBox.getStyleClass().addAll("pad20");
 

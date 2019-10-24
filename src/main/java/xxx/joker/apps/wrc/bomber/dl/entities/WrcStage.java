@@ -1,30 +1,26 @@
 package xxx.joker.apps.wrc.bomber.dl.entities;
 
+import xxx.joker.libs.datalayer.design.EntityField;
+import xxx.joker.libs.datalayer.design.EntityPK;
 import xxx.joker.libs.datalayer.design.RepoEntity;
-import xxx.joker.libs.datalayer.design.RepoField;
-
-import static xxx.joker.libs.core.utils.JkStrings.strf;
 
 public class WrcStage extends RepoEntity {
 
-    @RepoField
+    @EntityField
     private WrcNation nation;
-    @RepoField
+    @EntityPK
+    private String nationName;
+    @EntityField
     private String name;
-    @RepoField
+    @EntityPK
     private int num;
-    @RepoField
+    @EntityField
     private int length;
-    @RepoField
+    @EntityField
     private boolean specialStage;
-    @RepoField
+    @EntityField
     private WrcSurface surface;
 
-
-    @Override
-    public String getPrimaryKey() {
-        return strf("stage-{}-{}", nation.getName(), num);
-    }
 
     public WrcNation getNation() {
         return nation;
@@ -32,6 +28,11 @@ public class WrcStage extends RepoEntity {
 
     public void setNation(WrcNation nation) {
         this.nation = nation;
+        this.nationName = nation.getName();
+    }
+
+    public String getNationName() {
+        return nationName;
     }
 
     public String getName() {

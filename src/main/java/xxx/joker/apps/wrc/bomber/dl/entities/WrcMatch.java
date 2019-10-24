@@ -3,32 +3,31 @@ package xxx.joker.apps.wrc.bomber.dl.entities;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcDriver;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcTime;
 import xxx.joker.apps.wrc.bomber.dl.enums.WrcWeather;
+import xxx.joker.libs.datalayer.design.EntityField;
+import xxx.joker.libs.datalayer.design.EntityPK;
 import xxx.joker.libs.datalayer.design.RepoEntity;
-import xxx.joker.libs.datalayer.design.RepoField;
-
-import static xxx.joker.libs.core.utils.JkStrings.strf;
 
 public class WrcMatch extends RepoEntity {
 
-    @RepoField
+    @EntityField
     private WrcNation nation;
-    @RepoField
+    @EntityPK
     private Long seasonID;
-    @RepoField
+    @EntityPK
     private Long rallyID;
-    @RepoField
+    @EntityPK
     private Integer stageProgrInRally;
-    @RepoField
+    @EntityField
     private WrcStage stage;
-    @RepoField
+    @EntityField
     private WrcDriver winner;
-    @RepoField
+    @EntityField
     private WrcCar carFede;
-    @RepoField
+    @EntityField
     private WrcCar carBomber;
-    @RepoField
+    @EntityField
     private WrcWeather weather;
-    @RepoField
+    @EntityField
     private WrcTime time;
 
     public WrcMatch() {
@@ -37,11 +36,6 @@ public class WrcMatch extends RepoEntity {
     public WrcMatch(WrcNation nation, WrcDriver winner) {
         this.nation = nation;
         this.winner = winner;
-    }
-
-    @Override
-    public String getPrimaryKey() {
-        return strf("match-%04d", getEntityId());
     }
 
     public WrcNation getNation() {

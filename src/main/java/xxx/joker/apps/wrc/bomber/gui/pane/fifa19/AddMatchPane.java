@@ -12,6 +12,7 @@ import xxx.joker.apps.wrc.bomber.dl.entities.FifaMatch;
 import xxx.joker.apps.wrc.bomber.gui.snippet.GridPaneBuilder;
 import xxx.joker.libs.core.lambdas.JkStreams;
 import xxx.joker.libs.core.tests.JkTests;
+import xxx.joker.libs.datalayer.design.RepoEntity;
 
 import java.util.*;
 
@@ -56,7 +57,8 @@ public class AddMatchPane extends BorderPane {
                 teamFede.textProperty(), golFede.textProperty(), teamBomber.textProperty(), golBomber.textProperty()
         ));
         btnSave.setOnAction(e -> {
-            FifaMatch fifaMatch = new FifaMatch();
+            int matchCounter = 1 + repo.getFifaMatches().stream().mapToInt(FifaMatch::getMatchCounter).max().orElse(0);
+            FifaMatch fifaMatch = new FifaMatch(matchCounter);
             fifaMatch.setTeamFede(teamFede.getText().trim());
             fifaMatch.setGolFede(Integer.parseInt(golFede.getText().trim()));
             fifaMatch.setGolBomber(Integer.parseInt(golBomber.getText().trim()));

@@ -1,21 +1,17 @@
 package xxx.joker.apps.wrc.bomber.dl.entities;
 
+import xxx.joker.libs.datalayer.design.EntityField;
+import xxx.joker.libs.datalayer.design.EntityPK;
 import xxx.joker.libs.datalayer.design.RepoEntity;
-import xxx.joker.libs.datalayer.design.RepoField;
 
 public class WrcNation extends RepoEntity {
 
-    @RepoField
+    @EntityPK
     private String name;
-    @RepoField
+    @EntityField
     private String code;
-    @RepoField
+    @EntityField
     private int num;
-
-    @Override
-    public String getPrimaryKey() {
-        return name;
-    }
 
     public String getName() {
         return name;
