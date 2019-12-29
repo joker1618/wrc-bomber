@@ -58,13 +58,13 @@ public class WrcGUI extends Application {
     public void stop() throws Exception {
         LOG.debug("STOP APP");
 
-        WrcRepo repo = WrcRepoImpl.getInstance();
-        Map<Class<RepoEntity>, Set<RepoEntity>> dataSets = repo.getDataSets();
-        for (Class<?> c : dataSets.keySet()) {
-            Set<RepoEntity> ds = dataSets.get(c);
-            display(c.getName());
-            display(JkOutput.columnsView(JkFormatter.get().formatCsv(ds)));
-        }
+//        WrcRepo repo = WrcRepoImpl.getInstance();
+//        Map<Class<RepoEntity>, Set<RepoEntity>> dataSets = repo.getDataSets();
+//        for (Class<?> c : dataSets.keySet()) {
+//            Set<RepoEntity> ds = dataSets.get(c);
+//            display(c.getName());
+//            display(JkOutput.columnsView(JkFormatter.get().formatCsv(ds)));
+//        }
 
     }
 
