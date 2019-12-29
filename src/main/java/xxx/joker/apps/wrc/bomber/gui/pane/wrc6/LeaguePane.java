@@ -144,9 +144,9 @@ public class LeaguePane extends BorderPane {
                     startStageNumBox.getItems().add(i);
                 }
             }
-            timeBox.getSelectionModel().selectFirst();
-            weatherBox.getSelectionModel().selectFirst();
-            startStageNumBox.getSelectionModel().selectFirst();
+            timeBox.getSelectionModel().select(WrcTime.DAWN);
+            weatherBox.getSelectionModel().select(WrcWeather.CLEAR_SKY);
+            startStageNumBox.getSelectionModel().select((Integer)0);
             gp.getChildren().clear();
             gp.add(btnFede, 1, 0);
             gp.add(btnBomber, 2, 0);
