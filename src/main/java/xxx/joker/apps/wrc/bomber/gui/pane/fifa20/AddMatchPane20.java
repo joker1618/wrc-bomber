@@ -28,7 +28,7 @@ public class AddMatchPane20 extends BorderPane {
     public AddMatchPane20() {
         getStyleClass().addAll("childPane");
 
-        HBox topBox = new HBox(new Label("FIFA 19  -  ADD MATCH"));
+        HBox topBox = new HBox(new Label("FIFA 20  -  ADD MATCH"));
         topBox.getStyleClass().add("captionBox");
         setTop(topBox);
 
