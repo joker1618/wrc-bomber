@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import xxx.joker.apps.wrc.bomber.dl.enums.GameType;
 import xxx.joker.apps.wrc.bomber.gui.pane.fifa19.AddMatchPane;
 import xxx.joker.apps.wrc.bomber.gui.pane.fifa19.HistoryMatchesPane;
+import xxx.joker.apps.wrc.bomber.gui.pane.fifa20.AddMatchPane20;
+import xxx.joker.apps.wrc.bomber.gui.pane.fifa20.HistoryMatchesPane20;
 import xxx.joker.apps.wrc.bomber.gui.pane.wrc6.HistorySeasonPane;
 import xxx.joker.apps.wrc.bomber.gui.pane.wrc6.LeaguePane;
 import xxx.joker.apps.wrc.bomber.gui.pane.wrc6.SummaryPane;
@@ -24,8 +26,7 @@ import xxx.joker.libs.core.cache.JkCache;
 import java.util.Arrays;
 import java.util.List;
 
-import static xxx.joker.apps.wrc.bomber.dl.enums.GameType.FIFA_19;
-import static xxx.joker.apps.wrc.bomber.dl.enums.GameType.WRC_6;
+import static xxx.joker.apps.wrc.bomber.dl.enums.GameType.*;
 import static xxx.joker.libs.core.utils.JkStrings.strf;
 
 
@@ -60,6 +61,7 @@ public class RootPane extends ScrollPane {
 
         cachePane.add(WRC_6, Arrays.asList(new SummaryPane(), new LeaguePane(), new HistorySeasonPane()));
         cachePane.add(FIFA_19, Arrays.asList(new AddMatchPane(), new HistoryMatchesPane()));
+        cachePane.add(FIFA_20, Arrays.asList(new AddMatchPane20(), new HistoryMatchesPane20()));
 
         choiceGame.getSelectionModel().selectedItemProperty().addListener((obs,o,n) -> {
             LOG.debug("Switch view to: {}", n);
@@ -98,7 +100,7 @@ public class RootPane extends ScrollPane {
 
     private Pane createMenuTopBoxPane() {
         choiceGame = new ChoiceBox<>();
-        choiceGame.getItems().addAll(WRC_6, FIFA_19);
+        choiceGame.getItems().addAll(WRC_6, FIFA_19, FIFA_20);
 
         Button btnUpdate = new Button("UPDATE FROM GITHUB");
         btnUpdate.setOnAction(e -> {

@@ -112,5 +112,10 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
         return getList(FifaMatch.class);
     }
 
+    @Override
+    public List<FifaMatch20> getFifaMatches20() {
+        return getList(FifaMatch20.class);
+    }
+
 
 }

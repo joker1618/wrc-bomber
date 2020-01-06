@@ -32,6 +32,7 @@ public interface WrcRepo extends JkRepo {
     Image getFlag(WrcNation nation);
 
     List<FifaMatch> getFifaMatches();
+    List<FifaMatch20> getFifaMatches20();
 
 
 }
