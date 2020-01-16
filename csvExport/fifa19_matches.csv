@@ -1,34 +1,34 @@
-teamFede|golFede|teamBomber|golBomber|entityID|creationTm
-Tottenham|2|Liverpool|1|164|2019-05-25T05:04:00.689
-Liverpool|1|Juventus|1|196|2019-06-01T01:55:32.17
-PSG|0|Man City|2|197|2019-06-01T02:17:09.84
-Milan|0|Inter|2|210|2019-06-02T23:11:07.81
-Barcelona|0|Real Madrid|2|258|2019-06-08T03:11:26.137
-Man City|0|Juventus|1|259|2019-06-08T03:28:20.3
-Tottenham|1|Liverpool|2|288|2019-06-09T23:39:04.729
-Arsenal|1|Atletico Madrid|2|289|2019-06-10T00:14:58.624
-Atletico Madrid|1|Roma|2|290|2019-06-10T00:15:28.987
-Liverpool|0|Roma|0|291|2019-06-10T22:49:39.001
-Liverpool|3|PSG|1|292|2019-06-10T23:09:17.834
-Arsenal|1|Juventus|1|293|2019-06-10T23:25:50.059
-Man City|3|Chelsea|0|294|2019-06-10T23:44:45.123
-Napoli|1|Roma|1|295|2019-06-11T00:00:34.927
-Arsenal|1|Man Utd|1|296|2019-06-12T20:14:43.282
-Liverpool|2|Man Utd|0|303|2019-06-15T01:19:09.996
-Liverpool|2|Man City|3|304|2019-06-15T01:37:12.819
-England|1|France|1|305|2019-06-15T02:04:29.435
-Man City|2|Real Madrid|1|314|2019-06-16T01:58:51.153
-Arsenal|2|Chelsea|3|329|2019-06-18T22:38:44.482
-Liverpool|2|Man City|1|330|2019-06-18T22:56:50.525
-Juventus|1|Inter|0|331|2019-06-18T23:31:14.109
-Francia|1|Italia|1|374|2019-06-22T01:05:53.539
-Liverpool|0|Psg|2|375|2019-06-22T01:27:58.337
-Liverpool|2|PSG|1|376|2019-06-22T01:28:17.879
-Liverpool|3|PSG|0|377|2019-06-22T01:46:09.957
-Man City|1|Rubentus|1|378|2019-06-22T02:03:37.778
-Atletico Madrid|1|Liverpool|1|403|2019-06-24T00:28:53.749
-Liverpool|0|Juventus|1|404|2019-06-24T00:45:55.401
-Arsenal|2|Napoli|1|405|2019-06-26T00:19:03.636
-Liverpool|1|Juventus|2|406|2019-06-26T00:36:29.428
-Man City|1|Liverpool|0|407|2019-06-26T00:53:48.951
-Tottenham|3|Napoli|2|418|2019-07-04T22:40:37.043
+entityId|creationTm|matchCounter|teamFede|golFede|teamBomber|golBomber
+164|2019-05-25T05:04:00.689|1|Tottenham|2|Liverpool|1
+291|2019-06-10T22:49:39.001|10|Liverpool|0|Roma|0
+292|2019-06-10T23:09:17.834|11|Liverpool|3|PSG|1
+293|2019-06-10T23:25:50.059|12|Arsenal|1|Juventus|1
+294|2019-06-10T23:44:45.123|13|Man City|3|Chelsea|0
+295|2019-06-11T00:00:34.927|14|Napoli|1|Roma|1
+296|2019-06-12T20:14:43.282|15|Arsenal|1|Man Utd|1
+303|2019-06-15T01:19:09.996|16|Liverpool|2|Man Utd|0
+304|2019-06-15T01:37:12.819|17|Liverpool|2|Man City|3
+305|2019-06-15T02:04:29.435|18|England|1|France|1
+314|2019-06-16T01:58:51.153|19|Man City|2|Real Madrid|1
+196|2019-06-01T01:55:32.17|2|Liverpool|1|Juventus|1
+329|2019-06-18T22:38:44.482|20|Arsenal|2|Chelsea|3
+330|2019-06-18T22:56:50.525|21|Liverpool|2|Man City|1
+331|2019-06-18T23:31:14.109|22|Juventus|1|Inter|0
+374|2019-06-22T01:05:53.539|23|Francia|1|Italia|1
+375|2019-06-22T01:27:58.337|24|Liverpool|0|Psg|2
+376|2019-06-22T01:28:17.879|25|Liverpool|2|PSG|1
+377|2019-06-22T01:46:09.957|26|Liverpool|3|PSG|0
+378|2019-06-22T02:03:37.778|27|Man City|1|Juventus|1
+403|2019-06-24T00:28:53.749|28|Atletico Madrid|1|Liverpool|1
+404|2019-06-24T00:45:55.401|29|Liverpool|0|Juventus|1
+197|2019-06-01T02:17:09.84|3|PSG|0|Man City|2
+405|2019-06-26T00:19:03.636|30|Arsenal|2|Napoli|1
+406|2019-06-26T00:36:29.428|31|Liverpool|1|Juventus|2
+407|2019-06-26T00:53:48.951|32|Man City|1|Liverpool|0
+418|2019-07-04T22:40:37.043|33|Tottenham|3|Napoli|2
+210|2019-06-02T23:11:07.81|4|Milan|0|Inter|2
+258|2019-06-08T03:11:26.137|5|Barcelona|0|Real Madrid|2
+259|2019-06-08T03:28:20.3|6|Man City|0|Juventus|1
+288|2019-06-09T23:39:04.729|7|Tottenham|1|Liverpool|2
+289|2019-06-10T00:14:58.624|8|Arsenal|1|Atletico Madrid|2
+290|2019-06-10T00:15:28.987|9|Atletico Madrid|1|Roma|2

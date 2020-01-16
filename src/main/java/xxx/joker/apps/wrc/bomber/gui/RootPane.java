@@ -121,6 +121,7 @@ public class RootPane extends ScrollPane {
             alert.close();
         });
 
+
         int size = 120;
         String styleFiller = strf("-fx-min-width:{}; -fx-max-width:{}; -fx-background-color:#cc3333", size, size);
         Pane middle1 = new Pane();
