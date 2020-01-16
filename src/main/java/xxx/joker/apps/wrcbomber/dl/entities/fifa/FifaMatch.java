@@ -2,6 +2,8 @@ package xxx.joker.apps.wrcbomber.dl.entities.fifa;
 
 import xxx.joker.apps.wrcbomber.dl.entities.JpaEntity;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
+import xxx.joker.libs.repo.design.annotation.marker.EntityField;
+import xxx.joker.libs.repo.design.annotation.marker.EntityPK;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,15 +19,21 @@ public class FifaMatch extends JpaEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @EntityField
     private long jpaID;
-
+    @EntityPK
     private String fifaVersion;
-
+    @EntityPK
     private int matchCounter;
+    @EntityField
     private String teamFede;
+    @EntityField
     private int golFede;
+    @EntityField
     private String teamBomber;
+    @EntityField
     private int golBomber;
+    @EntityField
     private LocalDateTime matchTime;
 
     public FifaMatch() {
