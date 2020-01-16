@@ -1,0 +1,28 @@
+.gpResults .cellBox {
+    -fx-background-color: WHITE;
+    -fx-min-width: 50;
+    -fx-min-height: 40;
+    -fx-alignment: CENTER;
+    -fx-border-width: 0 1 1 0;
+    -fx-border-color: BLACK;
+}
+.gpResults .col0 {
+    -fx-min-width: 85;
+    -fx-padding: 0 20 0 10;
+    -fx-alignment: CENTER-LEFT;
+    -fx-border-width: 0 1 1 1;
+    -fx-font-weight: BOLD;
+}
+.gpResults .row0 {
+    -fx-background-color: #e6e6ff;
+    -fx-font-weight: BOLD;
+    -fx-border-width: 1 1 1 0;
+}
+.gpResults .row0.col0 {
+    -fx-border-width: 1;
+}
+
+.gpResults .image-view {
+    -fx-border-width: 1;
+    -fx-border-color: BLACK;
+}

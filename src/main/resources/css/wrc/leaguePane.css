@@ -1,0 +1,33 @@
+.leaguePane {
+    -fx-spacing: 30;
+}
+
+.addPane .jfxBox {
+    -fx-border-color: BLACK;
+    -fx-padding: 10;
+}
+.addPane .boxCombos {
+    -fx-border-width: 1 0 1 1;
+}
+.addPane .boxMatches {
+    -fx-border-width: 1;
+}
+.addPane .boxSave {
+    -fx-border-width: 0 1 1 1;
+    -fx-alignment: CENTER;
+}
+
+.boxCombos .cellBox {
+    -fx-padding: 5 10 5 10;
+    -fx-alignment: CENTER-LEFT;
+}
+.boxCombos .choice-box .label {
+    -fx-padding: 2 5 2 5;
+}
+.boxCombos1 .row-odd {
+    -fx-background-color: CYAN;
+}
+
+.boxMatches .button {
+    -fx-min-width: 90;
+}

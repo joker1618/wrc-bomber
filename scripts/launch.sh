@@ -1,1 +1,1 @@
-java -Dapps.folder=$(pwd) -jar wrc-bomber.jar
+java -Dapps.folder=. -jar wrc-bomber.jar

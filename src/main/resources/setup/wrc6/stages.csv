@@ -1,0 +1,83 @@
+country|location|num|length|surface|specialStage
+
+Monaco|Entrevaux|0|4346|TARMAC:1.0|false
+Monaco|Corps|1|6072|TARMAC:0.7--SNOW:0.3|false
+Monaco|La Baite-Neuve|2|5594|SNOW:0.7--TARMAC:0.3|false
+Monaco|Peira Cava|3|8171|TARMAC:1.0|false
+Monaco|Col de l'Orme|4|6168|TARMAC:1.0|false
+
+Sweden|Torsby|0|6000|SNOW:1.0|false
+Sweden|Kirkenaer|1|3380|SNOW:1.0|false
+Sweden|Fredriksberg|2|5500|SNOW:1.0|false
+Sweden|Vargasen|3|11610|SNOW:0.7--GRAVEL:0.3|false
+Sweden|Karlstad|4|3800|SNOW:1.0|true
+
+Mexico|Los Mexicanos|0|4020|GRAVEL:1.0|false
+Mexico|Las Minas|1|5030|GRAVEL:1.0|false
+Mexico|Ibarilla|2|8250|GRAVEL:1.0|false
+Mexico|El Brinco|3|3350|GRAVEL:1.0|false
+Mexico|Autodromo de Leon|4|2300|TARMAC:0.8--GRAVEL:0.2|true
+
+Argentina|Soconcho|0 |7910|GRAVEL:1.0|false
+Argentina|El Resposo|1|1101|GRAVEL:1.0|false
+Argentina|Ischilin|2|7060|GRAVEL:1.0|false
+Argentina|El Condor|3|3890|GRAVEL:1.0|false
+Argentina|Fernet Branca|4|6040|GRAVEL:1.0|true
+
+Portugal|Ponte de Lima|0|6430|GRAVEL:0.8--TARMAC:0.2|false
+Portugal|Viano do Castelo|1|6280|GRAVEL:1.0|false
+Portugal|Fridao|2|9670|GRAVEL:0.9--TARMAC:0.1|false
+Portugal|Fafe|3|3850|GRAVEL:0.9--TARMAC:0.1|false
+Portugal|Lousada|4|3340|GRAVEL:0.4--TARMAC:0.6|true
+
+Italy|Olmedo Monte Baranta|0|6600|GRAVEL:1.0|false
+Italy|Sagama|1|4800|GRAVEL:1.0|false
+Italy|Monte Lerno|2|4600|GRAVEL:1.0|false
+Italy|Grighine Nord|3|4850|GRAVEL:1.0|false
+Italy|Ittiri Arena|4|1440|GRAVEL:1.0|true
+
+Poland|Gorklo|0|8270|GRAVEL:0.8--TARMAC:0.2|false
+Poland|Swietajno|1|7180|GRAVEL:0.8--TARMAC:0.2|false
+Poland|Wieliczki|2|5200|GRAVEL:1.0|false
+Poland|Baranowo|3|6730|GRAVEL:0.9--TARMAC:0.1|false
+Poland|Mikolajki Arena|4|2500|TARMAC:1.0|true
+
+Finland|Ounipohja|0|10630|GRAVEL:1.0|false
+Finland|Horrka|1|8370|GRAVEL:1.0|false
+Finland|Jukojarvi|2|6090|GRAVEL:1.0|false
+Finland|Surkee|3|5450|GRAVEL:1.0|false
+Finland|Harju|4|2270|GRAVEL:0.1--TARMAC:0.9|true
+
+Germany|Bosenberg|0|6901|TARMAC:0.9--GRAVEL:0.1|false
+Germany|Moselland|1|9406|TARMAC:1.0|false
+Germany|Stein Wein|2|7327|TARMAC:1.0|false
+Germany|Dronthal|3|5608|TARMAC:1.0|false
+Germany|Arena Panzerplatte|4|2856|TARMAC:1.0|true
+
+China|Huangdianzi|0|13340|TARMAC:1.0|false
+China|Sihai|1|8780|TARMAC:1.0|false
+China|Dishuihu|2|5010|TARMAC:1.0|false
+
+France|Muracciole|0|7790|TARMAC:1.0|false
+France|Francardo|1|5030|TARMAC:1.0|false
+France|Sotta|2|7660|TARMAC:1.0|false
+France|Bisinao|3|5510|TARMAC:1.0|false
+
+Spain|Bot|0|3540|GRAVEL:1.0|false
+Spain|Poboleda|1|6330|TARMAC:1.0|false
+Spain|La Figuera|2|10380|TARMAC:1.0|false
+Spain|Duesaigues|3|4910|TARMAC:1.0|false
+Spain|Barcelona|4|0|TARMAC:1.0|true
+
+United Kingdom|Myherin|0|6770|GRAVEL:1.0|false
+United Kingdom|Hafren|1|8720|GRAVEL:1.0|false
+United Kingdom|Great Orme|2|4590|TARMAC:1.0|false
+United Kingdom|Brenig|3|6640|GRAVEL:0.8--TARMAC:0.2|false
+United Kingdom|Chirk Castle|4|2060|TARMAC:1.0|true
+
+Australia|Baker's Creek|0|3670|GRAVEL:0.8--TARMAC:0.2|false
+Australia|Newry|1|6610|GRAVEL:1.0|false
+Australia|Nambucca|2|12570|GRAVEL:0.9--TARMAC:0.1|false
+Australia|Wedding Bells|3|4100|GRAVEL:1.0|false
+Australia|Coffs|4|1560|GRAVEL:1.0|true
+

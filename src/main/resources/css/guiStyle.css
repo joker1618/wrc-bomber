@@ -1,29 +1,53 @@
 .rootPane {
     -fx-font-family: "Calibri";
-    -fx-font-size: 18;
-    -fx-spacing: 20;
-    -fx-background-color: #00cc00;
+    -fx-font-size: 15;
+    -fx-background-color: #ffefb5;
+    -fx-padding: 10;
 }
 
 .rootPane .childPane {
-    -fx-border-width: 5;
-    -fx-border-color: BLUE;
-    -fx-background-color: WHITE;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: BLACK;
     -fx-padding: 10;
+}
+
+.rootPane .topBox {
+    -fx-border-width: 1 0 1 0;
+    -fx-spacing: 100;
 }
 
 .captionBox {
-    -fx-font-family: "Times New Roman";
-    -fx-font-size: 40;
-    -fx-font-weight: BOLD;
     -fx-padding: 10;
+    -fx-spacing: 50;
 }
 
 .captionBox .label {
-    -fx-text-fill: BLUE;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 20;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: #000033;
     -fx-font-style: italic;
 }
 
 .scroll-bar {
     -fx-pref-width: 25;
+}
+
+.winner-stat .label,
+.winner-stat .text,
+.winner-stat {
+    -fx-font-weight: BOLD;
+    -fx-text-fill: #008000;
+}
+.loser-stat .label,
+.loser-stat .text,
+.loser-stat {
+    -fx-font-weight: BOLD;
+    -fx-text-fill: #cc0000;
+}
+.draw-stat .label,
+.draw-stat .text,
+.draw-stat {
+    -fx-font-weight: BOLD;
+    -fx-text-fill: #ff6600;
 }

@@ -3,4 +3,4 @@ target
 *.iml
 
 scenicView.properties
-wrc-data
+dataFolder/

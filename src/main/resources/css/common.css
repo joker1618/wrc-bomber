@@ -2,8 +2,9 @@
     -fx-opacity: 0;
 }
 
-.centered   { -fx-alignment: CENTER }
-.hcenter    { -fx-alignment: TOP-CENTER }
+.centered      { -fx-alignment: CENTER }
+.top-center    { -fx-alignment: TOP-CENTER }
+.center-left   { -fx-alignment: CENTER-LEFT }
 
 .bgPurple   { -fx-background-color: PURPLE }
 .bgRed      { -fx-background-color: RED }
@@ -24,6 +25,7 @@
 .spacing5  { -fx-spacing: 5 }
 .spacing10 { -fx-spacing: 10 }
 .spacing20 { -fx-spacing: 20 }
+.spacing40 { -fx-spacing: 40 }
 
 .hgap5  { -fx-hgap: 5 }
 .hgap10 { -fx-hgap: 10 }
@@ -38,3 +40,7 @@
 
 .bold { -fx-font-weight: BOLD }
 
+.scroll-bar {
+    -fx-pref-width: 25;
+    -fx-pref-height: 25;
+}
