@@ -1,0 +1,44 @@
+.centerBox {
+    -fx-spacing: 50;
+}
+
+.gpRecap .cellBox {
+    -fx-pref-width: 100;
+    -fx-pref-height: 40;
+    -fx-alignment: CENTER;
+    -fx-border-width: 0 1 1 0;
+    -fx-border-color: BLACK;
+}
+.gpRecap .col0 {
+    -fx-pref-width: 120;
+    -fx-alignment: CENTER-LEFT;
+    -fx-border-width: 0 1 1 1;
+    -fx-padding: 10;
+}
+.gpRecap .row0 {
+    -fx-pref-height: 60;
+    -fx-border-width: 1 1 1 0;
+}
+.gpRecap .row0.col0 {
+    -fx-border-width: 1;
+}
+.gpRecap .row0,
+.gpRecap .col0 {
+    -fx-font-weight: BOLD;
+}
+
+
+.gpAddMatch .cellBox {
+    -fx-padding: 10;
+    -fx-alignment: CENTER;
+}
+.gpAddMatch .col0 {
+    -fx-alignment: CENTER-LEFT;
+}
+.gpAddMatch .row0,
+.gpAddMatch .col0 {
+    -fx-font-weight: BOLD;
+}
+.gpAddMatch .col-last {
+    -fx-pref-width: 60;
+}

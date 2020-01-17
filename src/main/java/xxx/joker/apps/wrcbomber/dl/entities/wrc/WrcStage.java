@@ -7,11 +7,13 @@ import xxx.joker.libs.repo.design.annotation.marker.EntityPK;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Objects;
-
-import static xxx.joker.libs.core.util.JkStrings.strf;
 
 @Entity
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"wrcVersion"}),
+        @UniqueConstraint(columnNames = {"country_jpaid"}),
+        @UniqueConstraint(columnNames = {"num"})
+})
 public class WrcStage extends JpaEntity implements Serializable {
 
     @Id

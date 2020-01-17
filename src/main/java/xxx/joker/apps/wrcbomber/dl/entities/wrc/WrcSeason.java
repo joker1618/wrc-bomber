@@ -5,13 +5,11 @@ import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.libs.repo.design.annotation.marker.EntityField;
 import xxx.joker.libs.repo.design.annotation.marker.EntityPK;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 public class WrcSeason extends JpaEntity implements Serializable {

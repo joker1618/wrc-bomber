@@ -6,7 +6,6 @@ import xxx.joker.apps.wrcbomber.dl.entities.fifa.FifaMatch;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.*;
 import xxx.joker.apps.wrcbomber.dl.enums.GameType;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface GuiModel {

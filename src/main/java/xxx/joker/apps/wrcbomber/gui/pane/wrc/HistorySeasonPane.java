@@ -2,21 +2,21 @@ package xxx.joker.apps.wrcbomber.gui.pane.wrc;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcSeason;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
-import xxx.joker.libs.core.util.JkStrings;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static xxx.joker.libs.core.lambda.JkStreams.*;
+import static xxx.joker.libs.core.lambda.JkStreams.mapUniq;
 import static xxx.joker.libs.core.util.JkStrings.strf;
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 import static xxx.joker.libs.javafx.util.JfxControls.createVBox;

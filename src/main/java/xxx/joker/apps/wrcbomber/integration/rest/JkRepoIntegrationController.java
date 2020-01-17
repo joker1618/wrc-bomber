@@ -13,17 +13,12 @@ import xxx.joker.apps.wrcbomber.config.AppConfig;
 import xxx.joker.apps.wrcbomber.dl.entities.fifa.FifaMatch;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.*;
 import xxx.joker.apps.wrcbomber.dl.repo.RepoFacade;
-import xxx.joker.apps.wrcbomber.dl.repo.wrc.WrcCarRepo;
 import xxx.joker.apps.wrcbomber.integration.model.WrcRepo;
 import xxx.joker.apps.wrcbomber.integration.model.WrcRepoImpl;
 import xxx.joker.libs.core.runtime.JkReflection;
-import xxx.joker.libs.repo.design.RepoEntity;
 
 import java.util.List;
 import java.util.Set;
-
-import static xxx.joker.libs.core.util.JkConsole.display;
-import static xxx.joker.libs.core.util.JkConsole.displayColl;
 
 @RestController
 @RequestMapping("/repoIntegration")

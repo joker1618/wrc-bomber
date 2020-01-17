@@ -8,7 +8,7 @@
 .rootPane .childPane {
     -fx-border-width: 0 0 1 0;
     -fx-border-color: BLACK;
-    -fx-padding: 10;
+    -fx-padding: 10 10 20 10;
 }
 
 .rootPane .topBox {

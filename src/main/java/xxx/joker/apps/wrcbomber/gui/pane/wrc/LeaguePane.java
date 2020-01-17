@@ -7,7 +7,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.util.StringConverter;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.*;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
@@ -24,7 +27,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
-import static xxx.joker.libs.javafx.util.JfxControls.createVBox;
 
 public class LeaguePane extends BorderPane {
 

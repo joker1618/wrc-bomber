@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import xxx.joker.apps.wrcbomber.config.AppConfig;
 import xxx.joker.apps.wrcbomber.dl.enums.GameType;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
-import xxx.joker.apps.wrcbomber.gui.pane.fifa.AddFifaMatchPane;
+import xxx.joker.apps.wrcbomber.gui.pane.fifa.AddFifaMatchAndRecapPane;
 import xxx.joker.apps.wrcbomber.gui.pane.fifa.HistoryMatchesPane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.HistorySeasonPane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.LeaguePane;
@@ -26,7 +26,6 @@ import xxx.joker.apps.wrcbomber.proxies.GitProxy;
 
 import javax.annotation.PostConstruct;
 
-import static xxx.joker.libs.core.util.JkStrings.strf;
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 import static xxx.joker.libs.javafx.util.JfxControls.createVBox;
 
@@ -125,7 +124,7 @@ public class RootPaneController {
     }
 
     private Pane createFifaPane() {
-        AddFifaMatchPane addPane = new AddFifaMatchPane(guiModel);
+        AddFifaMatchAndRecapPane addPane = new AddFifaMatchAndRecapPane(guiModel);
         HistoryMatchesPane histPane = new HistoryMatchesPane(guiModel);
         VBox.setVgrow(histPane, Priority.ALWAYS);
         return createVBox("fifaPane", addPane, histPane);

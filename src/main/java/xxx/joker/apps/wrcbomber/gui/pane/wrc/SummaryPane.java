@@ -13,7 +13,10 @@ import xxx.joker.apps.wrcbomber.stats.StatsUtil;
 import xxx.joker.apps.wrcbomber.stats.WinsStat;
 import xxx.joker.libs.javafx.builder.JfxGridPaneBuilder;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import static xxx.joker.apps.wrcbomber.dl.enums.Player.BOMBER;
 import static xxx.joker.apps.wrcbomber.dl.enums.Player.FEDE;

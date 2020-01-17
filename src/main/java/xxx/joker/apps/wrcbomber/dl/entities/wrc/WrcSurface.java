@@ -4,14 +4,15 @@ import xxx.joker.apps.wrcbomber.dl.entities.JpaEntity;
 import xxx.joker.libs.repo.design.annotation.marker.EntityField;
 import xxx.joker.libs.repo.design.annotation.marker.EntityPK;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
-
-import static xxx.joker.libs.core.util.JkStrings.strf;
 
 @Entity
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"wrcVersion"}),
+        @UniqueConstraint(columnNames = {"primary_ground_jpaid"}),
+        @UniqueConstraint(columnNames = {"secondary_ground_jpaid"})
+})
 public class WrcSurface extends JpaEntity implements Serializable {
 
     @Id

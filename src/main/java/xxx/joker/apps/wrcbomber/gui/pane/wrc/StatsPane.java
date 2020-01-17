@@ -1,15 +1,10 @@
 package xxx.joker.apps.wrcbomber.gui.pane.wrc;
 
-import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcCar;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcRally;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;

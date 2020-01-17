@@ -4,15 +4,16 @@ import xxx.joker.apps.wrcbomber.dl.entities.JpaEntity;
 import xxx.joker.libs.repo.design.annotation.marker.EntityField;
 import xxx.joker.libs.repo.design.annotation.marker.EntityPK;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Objects;
-
-import static xxx.joker.libs.core.util.JkStrings.strf;
 
 @Entity
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"wrcVersion"}),
+        @UniqueConstraint(columnNames = {"GROUND_TYPE_JPAID"}),
+        @UniqueConstraint(columnNames = {"groundPerc"})
+})
 public class WrcGroundMix extends JpaEntity implements Serializable {
 
     @Id
@@ -21,7 +22,6 @@ public class WrcGroundMix extends JpaEntity implements Serializable {
     private long jpaID;
     @EntityPK
     private String wrcVersion;
-
     @NotNull
     @ManyToOne
     @EntityPK

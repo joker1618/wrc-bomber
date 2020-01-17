@@ -4,14 +4,15 @@ import xxx.joker.apps.wrcbomber.dl.entities.JpaEntity;
 import xxx.joker.libs.repo.design.annotation.marker.EntityField;
 import xxx.joker.libs.repo.design.annotation.marker.EntityPK;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
-@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"groundType"})})
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"wrcVersion"}),
+        @UniqueConstraint(columnNames = {"groundType"})
+})
 public class WrcGroundType extends JpaEntity implements Serializable {
 
     @Id

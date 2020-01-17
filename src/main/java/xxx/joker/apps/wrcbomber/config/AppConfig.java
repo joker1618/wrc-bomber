@@ -2,13 +2,10 @@ package xxx.joker.apps.wrcbomber.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import xxx.joker.libs.core.file.JkFiles;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 @Configuration
 public class AppConfig {

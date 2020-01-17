@@ -1,8 +1,5 @@
 package xxx.joker.apps.wrcbomber.dl.entities;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import xxx.joker.libs.repo.design.RepoEntity;
 import xxx.joker.libs.repo.design.SimpleRepoEntity;
 
 public abstract class JpaEntity extends SimpleRepoEntity {

@@ -10,7 +10,6 @@ import xxx.joker.apps.wrcbomber.dl.entities.fifa.FifaMatch;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.*;
 import xxx.joker.apps.wrcbomber.dl.enums.GameType;
 import xxx.joker.apps.wrcbomber.dl.repo.RepoFacade;
-import xxx.joker.libs.core.cache.JkCache;
 
 import java.util.ArrayList;
 import java.util.List;

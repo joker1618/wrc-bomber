@@ -1,12 +1,9 @@
 package xxx.joker.apps.wrcbomber.dl.entities.wrc;
 
-import org.hibernate.annotations.DynamicUpdate;
 import xxx.joker.apps.wrcbomber.dl.entities.JpaEntity;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.libs.repo.design.annotation.directive.NoPrimaryKey;
 import xxx.joker.libs.repo.design.annotation.marker.EntityField;
-import xxx.joker.libs.repo.design.annotation.marker.EntityPK;
-
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

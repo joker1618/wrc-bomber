@@ -8,10 +8,10 @@ import xxx.joker.libs.repo.design.annotation.marker.EntityPK;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"wrcVersion"}),
         @UniqueConstraint(columnNames = {"carModel"})
 })
 public class WrcCar extends JpaEntity implements Serializable {
