@@ -1,4 +1,4 @@
-package xxx.joker.apps.wrcbomber.integration.rest;
+package xxx.joker.apps.wrcbomber.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +22,9 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/repoIntegration")
-public class JkRepoIntegrationController {
+public class WrcIntegrationController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JkRepoIntegrationController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WrcIntegrationController.class);
 
     @Autowired
     private AppConfig config;

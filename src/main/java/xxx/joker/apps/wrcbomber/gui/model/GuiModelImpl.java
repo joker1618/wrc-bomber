@@ -85,6 +85,11 @@ public class GuiModelImpl implements GuiModel {
     }
 
     @Override
+    public List<WrcGroundType> getWrcGroundTypes() {
+        return repoFacade.getWrcGroundTypeRepo().getGroundTypes(labelGame());
+    }
+
+    @Override
     public WrcCar getWrcCarByModel(String carModel) {
         return repoFacade.getWrcCarRepo().findCar(labelGame(), carModel);
     }
@@ -158,6 +163,11 @@ public class GuiModelImpl implements GuiModel {
     @Override
     public SimpleObjectProperty<GameType> selectedGameProperty() {
         return selectedGame;
+    }
+
+    @Override
+    public String selectedGame() {
+        return selectedGame.get() == null ? "" : selectedGame.get().label();
     }
 
     private String labelGame() {

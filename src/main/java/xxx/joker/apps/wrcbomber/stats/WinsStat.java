@@ -4,11 +4,14 @@ public class WinsStat {
 
     private String title;
     private SingleStat winRally;
-    private SingleStat maxRallySerie;
-    private SingleStat actualRallySerie;
     private SingleStat winStage;
-    private SingleStat maxStageSerie;
-    private SingleStat actualStageSerie;
+    private SingleStat winSpecialStage;
+    private SingleStat maxRowRally;
+    private SingleStat actualRowRally;
+    private SingleStat maxRowStage;
+    private SingleStat actualRowStage;
+    private SingleStat maxRowSpecialStage;
+    private SingleStat actualRowSpecialStage;
 
     public WinsStat() {
     }
@@ -21,24 +24,48 @@ public class WinsStat {
         return winRally;
     }
 
+    public SingleStat getWinSpecialStage() {
+        return winSpecialStage;
+    }
+
+    public void setWinSpecialStage(SingleStat winSpecialStage) {
+        this.winSpecialStage = winSpecialStage;
+    }
+
+    public SingleStat getMaxRowSpecialStage() {
+        return maxRowSpecialStage;
+    }
+
+    public void setMaxRowSpecialStage(SingleStat maxRowSpecialStage) {
+        this.maxRowSpecialStage = maxRowSpecialStage;
+    }
+
+    public SingleStat getActualRowSpecialStage() {
+        return actualRowSpecialStage;
+    }
+
+    public void setActualRowSpecialStage(SingleStat actualRowSpecialStage) {
+        this.actualRowSpecialStage = actualRowSpecialStage;
+    }
+
     public void setWinRally(SingleStat winRally) {
         this.winRally = winRally;
     }
 
-    public SingleStat getMaxRallySerie() {
-        return maxRallySerie;
+    public SingleStat getMaxRowRally() {
+        return maxRowRally;
     }
 
-    public void setMaxRallySerie(SingleStat maxRallySerie) {
-        this.maxRallySerie = maxRallySerie;
+    public void setMaxRowRally(SingleStat maxRowRally) {
+        this.maxRowRally = maxRowRally;
     }
 
-    public SingleStat getActualRallySerie() {
-        return actualRallySerie;
+    public SingleStat getActualRowRally() {
+        return actualRowRally;
     }
 
-    public void setActualRallySerie(SingleStat actualRallySerie) {
-        this.actualRallySerie = actualRallySerie;
+    public void setActualRowRally(SingleStat actualRowRally) {
+        this.actualRowRally = actualRowRally;
     }
 
     public SingleStat getWinStage() {
@@ -49,20 +76,20 @@ public class WinsStat {
         this.winStage = winStage;
     }
 
-    public SingleStat getMaxStageSerie() {
-        return maxStageSerie;
+    public SingleStat getMaxRowStage() {
+        return maxRowStage;
     }
 
-    public void setMaxStageSerie(SingleStat maxStageSerie) {
-        this.maxStageSerie = maxStageSerie;
+    public void setMaxRowStage(SingleStat maxRowStage) {
+        this.maxRowStage = maxRowStage;
     }
 
-    public SingleStat getActualStageSerie() {
-        return actualStageSerie;
+    public SingleStat getActualRowStage() {
+        return actualRowStage;
     }
 
-    public void setActualStageSerie(SingleStat actualStageSerie) {
-        this.actualStageSerie = actualStageSerie;
+    public void setActualRowStage(SingleStat actualRowStage) {
+        this.actualRowStage = actualRowStage;
     }
 
     public String getTitle() {

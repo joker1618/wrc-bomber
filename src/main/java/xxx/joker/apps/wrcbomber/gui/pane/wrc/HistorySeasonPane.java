@@ -48,7 +48,7 @@ public class HistorySeasonPane extends BorderPane {
     }
 
     private Pane createHistorySeasonsPane() {
-        VBox vbox = createVBox("historyBox");
+        VBox vbox = createVBox("historyBox spacing10");
         List<TitledPane> tpList = new ArrayList<>();
 
         BooleanBinding bb = Bindings.createBooleanBinding(

@@ -234,8 +234,9 @@ public class LeaguePane extends BorderPane {
             WrcWeather weather = weatherBox.getSelectionModel().getSelectedItem();
             WrcRaceTime time = raceTimeBox.getSelectionModel().getSelectedItem();
 
-            WrcRally rally = new WrcRally(guiModel.selectedGameProperty().get().label());
+            WrcRally rally = new WrcRally(guiModel.selectedGame());
             rally.setCountry(country);
+            rally.setSeasonStart(season.getStartTm());
             rally.setProgrInSeason(season.getRallies().size());
             season.getRallies().add(rally);
 
@@ -243,7 +244,7 @@ public class LeaguePane extends BorderPane {
             AtomicInteger numStage = new AtomicInteger(startStageNumBox.getSelectionModel().getSelectedItem());
             List<WrcStage> stages = guiModel.getWrcStages(country);
             tempMatches.forEach(m -> {
-                m.setWrcVersion(guiModel.selectedGameProperty().get().label());
+                m.setWrcVersion(guiModel.selectedGame());
                 m.setCarFede(car);
                 m.setCarBomber(car);
                 m.setWeather(weather);
@@ -252,13 +253,13 @@ public class LeaguePane extends BorderPane {
                 m.setStage(stages.get(numStage.getAndIncrement() % stages.size()));
             });
             rally.getMatches().addAll(tempMatches);
-            rally.setWinner(StatsUtil.countMatchWins(tempMatches).getWinner());
+            rally.setWinner(StatsUtil.countStageWins(tempMatches).getWinner());
 
             guiModel.saveWrcSeason(season);
             guiModel.runRefreshActions();
         });
         btnSave.disableProperty().bind(Bindings.createBooleanBinding(
-                () -> countryBox.getSelectionModel().getSelectedItem() == null || StatsUtil.countMatchWins(tempMatches).getWinner() == null,
+                () -> countryBox.getSelectionModel().getSelectedItem() == null || StatsUtil.countStageWins(tempMatches).getWinner() == null,
                 countryBox.getSelectionModel().selectedItemProperty(),
                 tempMatches
         ));

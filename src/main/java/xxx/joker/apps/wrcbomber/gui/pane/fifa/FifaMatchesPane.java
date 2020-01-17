@@ -18,15 +18,15 @@ import java.util.Comparator;
 import static xxx.joker.libs.core.util.JkStrings.strf;
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 
-public class HistoryMatchesPane extends BorderPane {
+public class FifaMatchesPane extends BorderPane {
 
-    private static final Logger LOG = LoggerFactory.getLogger(HistoryMatchesPane.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FifaMatchesPane.class);
 
     private final GuiModel guiModel;
 
-    public HistoryMatchesPane(GuiModel guiModel) {
+    public FifaMatchesPane(GuiModel guiModel) {
         this.guiModel = guiModel;
-        getStyleClass().addAll("childPane", "historyMatchesPane");
+        getStyleClass().addAll("childPane", "bpMatches");
 
         Label lblHistMatches = new Label();
         setTop(createHBox("captionBox", lblHistMatches));
@@ -39,7 +39,6 @@ public class HistoryMatchesPane extends BorderPane {
             lblHistMatches.setText(strf("{} - ALL MATCHES", guiModel.selectedGameProperty().get().label()));
             table.getItems().setAll(JkStreams.reverseOrder(guiModel.getFifaMatches(), Comparator.comparingInt(FifaMatch::getMatchCounter)));
         });
-
     }
 
     private JfxTable<FifaMatch> createFifaTableMatches() {

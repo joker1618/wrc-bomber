@@ -14,7 +14,7 @@ public interface WrcCountryRepo extends JpaRepository<WrcCountry, Long> {
     @Query(value = "select c from WrcCountry c where c.wrcVersion = :version AND LOWER(c.name) = LOWER(:countryName)")
     WrcCountry findCountry(@Param("version") String version, @Param("countryName") String countryName);
 
-    @Query(value = "select c from WrcCountry c where c.wrcVersion = :version order by c.numInSeason")
+    @Query(value = "select c from WrcCountry c where c.wrcVersion = :version order by c.name")
     List<WrcCountry> findCountries(@Param("version") String version);
 
 }

@@ -38,52 +38,27 @@ public class SummaryPane extends BorderPane {
         setTop(topBox);
 
         guiModel.addRefreshAction(() -> {
-            lblTitle.setText(strf("{} SUMMARY", guiModel.selectedGameProperty().get().label()));
+            lblTitle.setText(strf("{} SUMMARY", guiModel.selectedGame()));
             setCenter(computeSummaryView(guiModel.getWrcRallies()));
         });
-
-//
-//        JfxGridPaneBuilder builder = new JfxGridPaneBuilder();
-//        builder.add(0, 1, FEDE.name());
-//        builder.add(0, 2, BOMBER.name());
-//
-//        int statNum = 1;
-//        addStatRow(builder, statNum++, "Stage", () -> JkStreams.toMap(guiModel.getWrcMatches(), WrcMatch::getWinner));
-//        addStatRow(builder, statNum++, "Rally", () -> JkStreams.toMap(guiModel.getWrcRallies(), WrcRally::getWinner));
-//        addStatRow(builder, statNum++, "Season", () -> JkStreams.toMap(guiModel.getWrcClosedSeasons(), WrcSeason::getWinner));
-//
-//        setCenter(builder.createGridPane());
 
         getStylesheets().add(getClass().getResource("/css/wrc/summaryPane.css").toExternalForm());
     }
 
     private GridPane computeSummaryView(List<WrcRally> rallies) {
-//        JfxGridPaneBuilder gpBuilder = new JfxGridPaneBuilder();
-//        WinsStat ws = StatsUtil.computeWinsStat(rallies);
-//
-//        int row = 0;
-//        gpBuilder.add(row, 1, Player.FEDE.name());
-//        gpBuilder.add(row, 2, Player.BOMBER.name());
-//
-//        row++;
-//        addStatRow(gpBuilder, row++, ws.getWinRallies(), "Win rally");
-//        addStatRow(gpBuilder, row++, ws.getWinMatches(), "Win stage");
-//        addStatRow(gpBuilder, row++, ws.getMaxRallySerie(), "Max serie rally");
-//        addStatRow(gpBuilder, row++, ws.getActualRallySerie(), "Act serie rally");
-//        addStatRow(gpBuilder, row++, ws.getMaxMatchSerie(), "Max serie match");
-//        addStatRow(gpBuilder, row++, ws.getActualMatchSerie(), "Act serie match");
-//
-//        return gpBuilder.createGridPane();
         JfxGridPaneBuilder gpBuilder = new JfxGridPaneBuilder();
 
         int row = 0;
         gpBuilder.add(row, 1, "Win season");
         gpBuilder.add(row, 2, "Win rally");
         gpBuilder.add(row, 3, "Win stage");
-        gpBuilder.add(row, 4, "Max serie rally");
-        gpBuilder.add(row, 5, "Act serie rally");
-        gpBuilder.add(row, 6, "Max serie stage");
-        gpBuilder.add(row, 7, "Act serie stage");
+        gpBuilder.add(row, 4, "Win s.s.");
+        gpBuilder.add(row, 5, "Max row rally");
+        gpBuilder.add(row, 6, "Act row rally");
+        gpBuilder.add(row, 7, "Max row stage");
+        gpBuilder.add(row, 8, "Act row stage");
+        gpBuilder.add(row, 9, "Max row s.s.");
+        gpBuilder.add(row, 10, "Act row s.s.");
 
         List<WrcRally> rlist = guiModel.getWrcRallies();
         WinsStat ws = StatsUtil.computeWinsStat(rlist);
@@ -95,10 +70,13 @@ public class SummaryPane extends BorderPane {
             gpBuilder.add(row, 1, statLabel(seasonStat, winner));
             gpBuilder.add(row, 2, statLabel(ws.getWinRally(), winner));
             gpBuilder.add(row, 3, statLabel(ws.getWinStage(), winner));
-            gpBuilder.add(row, 4, statLabel(ws.getMaxRallySerie(), winner));
-            gpBuilder.add(row, 5, statLabel(ws.getActualRallySerie(), winner));
-            gpBuilder.add(row, 6, statLabel(ws.getMaxStageSerie(), winner));
-            gpBuilder.add(row, 7, statLabel(ws.getActualStageSerie(), winner));
+            gpBuilder.add(row, 4, statLabel(ws.getWinSpecialStage(), winner));
+            gpBuilder.add(row, 5, statLabel(ws.getMaxRowRally(), winner));
+            gpBuilder.add(row, 6, statLabel(ws.getActualRowRally(), winner));
+            gpBuilder.add(row, 7, statLabel(ws.getMaxRowStage(), winner));
+            gpBuilder.add(row, 8, statLabel(ws.getActualRowStage(), winner));
+            gpBuilder.add(row, 9, statLabel(ws.getMaxRowSpecialStage(), winner));
+            gpBuilder.add(row, 10, statLabel(ws.getActualRowSpecialStage(), winner));
         }
 
         GridPane gp = gpBuilder.createGridPane();

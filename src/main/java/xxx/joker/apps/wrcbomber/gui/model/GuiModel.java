@@ -15,6 +15,7 @@ public interface GuiModel {
     void runRefreshActions();
 
     SimpleObjectProperty<GameType> selectedGameProperty();
+    String selectedGame();
 
     List<Runnable> getAppCloseActions();
 
@@ -28,6 +29,7 @@ public interface GuiModel {
     List<WrcCar> getWrcCars();
     List<WrcWeather> getWrcWeathers();
     List<WrcRaceTime> getWrcRaceTimes();
+    List<WrcGroundType> getWrcGroundTypes();
 
     WrcCar getWrcCarByModel(String carModel);
     WrcWeather getWrcWeatherByName(String weatherName);

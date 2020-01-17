@@ -30,6 +30,7 @@ import static xxx.joker.libs.core.util.JkStrings.splitList;
 
 @RestController
 @RequestMapping("/setup")
+@Deprecated
 public class SetupController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SetupController.class);

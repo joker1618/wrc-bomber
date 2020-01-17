@@ -6,8 +6,7 @@ import xxx.joker.apps.wrcbomber.dl.enums.Player;
 
 import java.util.List;
 
-import static xxx.joker.libs.core.lambda.JkStreams.count;
-import static xxx.joker.libs.core.lambda.JkStreams.flatMap;
+import static xxx.joker.libs.core.lambda.JkStreams.*;
 
 public class StatsUtil {
 
@@ -16,7 +15,7 @@ public class StatsUtil {
         if(stat.getWinner() != null)    return stat.getWinner();
 
         List<WrcMatch> allMatches = flatMap(rallies, WrcRally::getMatches);
-        stat = countMatchWins(allMatches);
+        stat = countStageWins(allMatches);
         if(stat.getWinner() != null)    return stat.getWinner();
 
         Player lastWinner = rallies.get(rallies.size() - 1).getWinner();
@@ -28,28 +27,37 @@ public class StatsUtil {
         List<WrcMatch> matches = flatMap(rallies, WrcRally::getMatches);
 
         ws.setWinRally(countRallyWins(rallies));
-        ws.setWinStage(countMatchWins(matches));
-        ws.setMaxRallySerie(maxRallyWinSerie(rallies));
-        ws.setActualRallySerie(actualRallyWinSerie(rallies));
-        ws.setMaxStageSerie(maxMatchWinSerie(matches));
-        ws.setActualStageSerie(actualMatchWinSerie(matches));
+        ws.setWinStage(countStageWins(matches));
+        ws.setWinSpecialStage(countSpecialStageWins(matches));
+        ws.setMaxRowRally(maxRallyRowWins(rallies));
+        ws.setActualRowRally(actualRallyRowWins(rallies));
+        ws.setMaxRowStage(maxStageRowWins(matches));
+        ws.setActualRowStage(actualStageRowWins(matches));
+        ws.setMaxRowSpecialStage(maxSpecialStageRowWins(matches));
+        ws.setActualRowSpecialStage(actualSpecialStageRowWins(matches));
 
         return ws;
     }
 
     public static SingleStat countRallyWins(List<WrcRally> rallies) {
         int fedeWin = count(rallies, r -> r.getWinner() == Player.FEDE);
-        int bomberWin = rallies.size() - fedeWin;
+        int bomberWin = count(rallies, r -> r.getWinner() == Player.BOMBER);
         return new SingleStat(fedeWin, bomberWin);
     }
 
-    public static SingleStat countMatchWins(List<WrcMatch> matches) {
+    public static SingleStat countStageWins(List<WrcMatch> matches) {
         int fedeWin = count(matches, r -> r.getWinner() == Player.FEDE);
-        int bomberWin = matches.size() - fedeWin;
+        int bomberWin = count(matches, r -> r.getWinner() == Player.BOMBER);
         return new SingleStat(fedeWin, bomberWin);
     }
 
-    public static SingleStat maxRallyWinSerie(List<WrcRally> rallies) {
+    public static SingleStat countSpecialStageWins(List<WrcMatch> matches) {
+        int fedeWin = count(matches, r -> r.getWinner() == Player.FEDE, m -> m.getStage().isSpecialStage());
+        int bomberWin = count(matches, r -> r.getWinner() == Player.BOMBER, m -> m.getStage().isSpecialStage());
+        return new SingleStat(fedeWin, bomberWin);
+    }
+
+    public static SingleStat maxRallyRowWins(List<WrcRally> rallies) {
         int f = 0;
         int fmax = 0;
         int b = 0;
@@ -69,7 +77,7 @@ public class StatsUtil {
         }
         return new SingleStat(fmax, bmax);
     }
-    public static SingleStat actualRallyWinSerie(List<WrcRally> rallies) {
+    public static SingleStat actualRallyRowWins(List<WrcRally> rallies) {
         Player p = null;
         int num = 0;
         for(int i = rallies.size() - 1; i >= 0; i--) {
@@ -88,7 +96,7 @@ public class StatsUtil {
         return new SingleStat(nf, nb);
     }
 
-    public static SingleStat maxMatchWinSerie(List<WrcMatch> matches) {
+    public static SingleStat maxStageRowWins(List<WrcMatch> matches) {
         int f = 0;
         int fmax = 0;
         int b = 0;
@@ -106,11 +114,49 @@ public class StatsUtil {
         }
         return new SingleStat(fmax, bmax);
     }
-    public static SingleStat actualMatchWinSerie(List<WrcMatch> matches) {
+    public static SingleStat actualStageRowWins(List<WrcMatch> matches) {
         Player p = null;
         int num = 0;
         for(int i = matches.size() - 1; i >= 0; i--) {
             Player winner = matches.get(i).getWinner();
+            if(p == null) {
+                p = winner;
+                num++;
+            } else if(p == winner) {
+                num++;
+            } else {
+                break;
+            }
+        }
+        int nf = p == Player.FEDE ? num : -1*num;
+        int nb = p == Player.BOMBER ? num : -1*num;
+        return new SingleStat(nf, nb);
+    }
+
+    public static SingleStat maxSpecialStageRowWins(List<WrcMatch> matches) {
+        int f = 0;
+        int fmax = 0;
+        int b = 0;
+        int bmax = 0;
+        for (WrcMatch match : filter(matches, m -> m.getStage().isSpecialStage())) {
+            if(match.getWinner() == Player.FEDE) {
+                f++;
+                b = 0;
+            } else {
+                b++;
+                f = 0;
+            }
+            if(f > fmax)    fmax = f;
+            if(b > bmax)    bmax = b;
+        }
+        return new SingleStat(fmax, bmax);
+    }
+    public static SingleStat actualSpecialStageRowWins(List<WrcMatch> matches) {
+        Player p = null;
+        int num = 0;
+        List<WrcMatch> spList = filter(matches, m -> m.getStage().isSpecialStage());
+        for(int i = spList.size() - 1; i >= 0; i--) {
+            Player winner = spList.get(i).getWinner();
             if(p == null) {
                 p = winner;
                 num++;

@@ -39,7 +39,7 @@ public class LeagueGridPane extends GridPane {
         int colNum = 1;
         for (WrcRally rally : season.getRallies()) {
             ImageView ivFlag = createFlagImageView(rally.getCountry());
-            SingleStat stat = StatsUtil.countMatchWins(rally.getMatches());
+            SingleStat stat = StatsUtil.countStageWins(rally.getMatches());
             cgrid.add(0, colNum, ivFlag);
             cgrid.add(1, colNum, ""+stat.getNumFede());
             cgrid.add(2, colNum, ""+stat.getNumBomber());
@@ -61,7 +61,7 @@ public class LeagueGridPane extends GridPane {
         cgrid.add(2, colNum, ""+statRallies.getNumBomber());
         colNum++;
 
-        SingleStat statMatches = StatsUtil.countMatchWins(JkStreams.flatMap(season.getRallies(), WrcRally::getMatches));
+        SingleStat statMatches = StatsUtil.countStageWins(JkStreams.flatMap(season.getRallies(), WrcRally::getMatches));
         cgrid.add(0, colNum, "N.S.");
         cgrid.add(1, colNum, ""+statMatches.getNumFede());
         cgrid.add(2, colNum, ""+statMatches.getNumBomber());

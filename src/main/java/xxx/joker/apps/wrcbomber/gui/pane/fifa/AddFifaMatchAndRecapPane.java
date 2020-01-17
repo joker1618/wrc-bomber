@@ -36,7 +36,7 @@ public class AddFifaMatchAndRecapPane extends BorderPane {
         Label lbl = new Label();
         HBox topBox = createHBox("captionBox", lbl);
         setTop(topBox);
-        guiModel.addRefreshAction(() -> lbl.setText(strf("{}  -  ADD MATCH", guiModel.selectedGameProperty().get().label())));
+        guiModel.addRefreshAction(() -> lbl.setText(strf("{}  -  ADD MATCH", guiModel.selectedGame())));
 
         setCenter(createHBox("centerBox", createAddMatchBox(), createRecapPane()));
     }
@@ -80,7 +80,7 @@ public class AddFifaMatchAndRecapPane extends BorderPane {
         ));
         btnSave.setOnAction(e -> {
             int matchCounter = 1 + guiModel.getFifaMatches().stream().mapToInt(FifaMatch::getMatchCounter).max().orElse(0);
-            FifaMatch fifaMatch = new FifaMatch(guiModel.selectedGameProperty().get().label());
+            FifaMatch fifaMatch = new FifaMatch(guiModel.selectedGame());
             fifaMatch.setMatchCounter(matchCounter);
             fifaMatch.setTeamFede(teamFede.getText().trim());
             fifaMatch.setGolFede(Integer.parseInt(golFede.getText().trim()));

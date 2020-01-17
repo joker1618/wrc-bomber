@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface WrcGroundTypeRepo extends JpaRepository<WrcGroundType, Long> {
 
-    @Query(value = "select c from WrcGroundType c where c.wrcVersion = :version")
+    @Query(value = "select c from WrcGroundType c where c.wrcVersion = :version order by c.groundType")
     List<WrcGroundType> getGroundTypes(@Param(value = "version") String version);
 
     @Query(value = "select c from WrcGroundType c where c.wrcVersion = :version AND LOWER(c.groundType) = LOWER(:gtype)")

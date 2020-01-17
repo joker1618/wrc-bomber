@@ -17,12 +17,13 @@ import xxx.joker.apps.wrcbomber.config.AppConfig;
 import xxx.joker.apps.wrcbomber.dl.enums.GameType;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
 import xxx.joker.apps.wrcbomber.gui.pane.fifa.AddFifaMatchAndRecapPane;
-import xxx.joker.apps.wrcbomber.gui.pane.fifa.HistoryMatchesPane;
+import xxx.joker.apps.wrcbomber.gui.pane.fifa.FifaMatchesPane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.HistorySeasonPane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.LeaguePane;
-import xxx.joker.apps.wrcbomber.gui.pane.wrc.StatsPane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.SummaryPane;
+import xxx.joker.apps.wrcbomber.gui.pane.wrc.WrcStatsPane;
 import xxx.joker.apps.wrcbomber.proxies.GitProxy;
+import xxx.joker.apps.wrcbomber.services.StatsComputer;
 
 import javax.annotation.PostConstruct;
 
@@ -43,6 +44,8 @@ public class RootPaneController {
     private GitProxy gitProxy;
     @Autowired
     private GuiModel guiModel;
+    @Autowired
+    private StatsComputer statsComputer;
 
     private ChoiceBox<GameType> choiceGame = new ChoiceBox<>();
 
@@ -125,7 +128,7 @@ public class RootPaneController {
 
     private Pane createFifaPane() {
         AddFifaMatchAndRecapPane addPane = new AddFifaMatchAndRecapPane(guiModel);
-        HistoryMatchesPane histPane = new HistoryMatchesPane(guiModel);
+        FifaMatchesPane histPane = new FifaMatchesPane(guiModel);
         VBox.setVgrow(histPane, Priority.ALWAYS);
         return createVBox("fifaPane", addPane, histPane);
     }
@@ -134,8 +137,7 @@ public class RootPaneController {
         SummaryPane summaryPane = new SummaryPane(guiModel);
         LeaguePane leaguePane = new LeaguePane(guiModel);
         HistorySeasonPane historyPane = new HistorySeasonPane(guiModel);
-        StatsPane statsPane = new StatsPane(guiModel);
+        WrcStatsPane statsPane = new WrcStatsPane(guiModel, statsComputer);
         return createVBox("wrcPane", summaryPane, leaguePane, statsPane, historyPane);
-//        return createVBox("wrcPane", summaryPane, leaguePane, historyPane);
     }
 }
