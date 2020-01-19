@@ -47,6 +47,7 @@ public class WrcIntegrationController {
     /** STEP 1 */
     @GetMapping("exportJpaToRepo")
     public ResponseEntity<String> exportJpaToRepo() {
+        wrcRepo.erase();
         List<WrcCar> cl = repoFacade.getWrcCarRepo().findAll();
         wrcRepo.addAll(cl);
         List<WrcWeather> wl = repoFacade.getWrcWeatherRepo().findAll();
