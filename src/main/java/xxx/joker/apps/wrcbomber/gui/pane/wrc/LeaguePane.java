@@ -26,6 +26,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static xxx.joker.libs.core.util.JkStrings.strf;
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 
 public class LeaguePane extends BorderPane {
@@ -48,7 +49,7 @@ public class LeaguePane extends BorderPane {
     private void createPane() {
         WrcSeason actualSeason = guiModel.getWrcActualSeasons();
 
-        HBox topBox = createHBox("captionBox", new Label("ACTUAL SEASON"));
+        HBox topBox = createHBox("captionBox", new Label(strf("{} ACTUAL SEASON", guiModel.selectedGame())));
         btnCloseSeason = new Button("Close season");
         if(actualSeason != null) {
             btnCloseSeason.setDisable(actualSeason.getRallies().isEmpty());

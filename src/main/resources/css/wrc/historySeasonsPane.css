@@ -1,0 +1,10 @@
+.boxTop {
+    -fx-alignment: CENTER-LEFT;
+    -fx-spacing: 50;
+}
+
+.vboxTitledPanes {
+    -fx-spacing: 10;
+}
+
+

@@ -3,15 +3,16 @@ package xxx.joker.apps.wrcbomber.stats;
 public class WinsStat {
 
     private String title;
+    private SingleStat winSeason;
     private SingleStat winRally;
     private SingleStat winStage;
     private SingleStat winSpecialStage;
     private SingleStat maxRowRally;
-    private SingleStat actualRowRally;
+    private SingleStat trendRally;
     private SingleStat maxRowStage;
-    private SingleStat actualRowStage;
+    private SingleStat trendStage;
     private SingleStat maxRowSpecialStage;
-    private SingleStat actualRowSpecialStage;
+    private SingleStat trendSpecialStage;
 
     public WinsStat() {
     }
@@ -22,6 +23,14 @@ public class WinsStat {
 
     public SingleStat getWinRally() {
         return winRally;
+    }
+
+    public SingleStat getWinSeason() {
+        return winSeason;
+    }
+
+    public void setWinSeason(SingleStat winSeason) {
+        this.winSeason = winSeason;
     }
 
     public SingleStat getWinSpecialStage() {
@@ -40,12 +49,12 @@ public class WinsStat {
         this.maxRowSpecialStage = maxRowSpecialStage;
     }
 
-    public SingleStat getActualRowSpecialStage() {
-        return actualRowSpecialStage;
+    public SingleStat getTrendSpecialStage() {
+        return trendSpecialStage;
     }
 
-    public void setActualRowSpecialStage(SingleStat actualRowSpecialStage) {
-        this.actualRowSpecialStage = actualRowSpecialStage;
+    public void setTrendSpecialStage(SingleStat trendSpecialStage) {
+        this.trendSpecialStage = trendSpecialStage;
     }
 
     public void setWinRally(SingleStat winRally) {
@@ -60,12 +69,12 @@ public class WinsStat {
         this.maxRowRally = maxRowRally;
     }
 
-    public SingleStat getActualRowRally() {
-        return actualRowRally;
+    public SingleStat getTrendRally() {
+        return trendRally;
     }
 
-    public void setActualRowRally(SingleStat actualRowRally) {
-        this.actualRowRally = actualRowRally;
+    public void setTrendRally(SingleStat trendRally) {
+        this.trendRally = trendRally;
     }
 
     public SingleStat getWinStage() {
@@ -84,12 +93,12 @@ public class WinsStat {
         this.maxRowStage = maxRowStage;
     }
 
-    public SingleStat getActualRowStage() {
-        return actualRowStage;
+    public SingleStat getTrendStage() {
+        return trendStage;
     }
 
-    public void setActualRowStage(SingleStat actualRowStage) {
-        this.actualRowStage = actualRowStage;
+    public void setTrendStage(SingleStat trendStage) {
+        this.trendStage = trendStage;
     }
 
     public String getTitle() {

@@ -3,13 +3,17 @@ package xxx.joker.apps.wrcbomber.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.*;
+import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
+import xxx.joker.apps.wrcbomber.stats.SingleStat;
 import xxx.joker.apps.wrcbomber.stats.StatsUtil;
 import xxx.joker.apps.wrcbomber.stats.WinsStat;
 
 import java.util.*;
 import java.util.function.Function;
 
+import static xxx.joker.apps.wrcbomber.dl.enums.Player.BOMBER;
+import static xxx.joker.apps.wrcbomber.dl.enums.Player.FEDE;
 import static xxx.joker.libs.core.lambda.JkStreams.filter;
 import static xxx.joker.libs.core.lambda.JkStreams.toMap;
 
@@ -18,6 +22,15 @@ public class StatsComputerImpl implements StatsComputer {
 
     @Autowired
     private GuiModel guiModel;
+
+    @Override
+    public WinsStat computeStatsSummary() {
+        WinsStat ws = StatsUtil.computeWinsStat(guiModel.getWrcRallies());
+        Map<Player, List<WrcSeason>> map = toMap(guiModel.getWrcClosedSeasons(), WrcSeason::getWinner);
+        SingleStat seasonStat = new SingleStat(map.getOrDefault(FEDE, Collections.emptyList()).size(), map.getOrDefault(BOMBER, Collections.emptyList()).size());
+        ws.setWinSeason(seasonStat);
+        return ws;
+    }
 
     @Override
     public List<WinsStat> computeStatsByCar() {
@@ -59,11 +72,11 @@ public class StatsComputerImpl implements StatsComputer {
             ws.setWinStage(StatsUtil.countStageWins(matches));
             ws.setWinSpecialStage(StatsUtil.countStageWins(specials));
             ws.setMaxRowRally(StatsUtil.maxRallyRowWins(rallies));
-            ws.setActualRowRally(StatsUtil.actualRallyRowWins(rallies));
+            ws.setTrendRally(StatsUtil.actualRallyRowWins(rallies));
             ws.setMaxRowStage(StatsUtil.maxStageRowWins(matches));
-            ws.setActualRowStage(StatsUtil.actualStageRowWins(matches));
+            ws.setTrendStage(StatsUtil.actualStageRowWins(matches));
             ws.setMaxRowSpecialStage(StatsUtil.maxStageRowWins(specials));
-            ws.setActualRowSpecialStage(StatsUtil.actualStageRowWins(specials));
+            ws.setTrendSpecialStage(StatsUtil.actualStageRowWins(specials));
             wsList.add(ws);
         }
         return wsList;

@@ -18,13 +18,13 @@ import java.util.Comparator;
 import static xxx.joker.libs.core.util.JkStrings.strf;
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 
-public class FifaStatssPane extends BorderPane {
+public class FifaStatsPane extends BorderPane {
 
-    private static final Logger LOG = LoggerFactory.getLogger(FifaStatssPane.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FifaStatsPane.class);
 
     private final GuiModel guiModel;
 
-    public FifaStatssPane(GuiModel guiModel) {
+    public FifaStatsPane(GuiModel guiModel) {
         this.guiModel = guiModel;
         getStyleClass().addAll("childPane", "bpMatches");
 
@@ -36,7 +36,7 @@ public class FifaStatssPane extends BorderPane {
         setCenter(boxTable);
 
         guiModel.addRefreshAction(() -> {
-            lblStats.setText(strf("{} - STATS", guiModel.selectedGameProperty().get().label()));
+            lblStats.setText(strf("{} - STATS", guiModel.selectedGame()));
             table.getItems().setAll(JkStreams.reverseOrder(guiModel.getFifaMatches(), Comparator.comparingInt(FifaMatch::getMatchCounter)));
         });
     }
@@ -49,7 +49,7 @@ public class FifaStatssPane extends BorderPane {
         JfxTableCol<FifaMatch, String> colTeamFede = JfxTableCol.createCol("TEAM FEDE", "teamFede");
         JfxTableCol<FifaMatch, String> colTeamBomber = JfxTableCol.createCol("TEAM BOMBER", "teamBomber");
         JfxTableCol<FifaMatch, String> colWinner = JfxTableCol.createCol("WINNER", FifaMatch::strWinner);
-        JfxTableCol<FifaMatch, LocalDateTime> colTime = JfxTableCol.createCol("MATCH TIME", "matchTime", m -> m.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), "centered");
+        JfxTableCol<FifaMatch, LocalDateTime> colTime = JfxTableCol.createCol("MATCH TIME", "matchTime", m -> m.format(DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm")), "centered");
         table.addColumn(colNum, colTeamFede, golFede, golBomber, colTeamBomber, colWinner, colTime);
         table.setWidths(30, 65, 150, 70, 70, 150, 100, 150);
         return table;

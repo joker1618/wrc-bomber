@@ -17,6 +17,7 @@ import xxx.joker.apps.wrcbomber.services.StatsComputer;
 import xxx.joker.apps.wrcbomber.stats.SingleStat;
 import xxx.joker.apps.wrcbomber.stats.StatsUtil;
 import xxx.joker.apps.wrcbomber.stats.WinsStat;
+import xxx.joker.apps.wrcbomber.util.WrcUtil;
 import xxx.joker.libs.javafx.builder.JfxGridPaneBuilder;
 import xxx.joker.libs.javafx.tableview.JfxTable;
 import xxx.joker.libs.javafx.tableview.JfxTableCol;
@@ -25,9 +26,11 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static xxx.joker.apps.wrcbomber.util.WrcUtil.signedNum;
 import static xxx.joker.libs.core.lambda.JkStreams.mapUniq;
 import static xxx.joker.libs.core.lambda.JkStreams.toMap;
 import static xxx.joker.libs.core.util.JkConsole.display;
+import static xxx.joker.libs.core.util.JkStrings.strf;
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 import static xxx.joker.libs.javafx.util.JfxControls.createVBox;
 
@@ -36,50 +39,96 @@ public class WrcStatsPane extends BorderPane {
     private final GuiModel guiModel;
     private final StatsComputer statsComputer;
 
+    private final Button btnExpandAll;
+
     public WrcStatsPane(GuiModel guiModel, StatsComputer statsComputer) {
         this.guiModel = guiModel;
         this.statsComputer = statsComputer;
         getStyleClass().addAll("childPane", "statsPane");
+        getStylesheets().add(getClass().getResource("/css/wrc/statsPane.css").toExternalForm());
 
-        Button btnExpandAll = new Button("EXPAND ALL");
-        HBox lblBox = createHBox("captionBox", new Label("STATS"));
-        setTop(createHBox("center-left spacing40", lblBox, btnExpandAll));
+        this.btnExpandAll = new Button("EXPAND ALL");
+        Label lblCaption = new Label();
+        HBox lblBox = createHBox("captionBox", lblCaption);
+        setTop(createHBox("boxTop", lblBox, btnExpandAll));
+        guiModel.addRefreshAction(() -> lblCaption.setText(strf("{} STATS", guiModel.selectedGame())));
 
-        VBox vbox = createVBox("statsVBox");
-        vbox.getChildren().add(createTitledPane("Win by car", statsComputer::computeStatsByCar));
-        vbox.getChildren().add(createTitledPane("Win by country", statsComputer::computeStatsByCountry));
-        vbox.getChildren().add(createTitledPane("Win by ground", statsComputer::computeStatsByPrimaryGround));
+        VBox vbox = createTitledPanesVBox();
         setCenter(vbox);
+    }
 
+    private VBox createTitledPanesVBox() {
+        VBox vbox = createVBox("vboxTitledPanes");
+        List<Pair<String, Supplier<List<WinsStat>>>> pairs = Arrays.asList(
+                Pair.of("Win by car", statsComputer::computeStatsByCar),
+                Pair.of("Win by country", statsComputer::computeStatsByCountry),
+                Pair.of("Win by ground", statsComputer::computeStatsByPrimaryGround)
+        );
+
+        List<TitledPane> tpList = new ArrayList<>();
         BooleanBinding bb = Bindings.createBooleanBinding(
                 () -> {
-                    List<Boolean> list = mapUniq(vbox.getChildren(), ch -> ((TitledPane)ch).isExpanded());
+                    List<Boolean> list = mapUniq(tpList, TitledPane::isExpanded);
                     return !list.contains(false);
                 }
         );
-        for (Node child : vbox.getChildren()) {
-            TitledPane tp = (TitledPane) child;
+
+        // Legend
+        TitledPane tpLegend = createLegendTitledPane();
+        tpLegend.setExpanded(false);
+        bb = bb.and(tpLegend.expandedProperty());
+        tpList.add(tpLegend);
+        vbox.getChildren().add(tpLegend);
+
+        // Stats
+        for (Pair<String, Supplier<List<WinsStat>>> pair : pairs) {
+            TitledPane tp = createTitledPane(pair.getLeft(), pair.getRight());
             tp.setExpanded(false);
             bb = bb.and(tp.expandedProperty());
+            tpList.add(tp);
+            vbox.getChildren().add(tp);
         }
+
         BooleanBinding bbFinal = bb;
         bbFinal.addListener((obs,o,n) -> btnExpandAll.setText(n ? "CLOSE ALL" : "EXPAND ALL"));
         btnExpandAll.setOnAction(e -> {
             boolean allExpanded = bbFinal.getValue();
-            vbox.getChildren().forEach(tp -> ((TitledPane)tp).setExpanded(!allExpanded));
+            tpList.forEach(tp -> tp.setExpanded(!allExpanded));
         });
 
-        getStylesheets().add(getClass().getResource("/css/wrc/statsPane.css").toExternalForm());
+        return vbox;
     }
 
-//    private BorderPane createStatsPane(String viewTitle, Supplier<List<WinsStat>> supplier) {
-//        HBox topBox = createHBox("view-caption", new Label(viewTitle));
-//        BorderPane bp = new BorderPane();
-//        bp.getStyleClass().add("bp-stats-view");
-//        bp.setTop(topBox);
-//        bp.setCenter(createBoxTables(supplier));
-//        return bp;
-//    }
+    private TitledPane createLegendTitledPane() {
+        JfxGridPaneBuilder gpBuilder = new JfxGridPaneBuilder();
+
+        int col = 0;
+        gpBuilder.add(0, col, "WR:");
+        gpBuilder.add(0, col + 1, "rally wins");
+        gpBuilder.add(1, col, "WS:");
+        gpBuilder.add(1, col + 1, "stage wins");
+        gpBuilder.add(2, col, "WSp:");
+        gpBuilder.add(2, col + 1, "special stage wins");
+
+        col += 2;
+        gpBuilder.add(0, col, "MaxR:");
+        gpBuilder.add(0, col + 1, "max rally wins in a row");
+        gpBuilder.add(1, col, "MaxS:");
+        gpBuilder.add(1, col + 1, "max stage wins in a row");
+        gpBuilder.add(2, col, "MaxSp:");
+        gpBuilder.add(2, col + 1, "max special stage wins in a row");
+
+        col += 2;
+        gpBuilder.add(0, col, "TrR:");
+        gpBuilder.add(0, col + 1, "actual rally wins trend");
+        gpBuilder.add(1, col, "TrS:");
+        gpBuilder.add(1, col + 1, "actual stage wins trend");
+        gpBuilder.add(2, col, "TrSp:");
+        gpBuilder.add(2, col + 1, "actual special stage wins trend");
+
+        GridPane gp = gpBuilder.createGridPane("gpLegend");
+        return new TitledPane("Legend", gp);
+    }
 
     private TitledPane createTitledPane(String viewTitle, Supplier<List<WinsStat>> supplier) {
         JfxTable<WinsStat> tableFede = createStatTable(Player.FEDE);
@@ -99,36 +148,19 @@ public class WrcStatsPane extends BorderPane {
         return new TitledPane(viewTitle, hBox);
     }
 
-//    private HBox createBoxTables(Supplier<List<WinsStat>> supplier) {
-//        JfxTable<WinsStat> tableFede = createStatTable(Player.FEDE);
-//        JfxTable<WinsStat> tableBomber = createStatTable(Player.BOMBER);
-//        HBox boxFede = createHBox("stats-table-box", tableFede);
-//        HBox boxBomber = createHBox("stats-table-box", tableBomber);
-//
-//        guiModel.addRefreshAction(() -> {
-//            List<WinsStat> wsList = supplier.get();
-//            tableFede.getItems().setAll(wsList);
-//            tableBomber.getItems().setAll(wsList);
-//            tableFede.refreshHeight();
-//            tableBomber.refreshHeight();
-//        });
-//
-//        return createHBox("stats car-stats", boxFede, boxBomber);
-//    }
-
     private JfxTable<WinsStat> createStatTable(Player player) {
         JfxTableCol<WinsStat, String> colTitle = JfxTableCol.createCol(player.name(), "title");
-        JfxTableCol<WinsStat, SingleStat> colWinRally = JfxTableCol.createCol("WR", "winRally", stat -> ""+stat.getNum(player));
-        JfxTableCol<WinsStat, SingleStat> colWinStage = JfxTableCol.createCol("WS", "winStage", stat -> ""+stat.getNum(player));
-        JfxTableCol<WinsStat, SingleStat> colWinSpecialStage = JfxTableCol.createCol("WSp", "winSpecialStage", stat -> ""+stat.getNum(player));
-        JfxTableCol<WinsStat, SingleStat> colMaxRowRally = JfxTableCol.createCol("MrR", "maxRowRally", stat -> ""+stat.getNum(player));
-        JfxTableCol<WinsStat, SingleStat> colActualRowRally = JfxTableCol.createCol("ArR", "actualRowRally", stat -> ""+stat.getNum(player));
-        JfxTableCol<WinsStat, SingleStat> colMaxRowStage = JfxTableCol.createCol("MrS", "maxRowStage", stat -> ""+stat.getNum(player));
-        JfxTableCol<WinsStat, SingleStat> colActualRowStage = JfxTableCol.createCol("ArS", "actualRowStage", stat -> ""+stat.getNum(player));
-        JfxTableCol<WinsStat, SingleStat> colMaxRowSpecialStage = JfxTableCol.createCol("MrSp", "maxRowSpecialStage", stat -> ""+stat.getNum(player));
-        JfxTableCol<WinsStat, SingleStat> colActualRowSpecialStage = JfxTableCol.createCol("ArSp", "actualRowSpecialStage", stat -> ""+stat.getNum(player));
+        JfxTableCol<WinsStat, SingleStat> colWinRally = JfxTableCol.createCol("WR", "winRally");
+        JfxTableCol<WinsStat, SingleStat> colWinStage = JfxTableCol.createCol("WS", "winStage");
+        JfxTableCol<WinsStat, SingleStat> colWinSpecialStage = JfxTableCol.createCol("WSp", "winSpecialStage");
+        JfxTableCol<WinsStat, SingleStat> colMaxRowRally = JfxTableCol.createCol("MaxR", "maxRowRally");
+        JfxTableCol<WinsStat, SingleStat> colTrendRally = JfxTableCol.createCol("TrR", "trendRally");
+        JfxTableCol<WinsStat, SingleStat> colMaxRowStage = JfxTableCol.createCol("MaxS", "maxRowStage");
+        JfxTableCol<WinsStat, SingleStat> colTrendStage = JfxTableCol.createCol("TrS", "trendStage");
+        JfxTableCol<WinsStat, SingleStat> colMaxRowSpecialStage = JfxTableCol.createCol("MaxSp", "maxRowSpecialStage");
+        JfxTableCol<WinsStat, SingleStat> colTrendSpecialStage = JfxTableCol.createCol("TrSp", "trendSpecialStage");
 
-        Arrays.asList(colWinRally, colWinStage, colWinSpecialStage, colMaxRowRally, colActualRowRally, colMaxRowStage, colActualRowStage, colMaxRowSpecialStage, colActualRowSpecialStage).forEach(
+        Arrays.asList(colWinRally, colWinStage, colWinSpecialStage, colMaxRowRally, colTrendRally, colMaxRowStage, colTrendStage, colMaxRowSpecialStage, colTrendSpecialStage).forEach(
                 col -> {
                     col.setComparator(Comparator.comparing(ws -> ws.getNum(player)));
                     col.getStyleClass().add("centered");
@@ -141,7 +173,7 @@ public class WrcStatsPane extends BorderPane {
                             if (item == null || empty) {
                                 setText(null);
                             } else {
-                                setText(item.getNum(player)+"");
+                                setText(""+item.getNum(player));
 
                                 // If index is two we set the background color explicitly.
                                 if (item.getWinner() == null) {
@@ -158,12 +190,12 @@ public class WrcStatsPane extends BorderPane {
         );
 
         JfxTable<WinsStat> table = new JfxTable<>();
-        table.addColumn(colTitle, colWinRally, colWinStage, colMaxRowRally, colActualRowRally, colMaxRowStage, colActualRowStage, colMaxRowSpecialStage, colActualRowSpecialStage);
+        table.addColumn(colTitle, colWinRally, colWinStage, colWinSpecialStage, colMaxRowRally, colTrendRally, colMaxRowStage, colTrendStage, colMaxRowSpecialStage, colTrendSpecialStage);
 
         table.setRowHeight(30, 25);
         int wcol = 70;
         table.setWidths(30, 200, wcol, wcol, wcol, wcol, wcol, wcol, wcol, wcol, wcol);
-        table.setNumElemVisible(20);
+        table.setMaxElemVisible(20);
 
         return table;
     }

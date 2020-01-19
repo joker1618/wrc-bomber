@@ -55,7 +55,7 @@ public class GuiLauncher extends Application {
         rootNode.prefWidthProperty().bind(Bindings.createDoubleBinding(() -> scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
         rootNode.prefHeightProperty().bind(Bindings.createDoubleBinding(() -> scrollPane.getViewportBounds().getHeight(), scrollPane.viewportBoundsProperty()));
 
-        Scene scene = new Scene(scrollPane);
+        Scene scene = new Scene(scrollPane, 1000, 600);
         stage.setScene(scene);
         stage.setTitle("WRC BOMBER");
 //        stage.sizeToScene();

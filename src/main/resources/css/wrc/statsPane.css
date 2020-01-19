@@ -1,6 +1,7 @@
-.statsVBox {
+.vboxTitledPanes {
     -fx-spacing: 10;
 }
+
 .stats {
     -fx-spacing: 50;
 }
@@ -9,5 +10,21 @@
     -fgColorHover: BLUE;
 }
 
+.boxTop {
+    -fx-alignment: CENTER-LEFT;
+    -fx-spacing: 50;
+}
 
-
+.gpLegend .col-odd {
+    -fx-padding: 3 10 3 10;
+    -fx-alignment: CENTER-LEFT;
+    -fx-font-weight: BOLD;
+}
+.gpLegend .col-odd.col-middle {
+    -fx-padding: 3 10 3 100;
+}
+.gpLegend .col-even {
+    -fx-padding: 3 10 3 0;
+    -fx-alignment: CENTER-LEFT;
+    -fx-font-size: 14;
+}

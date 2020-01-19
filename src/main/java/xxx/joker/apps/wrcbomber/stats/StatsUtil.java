@@ -30,11 +30,11 @@ public class StatsUtil {
         ws.setWinStage(countStageWins(matches));
         ws.setWinSpecialStage(countSpecialStageWins(matches));
         ws.setMaxRowRally(maxRallyRowWins(rallies));
-        ws.setActualRowRally(actualRallyRowWins(rallies));
+        ws.setTrendRally(actualRallyRowWins(rallies));
         ws.setMaxRowStage(maxStageRowWins(matches));
-        ws.setActualRowStage(actualStageRowWins(matches));
+        ws.setTrendStage(actualStageRowWins(matches));
         ws.setMaxRowSpecialStage(maxSpecialStageRowWins(matches));
-        ws.setActualRowSpecialStage(actualSpecialStageRowWins(matches));
+        ws.setTrendSpecialStage(actualSpecialStageRowWins(matches));
 
         return ws;
     }

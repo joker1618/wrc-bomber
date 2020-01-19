@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +15,7 @@ import xxx.joker.apps.wrcbomber.dl.enums.GameType;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
 import xxx.joker.apps.wrcbomber.gui.pane.fifa.AddFifaMatchAndRecapPane;
 import xxx.joker.apps.wrcbomber.gui.pane.fifa.FifaMatchesPane;
-import xxx.joker.apps.wrcbomber.gui.pane.wrc.HistorySeasonPane;
+import xxx.joker.apps.wrcbomber.gui.pane.wrc.HistorySeasonsPane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.LeaguePane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.SummaryPane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.WrcStatsPane;
@@ -123,7 +120,7 @@ public class RootPaneController {
             Platform.exit();
         });
         
-        return createHBox("childPane topBox", choiceGame, btnUpdate, btnPush);
+        return createHBox("childPane menuBox", choiceGame, btnUpdate, btnPush);
     }
 
     private Pane createFifaPane() {
@@ -134,9 +131,9 @@ public class RootPaneController {
     }
 
     private Pane createWrcPane() {
-        SummaryPane summaryPane = new SummaryPane(guiModel);
+        SummaryPane summaryPane = new SummaryPane(guiModel, statsComputer);
         LeaguePane leaguePane = new LeaguePane(guiModel);
-        HistorySeasonPane historyPane = new HistorySeasonPane(guiModel);
+        HistorySeasonsPane historyPane = new HistorySeasonsPane(guiModel);
         WrcStatsPane statsPane = new WrcStatsPane(guiModel, statsComputer);
         return createVBox("wrcPane", summaryPane, leaguePane, statsPane, historyPane);
     }

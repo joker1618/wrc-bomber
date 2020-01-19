@@ -21,23 +21,24 @@ import static xxx.joker.libs.core.util.JkStrings.strf;
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 import static xxx.joker.libs.javafx.util.JfxControls.createVBox;
 
-public class HistorySeasonPane extends BorderPane {
+public class HistorySeasonsPane extends BorderPane {
 
     private final GuiModel guiModel;
 
     private final List<WrcSeason> seasons;
     private final Button btnExpandAll = new Button("EXPAND ALL");
 
-    public HistorySeasonPane(GuiModel guiModel) {
+    public HistorySeasonsPane(GuiModel guiModel) {
         this.guiModel = guiModel;
         this.seasons = new ArrayList<>();
         getStyleClass().addAll("childPane");
         guiModel.addRefreshAction(this::initPane);
+        getStylesheets().add(getClass().getResource("/css/wrc/historySeasonsPane.css").toExternalForm());
     }
 
     private void initPane() {
-        HBox lblBox = createHBox("captionBox", new Label("HISTORY SEASONS"));
-        setTop(createHBox("center-left spacing40", lblBox, btnExpandAll));
+        HBox lblBox = createHBox("captionBox", new Label(strf("{} HISTORY SEASONS", guiModel.selectedGame())));
+        setTop(createHBox("boxTop", lblBox, btnExpandAll));
 
         List<WrcSeason> closedSeasons = guiModel.getWrcClosedSeasons();
         if(closedSeasons.size() != seasons.size()) {
@@ -48,7 +49,7 @@ public class HistorySeasonPane extends BorderPane {
     }
 
     private Pane createHistorySeasonsPane() {
-        VBox vbox = createVBox("historyBox spacing10");
+        VBox vbox = createVBox("vboxTitledPanes");
         List<TitledPane> tpList = new ArrayList<>();
 
         BooleanBinding bb = Bindings.createBooleanBinding(

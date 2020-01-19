@@ -4,19 +4,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcRally;
-import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcSeason;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
+import xxx.joker.apps.wrcbomber.services.StatsComputer;
 import xxx.joker.apps.wrcbomber.stats.SingleStat;
-import xxx.joker.apps.wrcbomber.stats.StatsUtil;
 import xxx.joker.apps.wrcbomber.stats.WinsStat;
 import xxx.joker.libs.javafx.builder.JfxGridPaneBuilder;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 import static xxx.joker.apps.wrcbomber.dl.enums.Player.BOMBER;
 import static xxx.joker.apps.wrcbomber.dl.enums.Player.FEDE;
@@ -27,9 +22,11 @@ import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 public class SummaryPane extends BorderPane {
 
     private final GuiModel guiModel;
+    private final StatsComputer statsComputer;
 
-    public SummaryPane(GuiModel guiModel) {
+    public SummaryPane(GuiModel guiModel, StatsComputer statsComputer) {
         this.guiModel = guiModel;
+        this.statsComputer = statsComputer;
 
         getStyleClass().addAll("childPane", "summaryPane");
 
@@ -39,13 +36,13 @@ public class SummaryPane extends BorderPane {
 
         guiModel.addRefreshAction(() -> {
             lblTitle.setText(strf("{} SUMMARY", guiModel.selectedGame()));
-            setCenter(computeSummaryView(guiModel.getWrcRallies()));
+            setCenter(computeSummaryView());
         });
 
         getStylesheets().add(getClass().getResource("/css/wrc/summaryPane.css").toExternalForm());
     }
 
-    private GridPane computeSummaryView(List<WrcRally> rallies) {
+    private GridPane computeSummaryView() {
         JfxGridPaneBuilder gpBuilder = new JfxGridPaneBuilder();
 
         int row = 0;
@@ -60,23 +57,20 @@ public class SummaryPane extends BorderPane {
         gpBuilder.add(row, 9, "Max row s.s.");
         gpBuilder.add(row, 10, "Act row s.s.");
 
-        List<WrcRally> rlist = guiModel.getWrcRallies();
-        WinsStat ws = StatsUtil.computeWinsStat(rlist);
-        Map<Player, List<WrcSeason>> map = toMap(guiModel.getWrcClosedSeasons(), WrcSeason::getWinner);
-        SingleStat seasonStat = new SingleStat(map.getOrDefault(FEDE, Collections.emptyList()).size(), map.getOrDefault(BOMBER, Collections.emptyList()).size());
+        WinsStat ws = statsComputer.computeStatsSummary();
         for (Player winner : Arrays.asList(FEDE, BOMBER)) {
             row++;
             gpBuilder.add(row, 0, winner.name());
-            gpBuilder.add(row, 1, statLabel(seasonStat, winner));
+            gpBuilder.add(row, 1, statLabel(ws.getWinSeason(), winner));
             gpBuilder.add(row, 2, statLabel(ws.getWinRally(), winner));
             gpBuilder.add(row, 3, statLabel(ws.getWinStage(), winner));
             gpBuilder.add(row, 4, statLabel(ws.getWinSpecialStage(), winner));
             gpBuilder.add(row, 5, statLabel(ws.getMaxRowRally(), winner));
-            gpBuilder.add(row, 6, statLabel(ws.getActualRowRally(), winner));
+            gpBuilder.add(row, 6, statLabel(ws.getTrendRally(), winner));
             gpBuilder.add(row, 7, statLabel(ws.getMaxRowStage(), winner));
-            gpBuilder.add(row, 8, statLabel(ws.getActualRowStage(), winner));
+            gpBuilder.add(row, 8, statLabel(ws.getTrendStage(), winner));
             gpBuilder.add(row, 9, statLabel(ws.getMaxRowSpecialStage(), winner));
-            gpBuilder.add(row, 10, statLabel(ws.getActualRowSpecialStage(), winner));
+            gpBuilder.add(row, 10, statLabel(ws.getTrendSpecialStage(), winner));
         }
 
         GridPane gp = gpBuilder.createGridPane();

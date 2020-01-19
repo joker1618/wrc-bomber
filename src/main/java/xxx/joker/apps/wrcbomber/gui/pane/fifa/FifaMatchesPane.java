@@ -36,8 +36,9 @@ public class FifaMatchesPane extends BorderPane {
         setCenter(boxTable);
 
         guiModel.addRefreshAction(() -> {
-            lblHistMatches.setText(strf("{} - ALL MATCHES", guiModel.selectedGameProperty().get().label()));
+            lblHistMatches.setText(strf("{} - ALL MATCHES", guiModel.selectedGame()));
             table.getItems().setAll(JkStreams.reverseOrder(guiModel.getFifaMatches(), Comparator.comparingInt(FifaMatch::getMatchCounter)));
+            table.refreshHeight();
         });
     }
 
@@ -49,9 +50,11 @@ public class FifaMatchesPane extends BorderPane {
         JfxTableCol<FifaMatch, String> colTeamFede = JfxTableCol.createCol("TEAM FEDE", "teamFede");
         JfxTableCol<FifaMatch, String> colTeamBomber = JfxTableCol.createCol("TEAM BOMBER", "teamBomber");
         JfxTableCol<FifaMatch, String> colWinner = JfxTableCol.createCol("WINNER", FifaMatch::strWinner);
-        JfxTableCol<FifaMatch, LocalDateTime> colTime = JfxTableCol.createCol("MATCH TIME", "matchTime", m -> m.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), "centered");
+        JfxTableCol<FifaMatch, LocalDateTime> colTime = JfxTableCol.createCol("MATCH TIME", "matchTime", m -> m.format(DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm")), "centered");
         table.addColumn(colNum, colTeamFede, golFede, golBomber, colTeamBomber, colWinner, colTime);
         table.setWidths(30, 65, 150, 70, 70, 150, 100, 150);
+        table.setRowHeight(28, 25);
+        table.setMaxElemVisible(20);
         return table;
     }
 
