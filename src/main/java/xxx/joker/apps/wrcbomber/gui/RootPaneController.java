@@ -1,12 +1,10 @@
 package xxx.joker.apps.wrcbomber.gui;
 
-import com.sun.org.apache.bcel.internal.generic.DLOAD;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +23,9 @@ import xxx.joker.apps.wrcbomber.gui.pane.wrc.WrcStatsPane;
 import xxx.joker.apps.wrcbomber.proxies.GitProxy;
 import xxx.joker.apps.wrcbomber.services.FifaStatsComputer;
 import xxx.joker.apps.wrcbomber.services.WrcStatsComputer;
-import xxx.joker.libs.core.test.JkTests;
 import xxx.joker.libs.core.util.JkConvert;
-import xxx.joker.libs.javafx.util.JfxControls;
 
 import javax.annotation.PostConstruct;
-
 import java.util.Optional;
 import java.util.Random;
 

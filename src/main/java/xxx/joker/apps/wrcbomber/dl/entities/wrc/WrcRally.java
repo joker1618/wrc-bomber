@@ -1,21 +1,16 @@
 package xxx.joker.apps.wrcbomber.dl.entities.wrc;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import xxx.joker.apps.wrcbomber.dl.entities.JpaEntity;
-import xxx.joker.apps.wrcbomber.dl.enums.GameType;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
-import xxx.joker.libs.core.lambda.JkStreams;
 import xxx.joker.libs.repo.design.annotation.directive.NoPrimaryKey;
 import xxx.joker.libs.repo.design.annotation.marker.EntityField;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
-import static xxx.joker.libs.core.lambda.JkStreams.*;
+import static xxx.joker.libs.core.lambda.JkStreams.reverseOrder;
 
 @Entity
 @Table(uniqueConstraints={

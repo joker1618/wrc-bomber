@@ -1,9 +1,6 @@
 package xxx.joker.apps.wrcbomber.setup;
 
 import org.junit.Test;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcCar;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcRally;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcSeason;
 import xxx.joker.apps.wrcbomber.integration.model.WrcRepo;

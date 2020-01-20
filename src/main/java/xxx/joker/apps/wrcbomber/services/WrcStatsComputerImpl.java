@@ -2,12 +2,10 @@ package xxx.joker.apps.wrcbomber.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xxx.joker.apps.wrcbomber.dl.entities.fifa.FifaMatch;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.*;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
 import xxx.joker.apps.wrcbomber.stats.SingleStat;
-import xxx.joker.apps.wrcbomber.stats.fifa.FifaWinStat;
 import xxx.joker.apps.wrcbomber.stats.wrc.WrcStatsUtil;
 import xxx.joker.apps.wrcbomber.stats.wrc.WrcWinsStat;
 

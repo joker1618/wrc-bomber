@@ -14,14 +14,8 @@ import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
 import xxx.joker.apps.wrcbomber.services.FifaStatsComputer;
 import xxx.joker.apps.wrcbomber.stats.fifa.FifaWinStat;
-import xxx.joker.libs.core.lambda.JkStreams;
 import xxx.joker.libs.core.test.JkTests;
 import xxx.joker.libs.javafx.builder.JfxGridPaneBuilder;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 import static xxx.joker.libs.core.util.JkStrings.strf;
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;

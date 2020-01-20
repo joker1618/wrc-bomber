@@ -15,7 +15,6 @@ import java.util.Arrays;
 
 import static xxx.joker.apps.wrcbomber.dl.enums.Player.BOMBER;
 import static xxx.joker.apps.wrcbomber.dl.enums.Player.FEDE;
-import static xxx.joker.libs.core.lambda.JkStreams.toMap;
 import static xxx.joker.libs.core.util.JkStrings.strf;
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 

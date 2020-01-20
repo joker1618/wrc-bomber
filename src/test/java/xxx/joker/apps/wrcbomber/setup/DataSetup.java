@@ -1,23 +1,10 @@
 package xxx.joker.apps.wrcbomber.setup;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
-import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcCar;
-import xxx.joker.apps.wrcbomber.dl.repo.wrc.WrcCarRepo;
-import xxx.joker.libs.core.format.JkFormatter;
-import xxx.joker.libs.core.runtime.JkReflection;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
 import static xxx.joker.libs.core.util.JkConsole.display;
-import static xxx.joker.libs.core.util.JkConsole.displayColl;
 
 //@RunWith(SpringRunner.class)
 //@DataJpaTest

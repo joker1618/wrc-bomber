@@ -26,7 +26,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static xxx.joker.libs.core.lambda.JkStreams.*;
+import static xxx.joker.libs.core.lambda.JkStreams.findUnique;
+import static xxx.joker.libs.core.lambda.JkStreams.map;
 import static xxx.joker.libs.core.util.JkStrings.splitList;
 
 @RestController

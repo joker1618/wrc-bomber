@@ -6,7 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.tuple.Pair;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
@@ -17,12 +20,13 @@ import xxx.joker.libs.javafx.builder.JfxGridPaneBuilder;
 import xxx.joker.libs.javafx.tableview.JfxTable;
 import xxx.joker.libs.javafx.tableview.JfxTableCol;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static xxx.joker.libs.core.lambda.JkStreams.mapUniq;
-import static xxx.joker.libs.core.lambda.JkStreams.toMap;
-import static xxx.joker.libs.core.util.JkConsole.display;
 import static xxx.joker.libs.core.util.JkStrings.strf;
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 import static xxx.joker.libs.javafx.util.JfxControls.createVBox;
