@@ -10,7 +10,7 @@ import javafx.scene.layout.*;
 import org.apache.commons.lang3.tuple.Pair;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
-import xxx.joker.apps.wrcbomber.services.StatsComputer;
+import xxx.joker.apps.wrcbomber.services.WrcStatsComputer;
 import xxx.joker.apps.wrcbomber.stats.SingleStat;
 import xxx.joker.apps.wrcbomber.stats.wrc.WrcWinsStat;
 import xxx.joker.libs.javafx.builder.JfxGridPaneBuilder;
@@ -30,11 +30,11 @@ import static xxx.joker.libs.javafx.util.JfxControls.createVBox;
 public class WrcStatsPane extends BorderPane {
 
     private final GuiModel guiModel;
-    private final StatsComputer statsComputer;
+    private final WrcStatsComputer statsComputer;
 
     private final Button btnExpandAll;
 
-    public WrcStatsPane(GuiModel guiModel, StatsComputer statsComputer) {
+    public WrcStatsPane(GuiModel guiModel, WrcStatsComputer statsComputer) {
         this.guiModel = guiModel;
         this.statsComputer = statsComputer;
         getStyleClass().addAll("childPane", "statsPane");

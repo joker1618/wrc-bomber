@@ -5,9 +5,7 @@ import xxx.joker.apps.wrcbomber.stats.wrc.WrcWinsStat;
 
 import java.util.List;
 
-import static xxx.joker.libs.core.lambda.JkStreams.toMap;
-
-public interface StatsComputer {
+public interface WrcStatsComputer {
     
     WrcWinsStat computeWrcStatsSummary();
 
@@ -15,5 +13,4 @@ public interface StatsComputer {
     List<WrcWinsStat> computeWrcStatsByCountry();
     List<WrcWinsStat> computeWrcStatsByPrimaryGround();
 
-    FifaWinStat computeFifaStatsSummary();
 }

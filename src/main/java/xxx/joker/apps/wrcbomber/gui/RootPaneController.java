@@ -20,7 +20,8 @@ import xxx.joker.apps.wrcbomber.gui.pane.wrc.LeaguePane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.SummaryPane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.WrcStatsPane;
 import xxx.joker.apps.wrcbomber.proxies.GitProxy;
-import xxx.joker.apps.wrcbomber.services.StatsComputer;
+import xxx.joker.apps.wrcbomber.services.FifaStatsComputer;
+import xxx.joker.apps.wrcbomber.services.WrcStatsComputer;
 
 import javax.annotation.PostConstruct;
 
@@ -42,7 +43,9 @@ public class RootPaneController {
     @Autowired
     private GuiModel guiModel;
     @Autowired
-    private StatsComputer statsComputer;
+    private WrcStatsComputer wrcStatsComputer;
+    @Autowired
+    private FifaStatsComputer fifaStatsComputer;
 
     private ChoiceBox<GameType> choiceGame = new ChoiceBox<>();
 
@@ -124,17 +127,17 @@ public class RootPaneController {
     }
 
     private Pane createFifaPane() {
-        AddFifaMatchAndRecapPane addPane = new AddFifaMatchAndRecapPane(guiModel, statsComputer);
+        AddFifaMatchAndRecapPane addPane = new AddFifaMatchAndRecapPane(guiModel, fifaStatsComputer);
         FifaMatchesPane histPane = new FifaMatchesPane(guiModel);
         VBox.setVgrow(histPane, Priority.ALWAYS);
         return createVBox("fifaPane", addPane, histPane);
     }
 
     private Pane createWrcPane() {
-        SummaryPane summaryPane = new SummaryPane(guiModel, statsComputer);
+        SummaryPane summaryPane = new SummaryPane(guiModel, wrcStatsComputer);
         LeaguePane leaguePane = new LeaguePane(guiModel);
         HistorySeasonsPane historyPane = new HistorySeasonsPane(guiModel);
-        WrcStatsPane statsPane = new WrcStatsPane(guiModel, statsComputer);
+        WrcStatsPane statsPane = new WrcStatsPane(guiModel, wrcStatsComputer);
         return createVBox("wrcPane", summaryPane, leaguePane, statsPane, historyPane);
     }
 }

@@ -23,23 +23,6 @@ public class WrcStatsUtil {
         return lastWinner == Player.BOMBER ? Player.FEDE : Player.BOMBER;
     }
 
-    public static WrcWinsStat computeWinsStat(List<WrcRally> rallies) {
-        WrcWinsStat ws = new WrcWinsStat();
-        List<WrcMatch> matches = flatMap(rallies, WrcRally::getMatches);
-
-        ws.setWinRally(countRallyWins(rallies));
-        ws.setWinStage(countStageWins(matches));
-        ws.setWinSpecialStage(countSpecialStageWins(matches));
-        ws.setMaxRowRally(maxRallyRowWins(rallies));
-        ws.setTrendRally(actualRallyRowWins(rallies));
-        ws.setMaxRowStage(maxStageRowWins(matches));
-        ws.setTrendStage(actualStageRowWins(matches));
-        ws.setMaxRowSpecialStage(maxSpecialStageRowWins(matches));
-        ws.setTrendSpecialStage(actualSpecialStageRowWins(matches));
-
-        return ws;
-    }
-
     public static SingleStat countRallyWins(List<WrcRally> rallies) {
         int fedeWin = count(rallies, r -> r.getWinner() == Player.FEDE);
         int bomberWin = count(rallies, r -> r.getWinner() == Player.BOMBER);

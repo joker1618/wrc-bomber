@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
-import xxx.joker.apps.wrcbomber.services.StatsComputer;
+import xxx.joker.apps.wrcbomber.services.WrcStatsComputer;
 import xxx.joker.apps.wrcbomber.stats.SingleStat;
 import xxx.joker.apps.wrcbomber.stats.wrc.WrcWinsStat;
 import xxx.joker.libs.javafx.builder.JfxGridPaneBuilder;
@@ -22,9 +22,9 @@ import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 public class SummaryPane extends BorderPane {
 
     private final GuiModel guiModel;
-    private final StatsComputer statsComputer;
+    private final WrcStatsComputer statsComputer;
 
-    public SummaryPane(GuiModel guiModel, StatsComputer statsComputer) {
+    public SummaryPane(GuiModel guiModel, WrcStatsComputer statsComputer) {
         this.guiModel = guiModel;
         this.statsComputer = statsComputer;
 

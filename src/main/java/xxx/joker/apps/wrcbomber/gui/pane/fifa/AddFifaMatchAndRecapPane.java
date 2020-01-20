@@ -12,7 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import xxx.joker.apps.wrcbomber.dl.entities.fifa.FifaMatch;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
-import xxx.joker.apps.wrcbomber.services.StatsComputer;
+import xxx.joker.apps.wrcbomber.services.FifaStatsComputer;
 import xxx.joker.apps.wrcbomber.stats.fifa.FifaWinStat;
 import xxx.joker.libs.core.lambda.JkStreams;
 import xxx.joker.libs.core.test.JkTests;
@@ -29,11 +29,11 @@ import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 public class AddFifaMatchAndRecapPane extends BorderPane {
 
     private final GuiModel guiModel;
-    private final StatsComputer statsComputer;
+    private final FifaStatsComputer fifaStatsComputer;
 
-    public AddFifaMatchAndRecapPane(GuiModel guiModel, StatsComputer statsComputer) {
+    public AddFifaMatchAndRecapPane(GuiModel guiModel, FifaStatsComputer fifaStatsComputer) {
         this.guiModel = guiModel;
-        this.statsComputer = statsComputer;
+        this.fifaStatsComputer = fifaStatsComputer;
         getStyleClass().addAll("childPane", "paneAddRecap");
         getStylesheets().add(getClass().getResource("/css/fifa/fifaPane.css").toExternalForm());
 
@@ -75,7 +75,7 @@ public class AddFifaMatchAndRecapPane extends BorderPane {
         HBox boxRecap = createHBox("boxRecap");
 
         guiModel.addRefreshAction(() -> {
-            FifaWinStat ws = statsComputer.computeFifaStatsSummary();
+            FifaWinStat ws = fifaStatsComputer.computeFifaStatsSummary();
 
             JfxGridPaneBuilder gpBuilder = new JfxGridPaneBuilder();
             int row = 0;
