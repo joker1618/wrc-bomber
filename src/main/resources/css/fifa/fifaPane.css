@@ -3,7 +3,7 @@
 }
 
 .gpRecap .cellBox {
-    -fx-pref-width: 100;
+    -fx-pref-width: 80;
     -fx-pref-height: 40;
     -fx-alignment: CENTER;
     -fx-border-width: 0 1 1 0;

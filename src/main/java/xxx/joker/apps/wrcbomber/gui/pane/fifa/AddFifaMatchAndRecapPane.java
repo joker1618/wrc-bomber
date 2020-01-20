@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import xxx.joker.apps.wrcbomber.dl.entities.fifa.FifaMatch;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
+import xxx.joker.apps.wrcbomber.services.StatsComputer;
+import xxx.joker.apps.wrcbomber.stats.fifa.FifaWinStat;
 import xxx.joker.libs.core.lambda.JkStreams;
 import xxx.joker.libs.core.test.JkTests;
 import xxx.joker.libs.javafx.builder.JfxGridPaneBuilder;
@@ -27,9 +29,11 @@ import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 public class AddFifaMatchAndRecapPane extends BorderPane {
 
     private final GuiModel guiModel;
+    private final StatsComputer statsComputer;
 
-    public AddFifaMatchAndRecapPane(GuiModel guiModel) {
+    public AddFifaMatchAndRecapPane(GuiModel guiModel, StatsComputer statsComputer) {
         this.guiModel = guiModel;
+        this.statsComputer = statsComputer;
         getStyleClass().addAll("childPane", "paneAddRecap");
         getStylesheets().add(getClass().getResource("/css/fifa/fifaPane.css").toExternalForm());
 
@@ -38,9 +42,8 @@ public class AddFifaMatchAndRecapPane extends BorderPane {
         setTop(topBox);
         guiModel.addRefreshAction(() -> lbl.setText(strf("{}  -  ADD MATCH", guiModel.selectedGame())));
 
-        setCenter(createHBox("centerBox", createAddMatchBox(), createRecapPane()));
+        setCenter(createHBox("centerBox", createAddMatchBox(), createDetailsPane()));
     }
-
 
     private Pane createRecapPane() {
         HBox boxRecap = createHBox("boxRecap");
@@ -59,6 +62,53 @@ public class AddFifaMatchAndRecapPane extends BorderPane {
                 gpBuilder.add(rnum, 1, ""+num);
                 gpBuilder.add(rnum, 2, "{} %", num > 0 ? (num * 100 / matches.size()) : 0);
                 rnum++;
+            }
+
+            GridPane gp = gpBuilder.createGridPane("gpRecap");
+            boxRecap.getChildren().setAll(gp);
+        });
+
+        return boxRecap;
+    }
+
+    private Pane createDetailsPane() {
+        HBox boxRecap = createHBox("boxRecap");
+
+        guiModel.addRefreshAction(() -> {
+            FifaWinStat ws = statsComputer.computeFifaStatsSummary();
+
+            JfxGridPaneBuilder gpBuilder = new JfxGridPaneBuilder();
+            int row = 0;
+            int col = 1;
+            gpBuilder.add(row, col++, "N.");
+            gpBuilder.add(row, col++, "W");
+            gpBuilder.add(row, col++, "D");
+            gpBuilder.add(row, col++, "L");
+            gpBuilder.add(row, col++, "+/-");
+            gpBuilder.add(row, col++, "GF");
+            gpBuilder.add(row, col++, "GA");
+            gpBuilder.add(row, col++, "GD");
+            gpBuilder.add(row, col++, "Row W");
+            gpBuilder.add(row, col++, "Row D");
+            gpBuilder.add(row, col++, "Row L");
+            gpBuilder.add(row, col++, "Trend");
+
+            for (Player player : Player.values()) {
+                row++;
+                col = 0;
+                gpBuilder.add(row, col++, player.name());
+                gpBuilder.add(row, col++, ws.getNumberOfMatches().getNum(player));
+                gpBuilder.add(row, col++, ws.getWin().getNum(player));
+                gpBuilder.add(row, col++, ws.getDraw().getNum(player));
+                gpBuilder.add(row, col++, ws.getLoose().getNum(player));
+                gpBuilder.add(row, col++, ws.getWinDiff().getNum(player));
+                gpBuilder.add(row, col++, ws.getGolFor().getNum(player));
+                gpBuilder.add(row, col++, ws.getGolAgainst().getNum(player));
+                gpBuilder.add(row, col++, ws.getGolDiff().getNum(player));
+                gpBuilder.add(row, col++, ws.getRowWin().getNum(player));
+                gpBuilder.add(row, col++, ws.getRowDraw().getNum(player));
+                gpBuilder.add(row, col++, ws.getRowLoose().getNum(player));
+                gpBuilder.add(row, col++, ws.getTrend().getNum(player));
             }
 
             GridPane gp = gpBuilder.createGridPane("gpRecap");

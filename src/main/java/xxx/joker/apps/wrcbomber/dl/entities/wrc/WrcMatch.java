@@ -11,6 +11,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"wrcVersion", "rallyCounter", "matchCounter"})
+})
 @NoPrimaryKey
 public class WrcMatch extends JpaEntity implements Serializable {
 

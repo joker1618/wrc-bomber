@@ -1,14 +1,15 @@
-package xxx.joker.apps.wrcbomber.stats;
+package xxx.joker.apps.wrcbomber.stats.wrc;
 
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcMatch;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcRally;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
+import xxx.joker.apps.wrcbomber.stats.SingleStat;
 
 import java.util.List;
 
 import static xxx.joker.libs.core.lambda.JkStreams.*;
 
-public class StatsUtil {
+public class WrcStatsUtil {
 
     public static Player computeSeasonWinner(List<WrcRally> rallies) {
         SingleStat stat = countRallyWins(rallies);
@@ -22,8 +23,8 @@ public class StatsUtil {
         return lastWinner == Player.BOMBER ? Player.FEDE : Player.BOMBER;
     }
 
-    public static WinsStat computeWinsStat(List<WrcRally> rallies) {
-        WinsStat ws = new WinsStat();
+    public static WrcWinsStat computeWinsStat(List<WrcRally> rallies) {
+        WrcWinsStat ws = new WrcWinsStat();
         List<WrcMatch> matches = flatMap(rallies, WrcRally::getMatches);
 
         ws.setWinRally(countRallyWins(rallies));

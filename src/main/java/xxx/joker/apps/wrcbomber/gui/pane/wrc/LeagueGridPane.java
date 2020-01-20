@@ -7,7 +7,7 @@ import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcRally;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.WrcSeason;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
 import xxx.joker.apps.wrcbomber.stats.SingleStat;
-import xxx.joker.apps.wrcbomber.stats.StatsUtil;
+import xxx.joker.apps.wrcbomber.stats.wrc.WrcStatsUtil;
 import xxx.joker.libs.core.lambda.JkStreams;
 import xxx.joker.libs.javafx.builder.JfxGridPaneBuilder;
 import xxx.joker.libs.javafx.util.JfxControls;
@@ -39,7 +39,7 @@ public class LeagueGridPane extends GridPane {
         int colNum = 1;
         for (WrcRally rally : season.getRallies()) {
             ImageView ivFlag = createFlagImageView(rally.getCountry());
-            SingleStat stat = StatsUtil.countStageWins(rally.getMatches());
+            SingleStat stat = WrcStatsUtil.countStageWins(rally.getMatches());
             cgrid.add(0, colNum, ivFlag);
             cgrid.add(1, colNum, ""+stat.getNumFede());
             cgrid.add(2, colNum, ""+stat.getNumBomber());
@@ -55,13 +55,13 @@ public class LeagueGridPane extends GridPane {
             colNum++;
         }
 
-        SingleStat statRallies = StatsUtil.countRallyWins(season.getRallies());
+        SingleStat statRallies = WrcStatsUtil.countRallyWins(season.getRallies());
         cgrid.add(0, colNum, "N.R.");
         cgrid.add(1, colNum, ""+statRallies.getNumFede());
         cgrid.add(2, colNum, ""+statRallies.getNumBomber());
         colNum++;
 
-        SingleStat statMatches = StatsUtil.countStageWins(JkStreams.flatMap(season.getRallies(), WrcRally::getMatches));
+        SingleStat statMatches = WrcStatsUtil.countStageWins(JkStreams.flatMap(season.getRallies(), WrcRally::getMatches));
         cgrid.add(0, colNum, "N.S.");
         cgrid.add(1, colNum, ""+statMatches.getNumFede());
         cgrid.add(2, colNum, ""+statMatches.getNumBomber());

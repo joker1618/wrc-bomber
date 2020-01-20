@@ -45,9 +45,14 @@ public class FifaMatch extends JpaEntity implements Serializable {
         this.matchTime = LocalDateTime.now();
     }
 
-    public String strWinner() {
+    public Player winner() {
         int res = golFede - golBomber;
-        return res == 0 ? DRAW : res < 0 ? Player.BOMBER.name() : Player.FEDE.name();
+        return res == 0 ? null : res < 0 ? Player.BOMBER : Player.FEDE;
+    }
+
+    public String strWinner() {
+        Player winner = winner();
+        return winner == null ? DRAW : winner.name();
     }
 
     public int getMatchCounter() {

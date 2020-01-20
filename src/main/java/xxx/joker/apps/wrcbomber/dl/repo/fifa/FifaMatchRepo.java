@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface FifaMatchRepo extends JpaRepository<FifaMatch, Long> {
 
-    @Query(value = "select c from FifaMatch c where c.fifaVersion = :version order by c.matchTime")
+    @Query(value = "select c from FifaMatch c where c.fifaVersion = :version order by c.matchCounter")
     List<FifaMatch> findMatches(@Param("version") String version);
 
 }

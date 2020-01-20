@@ -15,7 +15,7 @@ import javafx.util.StringConverter;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.*;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
-import xxx.joker.apps.wrcbomber.stats.StatsUtil;
+import xxx.joker.apps.wrcbomber.stats.wrc.WrcStatsUtil;
 import xxx.joker.libs.core.lambda.JkStreams;
 import xxx.joker.libs.javafx.builder.JfxGridPaneBuilder;
 
@@ -55,7 +55,7 @@ public class LeaguePane extends BorderPane {
             btnCloseSeason.setDisable(actualSeason.getRallies().isEmpty());
             btnCloseSeason.setOnAction(e -> {
                 actualSeason.setEndTm(LocalDateTime.now());
-                actualSeason.setWinner(StatsUtil.computeSeasonWinner(actualSeason.getRallies()));
+                actualSeason.setWinner(WrcStatsUtil.computeSeasonWinner(actualSeason.getRallies()));
                 guiModel.saveWrcSeason(actualSeason);
                 contentBox.getChildren().setAll(btnStartBox);
                 guiModel.runRefreshActions();
@@ -258,13 +258,13 @@ public class LeaguePane extends BorderPane {
                 m.setStage(stages.get(numStage.getAndIncrement() % stages.size()));
             });
             rally.getMatches().addAll(tempMatches);
-            rally.setWinner(StatsUtil.countStageWins(tempMatches).getWinner());
+            rally.setWinner(WrcStatsUtil.countStageWins(tempMatches).getWinner());
 
             guiModel.saveWrcSeason(season);
             guiModel.runRefreshActions();
         });
         btnSave.disableProperty().bind(Bindings.createBooleanBinding(
-                () -> countryBox.getSelectionModel().getSelectedItem() == null || StatsUtil.countStageWins(tempMatches).getWinner() == null,
+                () -> countryBox.getSelectionModel().getSelectedItem() == null || WrcStatsUtil.countStageWins(tempMatches).getWinner() == null,
                 countryBox.getSelectionModel().selectedItemProperty(),
                 tempMatches
         ));

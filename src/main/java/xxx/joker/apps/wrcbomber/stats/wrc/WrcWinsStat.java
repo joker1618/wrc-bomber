@@ -1,6 +1,8 @@
-package xxx.joker.apps.wrcbomber.stats;
+package xxx.joker.apps.wrcbomber.stats.wrc;
 
-public class WinsStat {
+import xxx.joker.apps.wrcbomber.stats.SingleStat;
+
+public class WrcWinsStat {
 
     private String title;
     private SingleStat winSeason;
@@ -14,10 +16,10 @@ public class WinsStat {
     private SingleStat maxRowSpecialStage;
     private SingleStat trendSpecialStage;
 
-    public WinsStat() {
+    public WrcWinsStat() {
     }
 
-    public WinsStat(String title) {
+    public WrcWinsStat(String title) {
         this.title = title;
     }
 

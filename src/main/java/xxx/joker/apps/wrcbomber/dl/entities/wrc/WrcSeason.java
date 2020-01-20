@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"wrcVersion", "seasonCounter"})
+})
 public class WrcSeason extends JpaEntity implements Serializable {
 
     @Id

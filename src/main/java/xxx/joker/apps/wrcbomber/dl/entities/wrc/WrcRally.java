@@ -18,6 +18,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static xxx.joker.libs.core.lambda.JkStreams.*;
 
 @Entity
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"wrcVersion", "seasonCounter", "rallyCounter"})
+})
 @NoPrimaryKey
 public class WrcRally extends JpaEntity implements Serializable {
 

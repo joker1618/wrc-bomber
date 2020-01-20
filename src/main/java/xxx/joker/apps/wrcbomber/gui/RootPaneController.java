@@ -124,7 +124,7 @@ public class RootPaneController {
     }
 
     private Pane createFifaPane() {
-        AddFifaMatchAndRecapPane addPane = new AddFifaMatchAndRecapPane(guiModel);
+        AddFifaMatchAndRecapPane addPane = new AddFifaMatchAndRecapPane(guiModel, statsComputer);
         FifaMatchesPane histPane = new FifaMatchesPane(guiModel);
         VBox.setVgrow(histPane, Priority.ALWAYS);
         return createVBox("fifaPane", addPane, histPane);

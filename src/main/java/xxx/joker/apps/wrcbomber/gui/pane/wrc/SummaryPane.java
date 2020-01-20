@@ -8,7 +8,7 @@ import xxx.joker.apps.wrcbomber.dl.enums.Player;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
 import xxx.joker.apps.wrcbomber.services.StatsComputer;
 import xxx.joker.apps.wrcbomber.stats.SingleStat;
-import xxx.joker.apps.wrcbomber.stats.WinsStat;
+import xxx.joker.apps.wrcbomber.stats.wrc.WrcWinsStat;
 import xxx.joker.libs.javafx.builder.JfxGridPaneBuilder;
 
 import java.util.Arrays;
@@ -57,7 +57,7 @@ public class SummaryPane extends BorderPane {
         gpBuilder.add(row, 9, "Max row s.s.");
         gpBuilder.add(row, 10, "Act row s.s.");
 
-        WinsStat ws = statsComputer.computeStatsSummary();
+        WrcWinsStat ws = statsComputer.computeWrcStatsSummary();
         for (Player winner : Arrays.asList(FEDE, BOMBER)) {
             row++;
             gpBuilder.add(row, 0, winner.name());
