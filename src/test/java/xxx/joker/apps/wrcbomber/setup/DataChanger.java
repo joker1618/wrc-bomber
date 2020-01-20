@@ -12,8 +12,11 @@ import xxx.joker.libs.core.config.JkConfigs;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import static xxx.joker.libs.core.lambda.JkStreams.sorted;
 import static xxx.joker.libs.core.util.JkConsole.display;
 
 public class DataChanger {
@@ -25,8 +28,23 @@ public class DataChanger {
         String dbName = conf.getString("jkrepo.db.name");
         WrcRepo repo = new WrcRepoImpl(repoPath, dbName);
 
-        List<WrcSeason> seasons = repo.getList(WrcSeason.class);
-        seasons.forEach(s -> s.getRallies().forEach(r -> r.setSeasonStart(s.getStartTm())));
+        AtomicInteger seasonCounter = new AtomicInteger(0);
+        AtomicInteger matchCounter = new AtomicInteger(0);
+        AtomicInteger rallyCounter = new AtomicInteger(0);
+
+        List<WrcSeason> seasons = sorted(repo.getList(WrcSeason.class), Comparator.comparing(WrcSeason::getStartTm));
+        seasons.forEach(s -> {
+            s.setSeasonCounter(seasonCounter.getAndIncrement());
+            s.getRallies().forEach(r -> {
+                r.setSeasonCounter(s.getSeasonCounter());
+                r.setRallyCounter(rallyCounter.getAndIncrement());
+                r.getMatches().forEach(m -> {
+                    m.setRallyCounter(r.getRallyCounter());
+                    m.setMatchCounter(matchCounter.getAndIncrement());
+                });
+            });
+        });
+
         repo.commit();
 
         display(repo.toStringClass(WrcRally.class));

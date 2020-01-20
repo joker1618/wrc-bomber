@@ -10,10 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"wrcVersion"}),
-        @UniqueConstraint(columnNames = {"name"}),
-        @UniqueConstraint(columnNames = {"code"}),
-        @UniqueConstraint(columnNames = {"numInSeason"})
+        @UniqueConstraint(columnNames = {"wrcVersion", "numInSeason"})
 })
 public class WrcCountry  extends JpaEntity implements Serializable {
 

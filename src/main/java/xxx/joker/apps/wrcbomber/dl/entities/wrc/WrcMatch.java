@@ -47,6 +47,12 @@ public class WrcMatch extends JpaEntity implements Serializable {
     @NotNull
     @EntityField
     private Integer progrInRally;
+    @NotNull
+    @EntityField
+    private int rallyCounter;
+    @NotNull
+    @EntityField
+    private int matchCounter;
 
 
 
@@ -62,6 +68,26 @@ public class WrcMatch extends JpaEntity implements Serializable {
     public WrcMatch(Player winner) {
         this.winner = winner;
         this.matchTime = LocalDateTime.now();
+    }
+
+    public void setJpaID(long jpaID) {
+        this.jpaID = jpaID;
+    }
+
+    public int getRallyCounter() {
+        return rallyCounter;
+    }
+
+    public void setRallyCounter(int rallyCounter) {
+        this.rallyCounter = rallyCounter;
+    }
+
+    public int getMatchCounter() {
+        return matchCounter;
+    }
+
+    public void setMatchCounter(int matchCounter) {
+        this.matchCounter = matchCounter;
     }
 
     public WrcStage getStage() {

@@ -21,11 +21,12 @@ import xxx.joker.libs.core.format.csv.JkCsvRow;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import static xxx.joker.libs.core.lambda.JkStreams.findUnique;
-import static xxx.joker.libs.core.lambda.JkStreams.map;
+import static xxx.joker.libs.core.lambda.JkStreams.*;
 import static xxx.joker.libs.core.util.JkStrings.splitList;
 
 @RestController
@@ -200,6 +201,7 @@ public class SetupController {
         int rallyId = -1;
         WrcSeason season = null;
         WrcRally rally = null;
+        List<WrcSeason> seasons = new ArrayList<>();
 
         for (JkCsvRow row : csvMatches.getData()) {
             Integer sid = row.getInt("season id");
@@ -209,6 +211,7 @@ public class SetupController {
                 }
                 seasonId = sid;
                 season = new WrcSeason(wrcVersion);
+                seasons.add(season);
                 Player seasonWinner = Player.getByName(row.getString("season winner"));
                 season.setStartTm(LocalDateTime.parse(row.getString("SEASON START")));
                 if(seasonWinner != null) {
@@ -250,5 +253,22 @@ public class SetupController {
             seasonRepo.save(season);
         }
 
+        AtomicInteger seasonCounter = new AtomicInteger(0);
+        AtomicInteger matchCounter = new AtomicInteger(0);
+        AtomicInteger rallyCounter = new AtomicInteger(0);
+
+        seasons.forEach(s -> {
+            s.setSeasonCounter(seasonCounter.getAndIncrement());
+            s.getRallies().forEach(r -> {
+                r.setSeasonCounter(s.getSeasonCounter());
+                r.setRallyCounter(rallyCounter.getAndIncrement());
+                r.getMatches().forEach(m -> {
+                    m.setRallyCounter(r.getRallyCounter());
+                    m.setMatchCounter(matchCounter.getAndIncrement());
+                });
+            });
+        });
+
+        seasonRepo.saveAll(seasons);
     }
 }

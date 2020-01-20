@@ -6,6 +6,7 @@ import xxx.joker.libs.repo.design.annotation.marker.EntityField;
 import xxx.joker.libs.repo.design.annotation.marker.EntityPK;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -30,6 +31,9 @@ public class WrcSeason extends JpaEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @EntityField
     private Player winner;
+    @NotNull
+    @EntityField
+    private int seasonCounter;
 
 
     public WrcSeason(String wrcVersion) {
@@ -40,6 +44,18 @@ public class WrcSeason extends JpaEntity implements Serializable {
     public WrcSeason() {
 
 
+    }
+
+    public void setJpaID(long jpaID) {
+        this.jpaID = jpaID;
+    }
+
+    public int getSeasonCounter() {
+        return seasonCounter;
+    }
+
+    public void setSeasonCounter(int seasonCounter) {
+        this.seasonCounter = seasonCounter;
     }
 
     public List<WrcRally> getRallies() {

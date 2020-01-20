@@ -58,6 +58,7 @@ public class GuiModelImpl implements GuiModel {
     @Override
     public WrcSeason createNewWrcSeason() {
         WrcSeason season = new WrcSeason(labelGame());
+        season.setSeasonCounter(getWrcSeasons().size());
         repoFacade.getWrcSeasonRepo().save(season);
         return season;
     }

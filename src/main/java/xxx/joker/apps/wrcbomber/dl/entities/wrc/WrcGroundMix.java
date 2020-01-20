@@ -10,9 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"wrcVersion"}),
-        @UniqueConstraint(columnNames = {"GROUND_TYPE_JPAID"}),
-        @UniqueConstraint(columnNames = {"groundPerc"})
+        @UniqueConstraint(columnNames = {"wrcVersion", "GROUND_TYPE_JPAID", "groundPerc"})
 })
 public class WrcGroundMix extends JpaEntity implements Serializable {
 

@@ -237,15 +237,19 @@ public class LeaguePane extends BorderPane {
 
             WrcRally rally = new WrcRally(guiModel.selectedGame());
             rally.setCountry(country);
-            rally.setSeasonStart(season.getStartTm());
+            rally.setSeasonCounter(season.getSeasonCounter());
+            rally.setRallyCounter(guiModel.getWrcRallies().size());
             rally.setProgrInSeason(season.getRallies().size());
             season.getRallies().add(rally);
 
             AtomicInteger progr = new AtomicInteger(0);
             AtomicInteger numStage = new AtomicInteger(startStageNumBox.getSelectionModel().getSelectedItem());
             List<WrcStage> stages = guiModel.getWrcStages(country);
+            AtomicInteger matchCounter = new AtomicInteger(guiModel.getWrcMatches().size());
             tempMatches.forEach(m -> {
                 m.setWrcVersion(guiModel.selectedGame());
+                m.setRallyCounter(rally.getRallyCounter());
+                m.setMatchCounter(matchCounter.getAndIncrement());
                 m.setCarFede(car);
                 m.setCarBomber(car);
                 m.setWeather(weather);

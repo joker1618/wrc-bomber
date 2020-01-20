@@ -1,5 +1,6 @@
 package xxx.joker.apps.wrcbomber.integration.model;
 
+import xxx.joker.apps.wrcbomber.dl.entities.fifa.FifaMatch;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.*;
 import xxx.joker.libs.repo.JkRepoFile;
 
@@ -20,7 +21,8 @@ public class WrcRepoImpl extends JkRepoFile implements WrcRepo {
                 WrcSeason.class,
                 WrcStage.class,
                 WrcWeather.class,
-                WrcRaceTime.class
+                WrcRaceTime.class,
+                FifaMatch.class
         ));
     }
 

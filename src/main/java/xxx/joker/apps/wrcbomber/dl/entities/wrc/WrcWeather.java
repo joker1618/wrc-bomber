@@ -10,8 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"wrcVersion"}),
-        @UniqueConstraint(columnNames = {"weather"})
+        @UniqueConstraint(columnNames = {"wrcVersion", "weather"})
 })
 public class WrcWeather extends JpaEntity implements Serializable {
 

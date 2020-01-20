@@ -11,8 +11,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"wrcVersion"}),
-        @UniqueConstraint(columnNames = {"carModel"})
+        @UniqueConstraint(columnNames = {"wrcVersion", "carModel"})
 })
 public class WrcCar extends JpaEntity implements Serializable {
 
@@ -20,6 +19,7 @@ public class WrcCar extends JpaEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EntityField
     private long jpaID;
+    @NotNull
     @EntityPK
 	private String wrcVersion;
     @NotNull
@@ -29,9 +29,14 @@ public class WrcCar extends JpaEntity implements Serializable {
     public WrcCar() {
     }
 
-    public WrcCar(String carModel) {
-        this.carModel = carModel;
-    }
+//    public WrcCar(String wrcVersion, @NotNull String carModel) {
+//        this.wrcVersion = wrcVersion;
+//        this.carModel = carModel;
+//    }
+//
+//    public WrcCar(String carModel) {
+//        this.carModel = carModel;
+//    }
 
     public long getJpaID() {
         return jpaID;

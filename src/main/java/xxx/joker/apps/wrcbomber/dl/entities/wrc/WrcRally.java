@@ -26,7 +26,7 @@ public class WrcRally extends JpaEntity implements Serializable {
     @EntityField
     private long jpaID;
     @EntityField
-	private String wrcVersion;
+    private String wrcVersion;
     @NotNull
     @ManyToOne
     @EntityField
@@ -42,7 +42,10 @@ public class WrcRally extends JpaEntity implements Serializable {
     private Integer progrInSeason;
     @NotNull
     @EntityField
-    private LocalDateTime seasonStart;
+    private int seasonCounter;
+    @NotNull
+    @EntityField
+    private int rallyCounter;
 
     public WrcRally() {
 
@@ -74,7 +77,7 @@ public class WrcRally extends JpaEntity implements Serializable {
             Double prev = map.getOrDefault(mix1.getGroundType(), 0d);
             map.put(mix1.getGroundType(), prev + len * mix1.getGroundPerc());
             WrcGroundMix mix2 = match.getStage().getSurface().getSecondaryGround();
-            if(mix2 != null) {
+            if (mix2 != null) {
                 prev = map.getOrDefault(mix2.getGroundType(), 0d);
                 map.put(mix2.getGroundType(), prev + len * mix2.getGroundPerc());
             }
@@ -105,6 +108,7 @@ public class WrcRally extends JpaEntity implements Serializable {
     public Player getWinner() {
         return winner;
     }
+
     public boolean hasWinner() {
         return winner != null;
     }
@@ -112,8 +116,25 @@ public class WrcRally extends JpaEntity implements Serializable {
     public void setWinner(Player winner) {
         this.winner = winner;
     }
+
     public String getWrcVersion() {
         return wrcVersion;
+    }
+
+    public int getSeasonCounter() {
+        return seasonCounter;
+    }
+
+    public void setSeasonCounter(int seasonCounter) {
+        this.seasonCounter = seasonCounter;
+    }
+
+    public int getRallyCounter() {
+        return rallyCounter;
+    }
+
+    public void setRallyCounter(int rallyCounter) {
+        this.rallyCounter = rallyCounter;
     }
 
     public void setWrcVersion(String wrcVersion) {
@@ -128,11 +149,4 @@ public class WrcRally extends JpaEntity implements Serializable {
         this.progrInSeason = progrInSeason;
     }
 
-    public LocalDateTime getSeasonStart() {
-        return seasonStart;
-    }
-
-    public void setSeasonStart(LocalDateTime seasonStart) {
-        this.seasonStart = seasonStart;
-    }
 }

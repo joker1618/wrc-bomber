@@ -9,9 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(uniqueConstraints={
-        @UniqueConstraint(columnNames = {"wrcVersion"}),
-        @UniqueConstraint(columnNames = {"primary_ground_jpaid"}),
-        @UniqueConstraint(columnNames = {"secondary_ground_jpaid"})
+        @UniqueConstraint(columnNames = {"wrcVersion", "primary_ground_jpaid", "secondary_ground_jpaid"})
 })
 public class WrcSurface extends JpaEntity implements Serializable {
 
