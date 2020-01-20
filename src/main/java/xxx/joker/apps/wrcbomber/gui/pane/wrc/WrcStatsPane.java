@@ -190,9 +190,10 @@ public class WrcStatsPane extends BorderPane {
         table.addColumn(colTitle, colWinRally, colWinStage, colWinSpecialStage, colMaxRowRally, colTrendRally, colMaxRowStage, colTrendStage, colMaxRowSpecialStage, colTrendSpecialStage);
 
         table.setRowHeight(30, 25);
-        int wcol = 70;
-        table.setWidths(30, 200, wcol, wcol, wcol, wcol, wcol, wcol, wcol, wcol, wcol);
         table.setMaxElemVisible(20);
+
+        table.setWidthsGroups(30, 200, 70, 70);
+        table.refreshWidth();
 
         return table;
     }

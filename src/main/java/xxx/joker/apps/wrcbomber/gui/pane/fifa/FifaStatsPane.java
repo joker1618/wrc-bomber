@@ -146,7 +146,9 @@ public class FifaStatsPane extends BorderPane {
 
         table.setRowHeight(28, 25);
         table.setMaxElemVisible(20);
-        table.setWidths(30, 130, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50);
+
+        table.setWidthsGroups(30, 130, 50, 50);
+        table.refreshWidth();
 
         return table;
     }

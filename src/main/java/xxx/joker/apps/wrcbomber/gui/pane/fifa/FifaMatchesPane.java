@@ -58,9 +58,13 @@ public class FifaMatchesPane extends BorderPane {
         JfxTableCol<FifaMatch, String> colWinner = JfxTableCol.createCol("WINNER", FifaMatch::strWinner);
         JfxTableCol<FifaMatch, LocalDateTime> colTime = JfxTableCol.createCol("MATCH TIME", "matchTime", m -> m.format(DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm")), "centered");
         table.addColumn(colNum, colTeamFede, golFede, golBomber, colTeamBomber, colWinner, colTime);
+
         table.setWidths(30, 65, 150, 70, 70, 150, 100, 150);
+        table.refreshWidth();
+
         table.setRowHeight(28, 25);
         table.setMaxElemVisible(20);
+
         return table;
     }
 
