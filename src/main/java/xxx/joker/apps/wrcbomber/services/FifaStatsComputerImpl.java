@@ -26,50 +26,65 @@ public class FifaStatsComputerImpl implements FifaStatsComputer {
 
     @Override
     public FifaWinStat computeFifaStatsSummary() {
-        FifaWinStat fws = new FifaWinStat();
         List<FifaMatch> fifaMatches = guiModel.getFifaMatches();
+        FifaWinStat fws = new FifaWinStat();
+        fillPlayerWinStats(fws, FEDE, fifaMatches);
+        fillPlayerWinStats(fws, BOMBER, fifaMatches);
+        return fws;
+    }
 
-        fws.setNumberOfMatches(new SingleStat(fifaMatches.size(), fifaMatches.size()));
+    @Override
+    public List<FifaWinStat> computeFifaStatsByTeam() {
+        List<String> teams = guiModel.getAllFifaTeams();
+        List<FifaMatch> matches = guiModel.getFifaMatches();
+        List<FifaWinStat> fwList = new ArrayList<>();
+        for (String team : teams) {
+            FifaWinStat fws = new FifaWinStat(team);
+            fwList.add(fws);
+            for (Player player : Player.values()) {
+                List<FifaMatch> filter = filter(matches, m -> m.getTeam(player).equals(team));
+                fillPlayerWinStats(fws, player, filter);
+            }
+        }
+        return fwList;
+    }
 
-        int winFede = count(fifaMatches, fm -> fm.winner() == FEDE);
-        int winBomber = count(fifaMatches, fm -> fm.winner() == BOMBER);
-        fws.setWin(new SingleStat(winFede, winBomber));
-        fws.setLoose(new SingleStat(winBomber, winFede));
-        int numDraw = count(fifaMatches, fm -> fm.winner() == null);
-        fws.setDraw(new SingleStat(numDraw, numDraw));
+    private void fillPlayerWinStats(FifaWinStat fws, Player player, List<FifaMatch> fifaMatches) {
+        Player other = findUnique(Arrays.asList(Player.values()), p -> p != player);
+        fws.getNumberOfMatches().setNum(player, fifaMatches.size());
+        fws.getWin().setNum(player, count(fifaMatches, fm -> fm.winner() == player));
+        fws.getDraw().setNum(player, count(fifaMatches, fm -> fm.winner() == null));
+        fws.getLoose().setNum(player, count(fifaMatches, fm -> fm.winner() == other));
+        fws.getGolFor().setNum(player, fifaMatches.stream().mapToInt(fm -> fm.getGol(player)).sum());
+        fws.getGolAgainst().setNum(player, fifaMatches.stream().mapToInt(fm -> fm.getGol(other)).sum());
 
-        int gfFede = fifaMatches.stream().mapToInt(FifaMatch::getGolFede).sum();
-        int gfBomber = fifaMatches.stream().mapToInt(FifaMatch::getGolBomber).sum();
-        fws.setGolFor(new SingleStat(gfFede, gfBomber));
-        fws.setGolAgainst(new SingleStat(gfBomber, gfFede));
-
-        int rowFede = 0;
-        int tmpFede = 0;
-        int rowBomber = 0;
-        int tmpBomber = 0;
+        int rowPlayer = 0;
+        int tmpPlayer = 0;
+        int rowOther = 0;
+        int tmpOther = 0;
         int rowDraw = 0;
         int tmpDraw = 0;
         for (FifaMatch fm : fifaMatches) {
             if(fm.winner() == FEDE) {
-                tmpFede++;
-                tmpBomber = 0;
+                tmpPlayer++;
+                tmpOther = 0;
                 tmpDraw = 0;
             } else if(fm.winner() == BOMBER) {
-                tmpFede = 0;
-                tmpBomber++;
+                tmpPlayer = 0;
+                tmpOther++;
                 tmpDraw = 0;
             } else {
-                tmpFede = 0;
-                tmpBomber = 0;
+                tmpPlayer = 0;
+                tmpOther = 0;
                 tmpDraw++;
             }
-            if(tmpFede > rowFede)       rowFede = tmpFede;
-            if(tmpBomber > rowBomber)   rowBomber = tmpBomber;
+            if(tmpPlayer > rowPlayer)       rowPlayer = tmpPlayer;
+            if(tmpOther > rowOther)   rowOther = tmpOther;
             if(tmpDraw > rowDraw)       rowDraw = tmpDraw;
         }
-        fws.setRowWin(new SingleStat(rowFede, rowBomber));
-        fws.setRowLoose(new SingleStat(rowBomber, rowFede));
-        fws.setRowDraw(new SingleStat(rowDraw, rowDraw));
+        fws.getRowWin().setNum(player, rowPlayer);
+        fws.getRowDraw().setNum(player, rowDraw);
+        fws.getRowLoose().setNum(player, rowOther);
 
         Player trendPlayer = null;
         int trendNum = 0;
@@ -80,11 +95,7 @@ public class FifaStatsComputerImpl implements FifaStatsComputer {
             trendPlayer = winner;
             trendNum++;
         }
-        int trendFede = trendNum * (trendPlayer == FEDE ? 1 : -1);
-        int trendBomber = trendNum * (trendPlayer == BOMBER ? 1 : -1);
-        fws.setTrend(new SingleStat(trendFede, trendBomber));
-
-        return fws;
+        int trend = trendNum * (trendPlayer == player ? 1 : -1);
+        fws.getTrend().setNum(player, trend);
     }
-
 }

@@ -5,16 +5,24 @@ import xxx.joker.apps.wrcbomber.stats.SingleStat;
 
 public class FifaWinStat {
 
-    private SingleStat numberOfMatches;
-    private SingleStat win;
-    private SingleStat draw;
-    private SingleStat loose;
-    private SingleStat golFor;
-    private SingleStat golAgainst;
-    private SingleStat rowWin;
-    private SingleStat rowDraw;
-    private SingleStat rowLoose;
-    private SingleStat trend;
+    private String title;
+    private SingleStat numberOfMatches = new SingleStat();
+    private SingleStat win = new SingleStat();
+    private SingleStat draw = new SingleStat();
+    private SingleStat loose = new SingleStat();
+    private SingleStat golFor = new SingleStat();
+    private SingleStat golAgainst = new SingleStat();
+    private SingleStat rowWin = new SingleStat();
+    private SingleStat rowDraw = new SingleStat();
+    private SingleStat rowLoose = new SingleStat();
+    private SingleStat trend = new SingleStat();
+
+    public FifaWinStat() {
+    }
+
+    public FifaWinStat(String title) {
+        this.title = title;
+    }
 
     public SingleStat getNumberOfMatches() {
         return numberOfMatches;
@@ -26,6 +34,14 @@ public class FifaWinStat {
 
     public SingleStat getWin() {
         return win;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public SingleStat getDraw() {

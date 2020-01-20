@@ -2,6 +2,7 @@ package xxx.joker.apps.wrcbomber.gui.model;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,11 @@ import xxx.joker.apps.wrcbomber.dl.entities.fifa.FifaMatch;
 import xxx.joker.apps.wrcbomber.dl.entities.wrc.*;
 import xxx.joker.apps.wrcbomber.dl.enums.GameType;
 import xxx.joker.apps.wrcbomber.dl.repo.RepoFacade;
+import xxx.joker.libs.core.lambda.JkStreams;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+import static xxx.joker.libs.core.lambda.JkStreams.sorted;
 
 @Repository
 public class GuiModelImpl implements GuiModel {
@@ -133,6 +136,15 @@ public class GuiModelImpl implements GuiModel {
     @Override
     public List<FifaMatch> getFifaMatches() {
         return repoFacade.getFifaRepo().findMatches(labelGame());
+    }
+
+    @Override
+    public List<String> getAllFifaTeams() {
+        Set<String> teams = new HashSet<>();
+        List<FifaMatch> matches = getFifaMatches();
+        teams.addAll(JkStreams.map(matches, FifaMatch::getTeamFede));
+        teams.addAll(JkStreams.map(matches, FifaMatch::getTeamBomber));
+        return sorted(teams, StringUtils::compareIgnoreCase);
     }
 
     @Override

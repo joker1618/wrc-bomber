@@ -45,5 +45,6 @@ public interface GuiModel {
     Image getFlag(WrcCountry country);
 
     List<FifaMatch> getFifaMatches();
+    List<String> getAllFifaTeams();
     void saveFifaMatch(FifaMatch fifaMatch);
 }

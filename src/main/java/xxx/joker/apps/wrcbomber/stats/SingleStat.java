@@ -41,7 +41,22 @@ public class SingleStat {
     }
 
     public int getNum(Player player) {
-        return player == Player.FEDE ? numFede : numBomber;
+        switch (player) {
+            case FEDE:      return numFede;
+            case BOMBER:    return numBomber;
+            default:        return 0;
+        }
+    }
+
+    public void setNum(Player player, int num) {
+        switch (player) {
+            case FEDE:
+                numFede = num;
+                break;
+            case BOMBER:
+                numBomber = num;
+                break;
+        }
     }
 
 }

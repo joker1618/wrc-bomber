@@ -10,4 +10,7 @@ import static xxx.joker.libs.core.lambda.JkStreams.toMap;
 public interface FifaStatsComputer {
     
     FifaWinStat computeFifaStatsSummary();
+
+    List<FifaWinStat> computeFifaStatsByTeam();
+
 }

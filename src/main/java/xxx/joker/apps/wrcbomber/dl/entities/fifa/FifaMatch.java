@@ -107,6 +107,29 @@ public class FifaMatch extends JpaEntity implements Serializable {
         this.golBomber = golBomber;
     }
 
+    public int getGol(Player player) {
+        switch (player) {
+            case FEDE:      return golFede;
+            case BOMBER:    return golBomber;
+        }
+        return -1;
+    }
+
+    public void setGol(Player player, int numGol) {
+        switch (player) {
+            case FEDE:      golFede = numGol; break;
+            case BOMBER:    golBomber = numGol; break;
+        }
+    }
+
+    public String getTeam(Player player) {
+        switch (player) {
+            case FEDE:      return teamFede;
+            case BOMBER:    return teamBomber;
+            default:        return null;
+        }
+    }
+
     public LocalDateTime getMatchTime() {
         return matchTime;
     }

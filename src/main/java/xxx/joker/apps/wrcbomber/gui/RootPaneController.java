@@ -15,6 +15,7 @@ import xxx.joker.apps.wrcbomber.dl.enums.GameType;
 import xxx.joker.apps.wrcbomber.gui.model.GuiModel;
 import xxx.joker.apps.wrcbomber.gui.pane.fifa.AddFifaMatchAndRecapPane;
 import xxx.joker.apps.wrcbomber.gui.pane.fifa.FifaMatchesPane;
+import xxx.joker.apps.wrcbomber.gui.pane.fifa.FifaStatsPane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.HistorySeasonsPane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.LeaguePane;
 import xxx.joker.apps.wrcbomber.gui.pane.wrc.SummaryPane;
@@ -128,9 +129,10 @@ public class RootPaneController {
 
     private Pane createFifaPane() {
         AddFifaMatchAndRecapPane addPane = new AddFifaMatchAndRecapPane(guiModel, fifaStatsComputer);
+        FifaStatsPane statsPane = new FifaStatsPane(guiModel, fifaStatsComputer);
         FifaMatchesPane histPane = new FifaMatchesPane(guiModel);
         VBox.setVgrow(histPane, Priority.ALWAYS);
-        return createVBox("fifaPane", addPane, histPane);
+        return createVBox("fifaPane", addPane, statsPane, histPane);
     }
 
     private Pane createWrcPane() {
