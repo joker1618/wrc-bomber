@@ -1,0 +1,12 @@
+.homePane {
+    -fx-background-image: url("/img/bomber1.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 450 800;
+    -fx-background-position: center center;
+}
+
+.homePane .button {
+    -fx-background-color: RED;
+    -fx-min-width: 30;
+    -fx-min-height: 30;
+}

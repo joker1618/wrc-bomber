@@ -5,8 +5,11 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.scenicview.ScenicView;
 import org.slf4j.Logger;
@@ -48,41 +51,52 @@ public class GuiLauncher extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-//        Scene scene = new Scene(rootNode);
-        ScrollPane scrollPane = new ScrollPane(rootNode);
-        scrollPane.getStylesheets().add(getClass().getResource("/css/stageStyle.css").toExternalForm());
-//        rootNode.prefWidthProperty().bind(Bindings.createDoubleBinding(() -> scrollPane.getWidth() - 30, scrollPane.widthProperty()));
-        rootNode.prefWidthProperty().bind(Bindings.createDoubleBinding(() -> scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
-        rootNode.prefHeightProperty().bind(Bindings.createDoubleBinding(() -> scrollPane.getViewportBounds().getHeight(), scrollPane.viewportBoundsProperty()));
-
-        Scene scene = new Scene(scrollPane, 1000, 600);
-        stage.setScene(scene);
         stage.setTitle("WRC BOMBER");
-//        stage.sizeToScene();
-        stage.setMaximized(true);
 
-        Platform.setImplicitExit(false);
-        stage.setOnCloseRequest(e -> {
-            LOG.debug("Closing GUI");
-            Platform.exit();
+        Button btnStart = new Button();
+        Scene homeScene = createHomepageScene(btnStart);
+        stage.setScene(homeScene);
+        stage.sizeToScene();
+        stage.setResizable(false);
+
+        List<String> params = new ArrayList<>(getParameters().getRaw());
+        btnStart.setOnAction(e -> {
+            stage.setScene(createMainScene());
+            stage.setMaximized(true);
+            stage.setResizable(true);
+            Platform.setImplicitExit(false);
+            stage.setOnCloseRequest(e1 -> {
+                LOG.debug("Closing GUI");
+                Platform.exit();
+            });
+            if (params.contains("-sv")) {
+                ScenicView.show(stage.getScene());
+            }
         });
 
         stage.show();
+    }
 
-        List<String> params = new ArrayList<>(getParameters().getRaw());
-        if (params.contains("-sv")) {
-            ScenicView.show(scene);
-        }
+    private Scene createMainScene() {
+        ScrollPane scrollPane = new ScrollPane(rootNode);
+        scrollPane.getStylesheets().add(getClass().getResource("/css/stageStyle.css").toExternalForm());
+        rootNode.prefWidthProperty().bind(Bindings.createDoubleBinding(() -> scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
+        rootNode.prefHeightProperty().bind(Bindings.createDoubleBinding(() -> scrollPane.getViewportBounds().getHeight(), scrollPane.viewportBoundsProperty()));
+        return new Scene(scrollPane, 1000, 600);
     }
 
     @Override
     public void stop() throws Exception {
-//        Path dataFolder = Paths.get("dataFolder");
-//        LOG.info(Files.exists(dataFolder)+"");
         context.close();
-//        JkFiles.delete(dataFolder);
         LOG.info("Stop app");
         rootController.doCloseActions();
+    }
+
+    private Scene createHomepageScene(Button btnStart) {
+        BorderPane bp = new BorderPane(btnStart);
+        bp.getStyleClass().add("homePane");
+        bp.getStylesheets().add(getClass().getResource("/css/homePane.css").toExternalForm());
+        return new Scene(bp, 450, 800);
     }
 
 

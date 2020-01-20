@@ -1,10 +1,12 @@
 package xxx.joker.apps.wrcbomber.gui;
 
+import com.sun.org.apache.bcel.internal.generic.DLOAD;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +25,16 @@ import xxx.joker.apps.wrcbomber.gui.pane.wrc.WrcStatsPane;
 import xxx.joker.apps.wrcbomber.proxies.GitProxy;
 import xxx.joker.apps.wrcbomber.services.FifaStatsComputer;
 import xxx.joker.apps.wrcbomber.services.WrcStatsComputer;
+import xxx.joker.libs.core.test.JkTests;
+import xxx.joker.libs.core.util.JkConvert;
+import xxx.joker.libs.javafx.util.JfxControls;
 
 import javax.annotation.PostConstruct;
 
+import java.util.Optional;
+import java.util.Random;
+
+import static xxx.joker.libs.core.util.JkStrings.strf;
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
 import static xxx.joker.libs.javafx.util.JfxControls.createVBox;
 
@@ -100,30 +109,38 @@ public class RootPaneController {
 
         Button btnUpdate = new Button("UPDATE FROM GITHUB");
         btnUpdate.setOnAction(e -> {
-            guiModel.getAppCloseActions().add(() -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("Updating from GIT");
-                alert.show();
-                gitProxy.updateData();
-                LOG.info("Data source updated with GIT repo");
-                alert.close();
-            });
-            Platform.exit();
+            Dialog<Boolean> dlg = createConfirmDialog("UPDATE FROM GITHUB");
+            Optional<Boolean> res = dlg.showAndWait();
+            if(res.isPresent() && res.get()) {
+                guiModel.getAppCloseActions().add(() -> {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText("Updating from GIT");
+                    alert.show();
+                    gitProxy.updateData();
+                    LOG.info("Data source updated with GIT repo");
+                    alert.close();
+                });
+                Platform.exit();
+            }
         });
 
-        Button btnPush = new Button("PUSH CHANGES TO GITHUB");
+        Button btnPush = new Button("PUSH TO GITHUB");
         btnPush.setOnAction(e -> {
-            guiModel.getAppCloseActions().add(() -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("Commit to GIT");
-                alert.show();
-                gitProxy.pushData();
-                LOG.info("Commit and push done");
-                alert.close();
-            });
-            Platform.exit();
+            Dialog<Boolean> dlg = createConfirmDialog("PUSH FROM GITHUB");
+            Optional<Boolean> res = dlg.showAndWait();
+            if(res.isPresent() && res.get()) {
+                guiModel.getAppCloseActions().add(() -> {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText("Commit to GIT");
+                    alert.show();
+                    gitProxy.pushData();
+                    LOG.info("Commit and push done");
+                    alert.close();
+                });
+                Platform.exit();
+            }
         });
-        
+
         return createHBox("childPane menuBox", choiceGame, btnUpdate, btnPush);
     }
 
@@ -132,7 +149,9 @@ public class RootPaneController {
         FifaStatsPane statsPane = new FifaStatsPane(guiModel, fifaStatsComputer);
         FifaMatchesPane histPane = new FifaMatchesPane(guiModel);
         VBox.setVgrow(histPane, Priority.ALWAYS);
-        return createVBox("fifaPane", addPane, statsPane, histPane);
+        VBox vbox = createVBox("fifaPane", addPane, statsPane, histPane);
+        vbox.getStylesheets().add(getClass().getResource("/css/fifa/fifaPane.css").toExternalForm());
+        return vbox;
     }
 
     private Pane createWrcPane() {
@@ -141,5 +160,32 @@ public class RootPaneController {
         HistorySeasonsPane historyPane = new HistorySeasonsPane(guiModel);
         WrcStatsPane statsPane = new WrcStatsPane(guiModel, wrcStatsComputer);
         return createVBox("wrcPane", summaryPane, leaguePane, statsPane, historyPane);
+    }
+
+    private Dialog<Boolean> createConfirmDialog(String text) {
+        Dialog<Boolean> dlg = new Dialog<>();
+        ButtonType btnYes = new ButtonType(text, ButtonBar.ButtonData.YES);
+        ButtonType btnNo = ButtonType.NO;
+        dlg.setResultConverter(bt -> bt.getButtonData() == ButtonBar.ButtonData.YES);
+        dlg.getDialogPane().getButtonTypes().addAll(btnYes, btnNo);
+
+        dlg.setHeaderText(text);
+
+        Random random = new Random(System.currentTimeMillis());
+        int n1 = random.nextInt(10) + 1;
+        int n2 = random.nextInt(10) + 1;
+        int expected = n1 + n2;
+        TextField tf = new TextField();
+        Label lbl = new Label(strf("{} + {} =", n1, n2));
+        HBox box = createHBox("spacing10", lbl, tf);
+        dlg.getDialogPane().setContent(box);
+
+        Node nodeBtnYes = dlg.getDialogPane().lookupButton(btnYes);
+        nodeBtnYes.disableProperty().bind(Bindings.createBooleanBinding(
+                () -> JkConvert.toInt(tf.getText(), -1) != expected,
+                tf.textProperty()
+        ));
+
+        return dlg;
     }
 }

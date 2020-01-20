@@ -18,6 +18,13 @@
     -fx-background-color: #665000;
 }
 
+.rootPane .menuBox .choice-box {
+    -fx-pref-width: 120;
+}
+.rootPane .menuBox .button {
+    -fx-pref-width: 180;
+}
+
 .captionBox {
     -fx-padding: 10;
     -fx-spacing: 50;

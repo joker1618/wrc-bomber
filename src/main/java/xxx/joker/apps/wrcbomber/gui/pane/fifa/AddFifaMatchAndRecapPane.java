@@ -35,7 +35,6 @@ public class AddFifaMatchAndRecapPane extends BorderPane {
         this.guiModel = guiModel;
         this.fifaStatsComputer = fifaStatsComputer;
         getStyleClass().addAll("childPane", "paneAddRecap");
-        getStylesheets().add(getClass().getResource("/css/fifa/fifaPane.css").toExternalForm());
 
         Label lbl = new Label();
         HBox topBox = createHBox("captionBox", lbl);
@@ -43,32 +42,6 @@ public class AddFifaMatchAndRecapPane extends BorderPane {
         guiModel.addRefreshAction(() -> lbl.setText(strf("{}  -  ADD MATCH", guiModel.selectedGame())));
 
         setCenter(createHBox("centerBox", createAddMatchBox(), createDetailsPane()));
-    }
-
-    private Pane createRecapPane() {
-        HBox boxRecap = createHBox("boxRecap");
-
-        guiModel.addRefreshAction(() -> {
-            JfxGridPaneBuilder gpBuilder = new JfxGridPaneBuilder();
-            gpBuilder.add(0, 1, "TOTAL");
-            gpBuilder.add(0, 2, "%");
-            List<FifaMatch> matches = guiModel.getFifaMatches();
-            Map<String, List<FifaMatch>> wmap = JkStreams.toMap(matches, FifaMatch::strWinner);
-            List<FifaMatch> el = Collections.emptyList();
-            int rnum = 1;
-            for (String winner : Arrays.asList("FEDE", "DRAW", "BOMBER")) {
-                int num = wmap.getOrDefault(winner, el).size();
-                gpBuilder.add(rnum, 0, winner);
-                gpBuilder.add(rnum, 1, ""+num);
-                gpBuilder.add(rnum, 2, "{} %", num > 0 ? (num * 100 / matches.size()) : 0);
-                rnum++;
-            }
-
-            GridPane gp = gpBuilder.createGridPane("gpRecap");
-            boxRecap.getChildren().setAll(gp);
-        });
-
-        return boxRecap;
     }
 
     private Pane createDetailsPane() {

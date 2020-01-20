@@ -1,8 +1,10 @@
 package xxx.joker.apps.wrcbomber.gui.pane.fifa;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xxx.joker.apps.wrcbomber.dl.entities.fifa.FifaMatch;
@@ -17,6 +19,7 @@ import java.util.Comparator;
 
 import static xxx.joker.libs.core.util.JkStrings.strf;
 import static xxx.joker.libs.javafx.util.JfxControls.createHBox;
+import static xxx.joker.libs.javafx.util.JfxControls.createVBox;
 
 public class FifaMatchesPane extends BorderPane {
 
@@ -33,7 +36,10 @@ public class FifaMatchesPane extends BorderPane {
 
         JfxTable<FifaMatch> table = createFifaTableMatches();
         HBox boxTable = createHBox("boxTable", table);
-        setCenter(boxTable);
+        TitledPane tpMatches = new TitledPane("All matches", boxTable);
+        tpMatches.setExpanded(false);
+        VBox vbox = createVBox("vboxTitledPanes", tpMatches);
+        setCenter(vbox);
 
         guiModel.addRefreshAction(() -> {
             lblHistMatches.setText(strf("{} - ALL MATCHES", guiModel.selectedGame()));

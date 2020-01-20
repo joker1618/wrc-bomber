@@ -42,3 +42,35 @@
 .gpAddMatch .col-last {
     -fx-pref-width: 60;
 }
+
+
+.vboxTitledPanes {
+    -fx-spacing: 10;
+}
+
+.bpStats .boxStats {
+    -fx-spacing: 50;
+}
+.bpStats .boxStats .col {
+    -fx-alignment: CENTER;
+}
+.bpStats .boxStats .col0 {
+    -fx-alignment: CENTER-LEFT;
+}
+
+.bpStats .gpLegend {
+    -fx-font-size: 15;
+}
+.bpStats .gpLegend .col-odd {
+    -fx-padding: 3 10 3 10;
+    -fx-alignment: CENTER-LEFT;
+    -fx-font-weight: BOLD;
+}
+.bpStats .gpLegend .col-odd.col-middle {
+    -fx-padding: 3 10 3 100;
+}
+.bpStats .gpLegend .col-even {
+    -fx-padding: 3 10 3 0;
+    -fx-alignment: CENTER-LEFT;
+    -fx-font-size: 14;
+}
