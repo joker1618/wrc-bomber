@@ -47,4 +47,8 @@ public interface GuiModel {
     List<FifaMatch> getFifaMatches();
     List<String> getAllFifaTeams();
     void saveFifaMatch(FifaMatch fifaMatch);
+
+    List<String> createBackupStatements();
+    List<String> createReinsertAllStatements();
+    void executeUpdate(List<String> statements);
 }

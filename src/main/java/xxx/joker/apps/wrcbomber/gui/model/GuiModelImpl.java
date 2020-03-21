@@ -156,6 +156,21 @@ public class GuiModelImpl implements GuiModel {
     }
 
     @Override
+    public List<String> createBackupStatements() {
+        return repoFacade.createBackupStatements();
+    }
+
+    @Override
+    public List<String> createReinsertAllStatements() {
+        return repoFacade.createReinsertAllStatements();
+    }
+
+    @Override
+    public void executeUpdate(List<String> statements) {
+        repoFacade.executeUpdate(statements);
+    }
+
+    @Override
     public void addInitAction(Runnable runnable) {
         // todo impl
     }

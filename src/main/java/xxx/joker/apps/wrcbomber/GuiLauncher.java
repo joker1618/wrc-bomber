@@ -12,14 +12,18 @@ import javafx.stage.Stage;
 import org.scenicview.ScenicView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import xxx.joker.apps.wrcbomber.config.AppConfig;
 import xxx.joker.apps.wrcbomber.gui.RootPaneController;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static xxx.joker.libs.core.util.JkStrings.strf;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "xxx.joker.apps.wrcbomber.dl")
@@ -73,6 +77,13 @@ public class GuiLauncher extends Application {
         });
 
         stage.show();
+
+        AppConfig config = context.getBean(AppConfig.class);
+        String afterHttp = strf("localhost:{}/{}/{}", config.getServerPort(), config.getContextPath(), config.getH2ConsolePath()).replaceAll("/+", "/");
+        LOG.info("H2 console available at http://{}", afterHttp);
+        LOG.info("H2 URL:  {}", config.getDataSourceUrl());
+        LOG.info("H2 user: {}", config.getH2Username());
+        LOG.info("H2 pwd:  {}", config.getH2Password());
     }
 
     private Scene createMainScene() {

@@ -43,7 +43,7 @@ public class FifaMatchesPane extends BorderPane {
 
         guiModel.addRefreshAction(() -> {
             lblHistMatches.setText(strf("{} - ALL MATCHES", guiModel.selectedGame()));
-            table.getItems().setAll(JkStreams.reverseOrder(guiModel.getFifaMatches(), Comparator.comparingInt(FifaMatch::getMatchCounter)));
+            table.getItems().setAll(JkStreams.descOrdered(guiModel.getFifaMatches(), Comparator.comparingInt(FifaMatch::getMatchCounter)));
             table.refreshHeight();
         });
     }

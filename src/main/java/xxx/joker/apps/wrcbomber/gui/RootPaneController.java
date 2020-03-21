@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.stage.FileChooser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,15 @@ import xxx.joker.apps.wrcbomber.gui.pane.wrc.WrcStatsPane;
 import xxx.joker.apps.wrcbomber.proxies.GitProxy;
 import xxx.joker.apps.wrcbomber.services.FifaStatsComputer;
 import xxx.joker.apps.wrcbomber.services.WrcStatsComputer;
+import xxx.joker.libs.core.file.JkFiles;
+import xxx.joker.libs.core.runtime.JkEnvironment;
 import xxx.joker.libs.core.util.JkConvert;
+import xxx.joker.libs.javafx.util.JfxControls;
+import xxx.joker.libs.javafx.util.JfxUtil;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -107,36 +114,45 @@ public class RootPaneController {
             Dialog<Boolean> dlg = createConfirmDialog("UPDATE FROM GITHUB");
             Optional<Boolean> res = dlg.showAndWait();
             if(res.isPresent() && res.get()) {
-                guiModel.getAppCloseActions().add(() -> {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("Updating from GIT");
-                    alert.show();
-                    gitProxy.updateData();
-                    LOG.info("Data source updated with GIT repo");
-                    alert.close();
-                });
-                Platform.exit();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Updating from GIT");
+                alert.show();
+                List<String> statements = gitProxy.pullData();
+                guiModel.executeUpdate(statements);
+                guiModel.runRefreshActions();
+                LOG.info("Data source updated from GIT repo");
+                alert.close();
             }
         });
 
         Button btnPush = new Button("PUSH TO GITHUB");
         btnPush.setOnAction(e -> {
-            Dialog<Boolean> dlg = createConfirmDialog("PUSH FROM GITHUB");
+            Dialog<Boolean> dlg = createConfirmDialog("PUSH TO GITHUB");
             Optional<Boolean> res = dlg.showAndWait();
             if(res.isPresent() && res.get()) {
-                guiModel.getAppCloseActions().add(() -> {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("Commit to GIT");
-                    alert.show();
-                    gitProxy.pushData();
-                    LOG.info("Commit and push done");
-                    alert.close();
-                });
-                Platform.exit();
+                List<String> statements = guiModel.createReinsertAllStatements();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Commit to GIT");
+                alert.show();
+                gitProxy.pushData(statements);
+                LOG.info("Commit and push done");
+                alert.close();
             }
         });
 
-        return createHBox("childPane menuBox", choiceGame, btnUpdate, btnPush);
+        Button btnBackup = new Button("CREATE BACKUP");
+        btnBackup.setOnAction(e -> {
+            List<String> statements = guiModel.createBackupStatements();
+            FileChooser fc = new FileChooser();
+            fc.setInitialDirectory(JkEnvironment.getDesktopFolder().toFile());
+            File outFile = fc.showSaveDialog(JfxUtil.getWindow(e));
+            if(outFile != null) {
+                JkFiles.writeFile(outFile.toPath(), statements);
+                JfxUtil.alertInfo(strf("Backup file saved to '{}'!", outFile.toPath().toAbsolutePath()));
+            }
+        });
+
+        return createHBox("childPane menuBox", choiceGame, btnUpdate, btnPush, btnBackup);
     }
 
     private Pane createFifaPane() {

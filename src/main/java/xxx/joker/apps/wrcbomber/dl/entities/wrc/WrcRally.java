@@ -2,6 +2,7 @@ package xxx.joker.apps.wrcbomber.dl.entities.wrc;
 
 import xxx.joker.apps.wrcbomber.dl.entities.JpaEntity;
 import xxx.joker.apps.wrcbomber.dl.enums.Player;
+import xxx.joker.libs.core.lambda.JkStreams;
 import xxx.joker.libs.repo.design.annotation.directive.NoPrimaryKey;
 import xxx.joker.libs.repo.design.annotation.marker.EntityField;
 
@@ -9,8 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
-
-import static xxx.joker.libs.core.lambda.JkStreams.reverseOrder;
 
 @Entity
 @Table(uniqueConstraints={
@@ -63,7 +62,7 @@ public class WrcRally extends JpaEntity implements Serializable {
 
     public WrcGroundType primaryGround() {
         Map<WrcGroundType, Double> map = groundMixes();
-        List<Map.Entry<WrcGroundType, Double>> entries = reverseOrder(map.entrySet(), Comparator.comparingDouble(Map.Entry::getValue));
+        List<Map.Entry<WrcGroundType, Double>> entries = JkStreams.descOrdered(map.entrySet(), Comparator.comparingDouble(Map.Entry::getValue));
         return entries.isEmpty() ? null : entries.get(0).getKey();
     }
 
